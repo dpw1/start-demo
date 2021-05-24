@@ -1,7 +1,7 @@
 // Initialize the application
 
 EcwidApp.init({
-  app_id: "custom-app-37374877-1", // use your application namespace
+  app_id: "easy-upsell-dev", // use your application namespace
   autoloadedflag: true,
   autoheight: true,
 });
