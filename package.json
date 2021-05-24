@@ -1,0 +1,11 @@
+{
+  "name": "ecwid-app-hello",
+  "version": "1.0.0",
+  "description": "This is a sample code for creating a native application for Ecwid.",
+  "main": "functions.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
