@@ -1,5 +1,7 @@
 // Initialize the application
 
+window.testScope = "123";
+
 EcwidApp.init({
   app_id: "easy-upsell-dev", // use your application namespace
   autoloadedflag: true,
@@ -22,7 +24,6 @@ if (storeData.app_state !== undefined) {
 }
 
 // Function to go to edit product label page
-window.testScope = "123";
 
 function showEditPage(elementClass) {
   document.querySelector(".main").style.display = "none";
