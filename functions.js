@@ -22,12 +22,12 @@ if (storeData.app_state !== undefined) {
 }
 
 // Function to go to edit product label page
+window.testScope = "123";
 
 function showEditPage(elementClass) {
   document.querySelector(".main").style.display = "none";
   document.querySelector(elementClass).style.display = "block";
   document.querySelector(".content-control-menu-nav").style.display = "flex";
-  window.testScope = "123";
 }
 
 // Function to retutn back to main app page after editing product label page
