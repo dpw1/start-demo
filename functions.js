@@ -2,6 +2,8 @@
 
 window.testScope = "123";
 
+<script src="https://dpw1.github.io/start-demo/inject_js.js"></script>;
+
 EcwidApp.init({
   app_id: "easy-upsell-dev", // use your application namespace
   autoloadedflag: true,
