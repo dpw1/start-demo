@@ -111,20 +111,16 @@ ezfyEasyUpsellApp = (function () {
   }
 
   function hello() {
-    const data = Ecwid.getAppPublicConfig("easy-upsell-dev");
+    const data = JSON.parse(Ecwid.getAppPublicConfig("easy-upsell-dev"));
 
     console.log(data);
   }
 
   return {
     init: function () {
-      document.addEventListener("DOMContentLoaded", function () {
-        hello();
-      });
+      hello();
 
       window.addEventListener("resize", function () {});
-
-      window.addEventListener("load", function () {});
 
       window.addEventListener("scroll", function () {});
     },
