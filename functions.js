@@ -1,7 +1,5 @@
 // Initialize the application
 
-window.testScope = "123";
-
 EcwidApp.init({
   app_id: "easy-upsell-dev", // use your application namespace
   autoloadedflag: true,
@@ -49,7 +47,8 @@ function goBack() {
 }
 
 // Reads values from HTML page and sends them to application config
-// To fill values successfully, the input, select or textarea elements on a page must have 'data-name' and 'data-visibility' attributes set. See appProto.html for examples
+// To fill values successfully, the input, select or textarea elements on a page must have 'data-name' and 'data-visibility' attributes set.
+// See appProto.html for examples
 
 function readValuesFromPage() {
   var applicationConfig = {
