@@ -27,9 +27,6 @@ export default function Products(props) {
                             <div className="list-element__title">
                               <span>{e.name}</span>
                             </div>
-                            <div className="list-element__description">
-                              <span className="muted">0001</span>
-                            </div>
                           </div>
                         </div>
                         <div className="list-element__status-row">

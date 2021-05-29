@@ -1,2 +1,10 @@
 .Products {
+  .list-element__content {
+    text-align: left;
+  }
+
+  .list-element__data-row {
+    display: flex;
+    flex-direction: column;
+  }
 }
