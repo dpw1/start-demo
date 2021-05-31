@@ -1,13 +1,32 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import "./Products.scss";
 import Skeleton from "react-loading-skeleton";
 import ProductPicker from "./ProductPicker";
 import ProductItem from "./ProductItem";
+import useStore from "./store/store";
 
 export default function Products(props) {
-  const { products } = props;
+  const storeSubscriber = useRef(useStore.getState().products);
 
-  useEffect(() => {}, []);
+  const populateProducts = useStore((state) => state.populateProducts);
+  const products = useStore((state) => state.products);
+
+  useEffect(
+    () =>
+      useStore.subscribe(
+        (products) => (storeSubscriber.current = products),
+        (state) => state.products,
+      ),
+    [],
+  );
+
+  useEffect(() => {
+    populateProducts();
+  }, []);
+
+  useEffect(() => {
+    console.log("my prrods", storeSubscriber);
+  }, [storeSubscriber]);
 
   const ProductSkeleton = () => {
     return (
@@ -33,7 +52,7 @@ export default function Products(props) {
       <div className="named-area__body">
         <div className="a-card a-card--compact">
           <div className="a-card__paddings">
-            <h4>Products</h4>
+            <h4>Products </h4>
 
             {products && products.hasOwnProperty("items") ? (
               products.items.map((e) => (

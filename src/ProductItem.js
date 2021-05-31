@@ -1,14 +1,19 @@
 import React from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import PopupContent from "./PopupContent";
 import "./ProductItem.scss";
+import useStore from "./store/store";
 
 export default function ProductItem({ product }) {
+  //   const increaseValue = useStore((state) => state.increaseValue);
+
   return (
     <div className="ProductItem list-element list-element--compact list-element--has-hover list-element--inline-mode">
       <div className="list-element__image">
         <img src={product.thumbnailUrl} alt={product.name} />
       </div>
+
       <div className="list-element__content">
         <div className="list-element__info">
           <div className="list-element__header">
@@ -24,7 +29,9 @@ export default function ProductItem({ product }) {
               <div className="ProductItem-upsell">
                 <span className="spacing--mr1">Cool product 1</span>
 
-                <a className="icolink" href="javascript:;">
+                {/* <button onClick={() => increaseValue()}>add</button> */}
+
+                <a className="icolink" href="#">
                   <span className="svg-icon">
                     <svg
                       width="21"
@@ -42,7 +49,7 @@ export default function ProductItem({ product }) {
               <div className="ProductItem-upsell">
                 <span className="spacing--mr1">Cool product 2</span>
 
-                <a className="icolink" href="javascript:;">
+                <a className="icolink" href="#">
                   <span className="svg-icon">
                     <svg
                       width="21"
@@ -60,6 +67,7 @@ export default function ProductItem({ product }) {
           </div>
         </div>
       </div>
+
       <Popup
         modal={true}
         trigger={() => {
@@ -78,7 +86,7 @@ export default function ProductItem({ product }) {
           );
         }}
         position="center center">
-        <div>{product.name}</div>
+        <PopupContent></PopupContent>
       </Popup>
     </div>
   );

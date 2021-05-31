@@ -199,9 +199,7 @@ export default function ProductPicker() {
                                         <td
                                           align="center"
                                           className="tableCell tableCell-3">
-                                          <a
-                                            className="icolink"
-                                            href="javascript:;">
+                                          <a className="icolink" href="#">
                                             <span className="svg-icon">
                                               <svg
                                                 xmlns="http://www.w3.org/2000/svg"
@@ -599,9 +597,7 @@ export default function ProductPicker() {
                                         <td
                                           align="center"
                                           className="tableCell tableCell-3">
-                                          <a
-                                            className="icolink"
-                                            href="javascript:;">
+                                          <a className="icolink" href="#">
                                             <span className="svg-icon">
                                               <svg
                                                 xmlns="http://www.w3.org/2000/svg"
