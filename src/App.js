@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -9,8 +9,10 @@ function App() {
   const [products, setProducts] = useState([]);
 
   const populateProducts = async () => {
-    // const url = `https://app.ecwid.com/api/v3/${storeData.store_id}/products?token=${storeData.access_token}`;
-    const url = `https://app.ecwid.com/api/v3/37374877/products?token=secret_EkQGe8SC4V4DHgSrnkmXsQsneDQ9JwQ4`;
+    const url =
+      storeData && storeData.hasOwnProperty("store_id")
+        ? `https://app.ecwid.com/api/v3/${storeData.store_id}/products?token=${storeData.access_token}`
+        : `https://app.ecwid.com/api/v3/37374877/products?token=secret_EkQGe8SC4V4DHgSrnkmXsQsneDQ9JwQ4`;
 
     const { data: _products } = await axios.get(url);
     setProducts(_products);
@@ -29,7 +31,7 @@ function App() {
   }, [storeData]);
 
   return (
-    <div className="App">
+    <div className="EasyUpsellApp">
       <Products products={products}></Products>
     </div>
   );

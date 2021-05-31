@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Products.scss";
 import Skeleton from "react-loading-skeleton";
+import ProductPicker from "./ProductPicker";
+import ProductItem from "./ProductItem";
 
 export default function Products(props) {
   const { products } = props;
+
+  useEffect(() => {}, []);
 
   const ProductSkeleton = () => {
     return (
@@ -24,36 +28,6 @@ export default function Products(props) {
     );
   };
 
-  const ProductsList = ({ product }) => {
-    return (
-      <div
-        key={product.id}
-        className="list-element list-element--compact list-element--has-hover list-element--inline-mode">
-        <div className="list-element__image">
-          <img src={product.thumbnailUrl} alt={product.name} />
-        </div>
-        <div className="list-element__content">
-          <div className="list-element__info">
-            <div className="list-element__header">
-              <div className="list-element__main-info">
-                <div className="list-element__title">
-                  <span>{product.name}</span>
-                </div>
-              </div>
-            </div>
-            <div className="list-element__status-row">
-              <span className="order__date-wrapper">Upsell Products</span>
-              <div className="list-element__data-row">
-                <span className="spacing--mr1">Cool product 1</span>
-                <span className="spacing--mr1">Nice Product 2</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    );
-  };
-
   return (
     <div className="Products  named-area">
       <div className="named-area__body">
@@ -63,7 +37,7 @@ export default function Products(props) {
 
             {products && products.hasOwnProperty("items") ? (
               products.items.map((e) => (
-                <ProductsList product={e}></ProductsList>
+                <ProductItem key={e.id} product={e}></ProductItem>
               ))
             ) : (
               <ProductSkeleton></ProductSkeleton>
