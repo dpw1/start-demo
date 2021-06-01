@@ -1,12 +1,20 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
-import PopupContent from "./PopupContent";
+import PopupCustom from "./PopupCustom";
 import "./ProductItem.scss";
 import useStore from "./store/store";
 
 export default function ProductItem({ product }) {
-  //   const increaseValue = useStore((state) => state.increaseValue);
+  const currentProductSubscriber = useRef(useStore.getState().currentProduct);
+
+  const currentProduct = useStore((state) => state.currentProduct);
+  const setCurrentProduct = useStore((state) => state.setCurrentProduct);
+
+  const setProduct = () => {
+    console.log("setting current product: ", product.id);
+    setCurrentProduct(product.id);
+  };
 
   return (
     <div className="ProductItem list-element list-element--compact list-element--has-hover list-element--inline-mode">
@@ -70,6 +78,9 @@ export default function ProductItem({ product }) {
 
       <Popup
         modal={true}
+        onOpen={() => {
+          setProduct();
+        }}
         trigger={() => {
           return (
             <button type="button" className="btn btn-small btn-primary">
@@ -86,7 +97,7 @@ export default function ProductItem({ product }) {
           );
         }}
         position="center center">
-        <PopupContent></PopupContent>
+        <PopupCustom></PopupCustom>
       </Popup>
     </div>
   );

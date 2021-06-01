@@ -1,6 +1,23 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
+import useStore from "./store/store";
 
 export default function PopupItem({ product }) {
+  const addUpsellProduct = useStore((state) => state.addUpsellProduct);
+
+  const currentProductID = useStore((state) => state.currentProduct);
+
+  const addBundleProduct = (id) => {
+    console.log();
+
+    const _product = {
+      id: currentProductID,
+      bundle: [id],
+    };
+
+    addUpsellProduct(_product);
+    console.log(`adding product ${id} to the parent: ${currentProductID}`);
+  };
+
   return (
     <div className="PopupItem  list-element list-element--compact list-element--has-hover list-element--inline-mode">
       <div className="list-element__image">
@@ -19,7 +36,10 @@ export default function PopupItem({ product }) {
         </div>
       </div>
 
-      <button type="button" className="btn btn-small btn-primary">
+      <button
+        onClick={(_) => addBundleProduct(product.id)}
+        type="button"
+        className="btn btn-small btn-primary">
         <span className="svg-icon">
           <svg
             xmlns="http://www.w3.org/2000/svg"

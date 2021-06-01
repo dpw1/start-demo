@@ -8,17 +8,11 @@ function App() {
   const [storeData, setStoreData] = useState(null);
   const [products, setProducts] = useState([]);
 
-  const populateProducts = async () => {};
-
   useEffect(() => {
     setStoreData(window.EcwidApp.getPayload());
   }, []);
 
   useEffect(() => {
-    (async () => {
-      populateProducts();
-    })();
-
     console.log("rr my store data: ", storeData);
   }, [storeData]);
 

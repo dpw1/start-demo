@@ -1,0 +1,21 @@
+.PopupCustom {
+  max-height: 90vh;
+  overflow-y: scroll;
+
+  h4 {
+    text-align: center;
+  }
+
+  @at-root {
+    .popup-overlay {
+      @media (max-width: 767px) {
+        padding: 0 5px !important;
+      }
+    }
+
+    .popup-content {
+      max-width: 500px;
+      width: 100%;
+    }
+  }
+}
