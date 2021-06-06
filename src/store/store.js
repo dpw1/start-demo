@@ -2,9 +2,12 @@ import create from "zustand";
 import axios from "axios";
 
 const useStore = create((set, get) => ({
-  /* All products coming from the API */
+  /* ## API PRODUCTS
+  ==================================== */
   products: [],
 
+  /* ===============
+  Get store's products and populate  */
   populateProducts: async () => {
     /* TODO = change this URL when on production */
     const url = `https://app.ecwid.com/api/v3/37374877/products?token=secret_EkQGe8SC4V4DHgSrnkmXsQsneDQ9JwQ4`;
@@ -16,7 +19,14 @@ const useStore = create((set, get) => ({
     });
   },
 
-  /* Products that will show up at the front-end. */
+  getProductById: (id) => {
+    return get().products.items.filter((e) => e.id === parseInt(id))[0];
+  },
+
+  /* ## UPSELL PRODUCTS
+  ==================================== */
+
+  /* Bundle products that will show up at the front-end. */
   upsellProducts: [],
 
   addUpsellProduct: (parentID, bundleID) => {
@@ -69,13 +79,25 @@ double check whether id already exists, if so, add bundle to existing id */
     });
   },
 
-  /* Current parent product being edited in the Popup. */
-  getCurrentProduct: undefined,
+  getUpsellProductById: (id) => {
+    let bundleProducts = get().upsellProducts;
+
+    // console.log("Bundle products:", bundleProducts);
+
+    const upsell = bundleProducts.filter((e) => e.id === id);
+    return upsell.length >= 1 ? upsell[0].bundle : [];
+  },
+
+  /* ## POPUP PRODUCTS
+  ==================================== */
+
+  /* Current product being edited in the Popup. */
+  getCurrentPopupProduct: undefined,
 
   /* Updates current product. */
-  setCurrentProduct: (id) => {
+  setCurrentPopupProduct: (id) => {
     set({
-      getCurrentProduct: id,
+      getCurrentPopupProduct: id,
     });
   },
 }));

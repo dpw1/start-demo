@@ -6,19 +6,22 @@ import ProductItem from "./ProductItem";
 import useStore from "./store/store";
 
 export default function Products(props) {
-  const storeSubscriber = useRef(useStore.getState().products);
+  // const upsellProductsSubscriber = useStore.subscribe(
+  //   (upsellProducts, previousupsellProducts) => {
+  //     console.log("Updated upsell products: ", upsellProducts);
+  //   },
+  //   (state) => state.upsellProducts,
+  // );
 
   const populateProducts = useStore((state) => state.populateProducts);
   const products = useStore((state) => state.products);
 
-  useEffect(
-    () =>
-      useStore.subscribe(
-        (products) => (storeSubscriber.current = products),
-        (state) => state.products,
-      ),
-    [],
-  );
+  // useStore.subscribe(
+  //   (e) => {
+  //     console.log("changes: ", e);
+  //   },
+  //   (state) => state.upsellProducts,
+  // );
 
   useEffect(() => {
     populateProducts();
