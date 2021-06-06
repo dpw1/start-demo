@@ -4,10 +4,16 @@ import "reactjs-popup/dist/index.css";
 import PopupCustom from "./PopupCustom";
 import "./ProductItem.scss";
 import useStore from "./store/store";
+import Products from "./Products";
 
 export default function ProductItem({ product }) {
   const [upsell, setUpsell] = useState([]);
 
+  const prods = useStore((state) =>
+    typeof state.upsellProducts === "function"
+      ? state.upsellProducts()
+      : state.upsellProducts,
+  );
   const getUpsellProductById = useStore((state) => state.getUpsellProductById);
   const getProductById = useStore((state) => state.getProductById);
 
@@ -15,17 +21,25 @@ export default function ProductItem({ product }) {
     (state) => state.setCurrentPopupProduct,
   );
 
+  const populateUpsells = (id) => {
+    const bundle = getUpsellProductById(product.id);
+    console.log("my ID and  bundle: ", product.id, bundle);
+
+    setUpsell(bundle);
+  };
+
   const upsellProductsSubscriber = useStore.subscribe(
     (upsellProducts, previousupsellProducts) => {
       // console.log("Updated upsell products: ", upsellProducts);
 
-      const bundle = getUpsellProductById(product.id);
-      console.log("my ID and  bundle: ", product.id, bundle);
-
-      setUpsell(bundle);
+      populateUpsells(product.id);
     },
     (state) => state.upsellProducts,
   );
+
+  useEffect(() => {
+    populateUpsells(product.id);
+  }, []);
 
   const setProduct = () => {
     console.log("setting current product: ", product.id);
@@ -74,6 +88,8 @@ export default function ProductItem({ product }) {
 
               {upsell &&
                 upsell.map((e) => {
+                  console.log("look e", e);
+
                   const _product = getProductById(e);
 
                   return (

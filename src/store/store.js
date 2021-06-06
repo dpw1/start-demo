@@ -1,6 +1,19 @@
 import create from "zustand";
 import axios from "axios";
 
+const initialData = () => {
+  return [
+    {
+      id: 239361082,
+      bundle: [359233331],
+    },
+    {
+      id: 358944799,
+      bundle: [239361082, 359233331],
+    },
+  ];
+};
+
 const useStore = create((set, get) => ({
   /* ## API PRODUCTS
   ==================================== */
@@ -10,7 +23,12 @@ const useStore = create((set, get) => ({
   Get store's products and populate  */
   populateProducts: async () => {
     /* TODO = change this URL when on production */
-    const url = `https://app.ecwid.com/api/v3/37374877/products?token=secret_EkQGe8SC4V4DHgSrnkmXsQsneDQ9JwQ4`;
+
+    const url = /localhost/.test(window.location.href)
+      ? `https://app.ecwid.com/api/v3/37374877/products?token=secret_EkQGe8SC4V4DHgSrnkmXsQsneDQ9JwQ4`
+      : `https://app.ecwid.com/api/v3/${
+          window.EcwidApp.getPayload().store_id
+        }/products?token=${window.EcwidApp.getPayload().access_token}`;
 
     const { data: products } = await axios.get(url);
 
@@ -19,6 +37,7 @@ const useStore = create((set, get) => ({
     });
   },
 
+  /* Get a product from the API by ID */
   getProductById: (id) => {
     return get().products.items.filter((e) => e.id === parseInt(id))[0];
   },
@@ -27,16 +46,30 @@ const useStore = create((set, get) => ({
   ==================================== */
 
   /* Bundle products that will show up at the front-end. */
-  upsellProducts: [],
+  upsellProducts: () => {
+    let data = [];
 
+    if (window.EcwidApp && window.EcwidApp.getPayload()) {
+      window.EcwidApp.getAppPublicConfig(function (value) {
+        data = JSON.parse(value).upsellProducts;
+        console.log("Ecwid xxx data:", data);
+      });
+    }
+
+    return initialData();
+
+    return data;
+  },
+
+  /* Adds a product to the upsell */
   addUpsellProduct: (parentID, bundleID) => {
-    /* TODO 
-double check whether id already exists, if so, add bundle to existing id */
-
     let bundle;
-    let bundleProducts = get().upsellProducts;
+    let bundleProducts =
+      typeof get().upsellProducts === "function"
+        ? get().upsellProducts()
+        : get().upsellProducts;
 
-    // console.log("Bundle products:", bundleProducts);
+    debugger;
 
     const _parentProduct =
       bundleProducts.length >= 1 &&
@@ -70,7 +103,29 @@ double check whether id already exists, if so, add bundle to existing id */
       bundle: bundle && bundle.length >= 1 ? [...new Set(bundle)] : [bundleID],
     };
 
-    const updated = [...bundleProducts, currentProduct];
+    const sanitizeBundleProducts = () => {
+      return Symbol.iterator in Object(bundleProducts)
+        ? [...bundleProducts]
+        : [];
+    };
+
+    const sanitizedBundleProducts = sanitizeBundleProducts();
+
+    const updated = [...sanitizedBundleProducts, currentProduct];
+
+    /* Save into Ecwid's database */
+    if (window.EcwidApp) {
+      try {
+        window.EcwidApp.setAppPublicConfig(
+          JSON.stringify({ upsellProducts: updated }),
+          function () {
+            console.log("Public config saved!");
+          },
+        );
+
+        console.log("Saved upsell products in Database");
+      } catch (err) {}
+    }
 
     console.log("updated: ", updated);
 
@@ -80,7 +135,10 @@ double check whether id already exists, if so, add bundle to existing id */
   },
 
   getUpsellProductById: (id) => {
-    let bundleProducts = get().upsellProducts;
+    let bundleProducts =
+      typeof get().upsellProducts === "function"
+        ? get().upsellProducts()
+        : get().upsellProducts;
 
     // console.log("Bundle products:", bundleProducts);
 
