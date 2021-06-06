@@ -1,6 +1,6 @@
 // Initialize the application
 
-EcwidApp.init({
+window.EcwidApp.init({
   app_id: "easy-upsell-dev", // use your application namespace
   autoloadedflag: true,
   autoheight: true,
