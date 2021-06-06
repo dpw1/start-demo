@@ -4,18 +4,11 @@ import useStore from "./store/store";
 export default function PopupItem({ product }) {
   const addUpsellProduct = useStore((state) => state.addUpsellProduct);
 
-  const currentProductID = useStore((state) => state.currentProduct);
+  const currentProductID = useStore((state) => state.getCurrentProduct);
 
   const addBundleProduct = (id) => {
-    console.log();
-
-    const _product = {
-      id: currentProductID,
-      bundle: [id],
-    };
-
-    addUpsellProduct(_product);
-    console.log(`adding product ${id} to the parent: ${currentProductID}`);
+    addUpsellProduct(currentProductID, id);
+    // console.log(`adding product ${id} to the parent: ${currentProductID}`);
   };
 
   return (

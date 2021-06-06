@@ -19,15 +19,50 @@ const useStore = create((set, get) => ({
   /* Products that will show up at the front-end. */
   upsellProducts: [],
 
-  addUpsellProduct: (product) => {
+  addUpsellProduct: (parentID, bundleID) => {
     /* TODO 
 double check whether id already exists, if so, add bundle to existing id */
 
-    const _upsellProducts = get().upsellProducts;
+    let bundle;
+    let bundleProducts = get().upsellProducts;
 
-    // _upsellProducts.filter( e => e.)
+    // console.log("Bundle products:", bundleProducts);
 
-    const updated = [...get().upsellProducts, product];
+    const _parentProduct =
+      bundleProducts.length >= 1 &&
+      bundleProducts.filter((e) => e.id === parentID);
+    let parentProduct = _parentProduct.length >= 1 ? _parentProduct[0] : null;
+
+    console.log(
+      `I wanna add the bundle product ${bundleID} to ${
+        parentProduct ? `parent ${parentProduct.id}` : `new parent.`
+      }`,
+    );
+
+    if (parentProduct) {
+      const existingBundles = () => {
+        const _existing = parentProduct.bundle;
+
+        if (Symbol.iterator in Object(_existing)) {
+          return [..._existing];
+        }
+
+        return [_existing];
+      };
+
+      bundle = [...existingBundles(), bundleID];
+
+      bundleProducts = bundleProducts.filter((e) => e.id !== parentID);
+    }
+
+    const currentProduct = {
+      id: parentID,
+      bundle: bundle && bundle.length >= 1 ? [...new Set(bundle)] : [bundleID],
+    };
+
+    const updated = [...bundleProducts, currentProduct];
+
+    console.log("updated: ", updated);
 
     set({
       upsellProducts: updated,
@@ -35,12 +70,12 @@ double check whether id already exists, if so, add bundle to existing id */
   },
 
   /* Current parent product being edited in the Popup. */
-  currentProduct: undefined,
+  getCurrentProduct: undefined,
 
   /* Updates current product. */
   setCurrentProduct: (id) => {
     set({
-      currentProduct: id,
+      getCurrentProduct: id,
     });
   },
 }));

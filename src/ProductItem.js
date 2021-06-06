@@ -6,9 +6,6 @@ import "./ProductItem.scss";
 import useStore from "./store/store";
 
 export default function ProductItem({ product }) {
-  const currentProductSubscriber = useRef(useStore.getState().currentProduct);
-
-  const currentProduct = useStore((state) => state.currentProduct);
   const setCurrentProduct = useStore((state) => state.setCurrentProduct);
 
   const setProduct = () => {
@@ -27,7 +24,9 @@ export default function ProductItem({ product }) {
           <div className="list-element__header">
             <div className="list-element__main-info">
               <div className="list-element__title">
-                <span>{product.name}</span>
+                <span>
+                  {product.name} {product.id}
+                </span>
               </div>
             </div>
           </div>
@@ -97,7 +96,7 @@ export default function ProductItem({ product }) {
           );
         }}
         position="center center">
-        <PopupCustom></PopupCustom>
+        <PopupCustom parentID={product.id}></PopupCustom>
       </Popup>
     </div>
   );
