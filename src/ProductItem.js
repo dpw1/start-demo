@@ -9,11 +9,6 @@ import Products from "./Products";
 export default function ProductItem({ product }) {
   const [upsell, setUpsell] = useState([]);
 
-  const prods = useStore((state) =>
-    typeof state.upsellProducts === "function"
-      ? state.upsellProducts()
-      : state.upsellProducts,
-  );
   const getUpsellProductById = useStore((state) => state.getUpsellProductById);
   const getProductById = useStore((state) => state.getProductById);
 
@@ -21,8 +16,8 @@ export default function ProductItem({ product }) {
     (state) => state.setCurrentPopupProduct,
   );
 
-  const populateUpsells = (id) => {
-    const bundle = getUpsellProductById(product.id);
+  const populateUpsells = async (id) => {
+    const bundle = await getUpsellProductById(product.id);
     console.log("my ID and  bundle: ", product.id, bundle);
 
     setUpsell(bundle);

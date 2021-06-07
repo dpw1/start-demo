@@ -45,31 +45,31 @@ const useStore = create((set, get) => ({
   /* ## UPSELL PRODUCTS
   ==================================== */
 
-  /* Bundle products that will show up at the front-end. */
+  /* Get Bundle products that will show up at the front-end. */
   upsellProducts: () => {
-    let data = [];
-
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
-      window.EcwidApp.getAppPublicConfig(function (value) {
-        data = JSON.parse(value).upsellProducts;
-        console.log("Ecwid xxx data:", data);
+      return new Promise(async (resolve, reject) => {
+        let data = [];
+        window.EcwidApp.getAppPublicConfig(function (value) {
+          data = JSON.parse(value).upsellProducts;
+          console.log("xxx ECWID DB DATA", data);
+          resolve(data);
+        });
       });
     }
 
-    return initialData();
-
-    return data;
+    return [];
   },
 
   /* Adds a product to the upsell */
-  addUpsellProduct: (parentID, bundleID) => {
+  addUpsellProduct: async (parentID, bundleID) => {
     let bundle;
     let bundleProducts =
       typeof get().upsellProducts === "function"
-        ? get().upsellProducts()
-        : get().upsellProducts;
+        ? await get().upsellProducts()
+        : await get().upsellProducts;
 
-    debugger;
+    console.log(bundleProducts);
 
     const _parentProduct =
       bundleProducts.length >= 1 &&
@@ -134,11 +134,14 @@ const useStore = create((set, get) => ({
     });
   },
 
-  getUpsellProductById: (id) => {
+  /* Get upsell product by ID */
+  getUpsellProductById: async (id) => {
     let bundleProducts =
       typeof get().upsellProducts === "function"
-        ? get().upsellProducts()
-        : get().upsellProducts;
+        ? await get().upsellProducts()
+        : await get().upsellProducts;
+
+    console.log(bundleProducts);
 
     // console.log("Bundle products:", bundleProducts);
 
@@ -149,10 +152,10 @@ const useStore = create((set, get) => ({
   /* ## POPUP PRODUCTS
   ==================================== */
 
-  /* Current product being edited in the Popup. */
+  /* Get current product being edited in the Popup. */
   getCurrentPopupProduct: undefined,
 
-  /* Updates current product. */
+  /* Updates current product being edited in the popup. */
   setCurrentPopupProduct: (id) => {
     set({
       getCurrentPopupProduct: id,
