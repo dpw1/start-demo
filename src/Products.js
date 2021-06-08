@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./Products.scss";
 import Skeleton from "react-loading-skeleton";
 import ProductPicker from "./ProductPicker";
@@ -13,18 +13,19 @@ export default function Products(props) {
   //   (state) => state.upsellProducts,
   // );
 
+  const upsellProducts = useStore((state) => state.upsellProducts);
   const populateProducts = useStore((state) => state.populateProducts);
   const products = useStore((state) => state.products);
 
-  // useStore.subscribe(
-  //   (e) => {
-  //     console.log("changes: ", e);
-  //   },
-  //   (state) => state.upsellProducts,
-  // );
-
   useEffect(() => {
     populateProducts();
+
+    useStore.subscribe(
+      (deleteUpsellProductById, previousupsellProducts) => {
+        console.log("Deleting upsell");
+      },
+      (state) => state.deleteUpsellProductById,
+    );
   }, []);
 
   const ProductSkeleton = () => {

@@ -20,7 +20,7 @@ const useStore = create((set, get) => ({
   products: [],
 
   /* ===============
-  Get store's products and populate  */
+  Get store's products and populate the store's 'products' variable */
   populateProducts: async () => {
     /* TODO = change this URL when on production */
 
@@ -51,7 +51,8 @@ const useStore = create((set, get) => ({
       return new Promise(async (resolve, reject) => {
         let data = [];
         window.EcwidApp.getAppPublicConfig(function (value) {
-          data = JSON.parse(value).upsellProducts;
+          const _data = JSON.parse(value);
+          data = data = _data.upsellProducts;
           console.log("xxx ECWID DB DATA", data);
           resolve(data);
         });
@@ -69,19 +70,20 @@ const useStore = create((set, get) => ({
         ? await get().upsellProducts()
         : await get().upsellProducts;
 
-    console.log(bundleProducts);
-
     const _parentProduct =
       bundleProducts.length >= 1 &&
       bundleProducts.filter((e) => e.id === parentID);
     let parentProduct = _parentProduct.length >= 1 ? _parentProduct[0] : null;
 
     console.log(
-      `I wanna add the bundle product ${bundleID} to ${
+      `Adding the bundle product ${bundleID} to ${
         parentProduct ? `parent ${parentProduct.id}` : `new parent.`
       }`,
     );
 
+    const bundleProduct = get().getProductById(bundleID);
+
+    // debugger;
     if (parentProduct) {
       const existingBundles = () => {
         const _existing = parentProduct.bundle;
@@ -93,14 +95,17 @@ const useStore = create((set, get) => ({
         return [_existing];
       };
 
-      bundle = [...existingBundles(), bundleID];
+      bundle = [...existingBundles(), bundleProduct];
 
       bundleProducts = bundleProducts.filter((e) => e.id !== parentID);
+
+      console.log(bundleProducts);
     }
 
     const currentProduct = {
       id: parentID,
-      bundle: bundle && bundle.length >= 1 ? [...new Set(bundle)] : [bundleID],
+      bundle:
+        bundle && bundle.length >= 1 ? [...new Set(bundle)] : [bundleProduct],
     };
 
     const sanitizeBundleProducts = () => {
@@ -119,15 +124,17 @@ const useStore = create((set, get) => ({
         window.EcwidApp.setAppPublicConfig(
           JSON.stringify({ upsellProducts: updated }),
           function () {
-            console.log("Public config saved!");
+            console.log("New upsell product saved!");
           },
         );
-
-        console.log("Saved upsell products in Database");
-      } catch (err) {}
+      } catch (err) {
+        console.error(
+          "Couldn't save upsell product. [store.js - addUpsellProduct()]",
+        );
+      }
     }
 
-    console.log("updated: ", updated);
+    // console.log("updated: ", updated);
 
     set({
       upsellProducts: updated,
@@ -147,6 +154,53 @@ const useStore = create((set, get) => ({
 
     const upsell = bundleProducts.filter((e) => e.id === id);
     return upsell.length >= 1 ? upsell[0].bundle : [];
+  },
+
+  deleteUpsellProductById: async (parentID, bundleID) => {
+    let bundleProducts =
+      typeof get().upsellProducts === "function"
+        ? await get().upsellProducts()
+        : await get().upsellProducts;
+
+    let updated = [];
+
+    const parent = bundleProducts.find((e) => e.id === parentID);
+
+    if (!parent) {
+      console.log("parent is undefined!!!");
+      return;
+    }
+
+    console.log("deleted bundle from parent: ", parent, parentID, bundleID);
+    const updatedBundle = parent.bundle.filter((e) => e.id !== bundleID);
+
+    /* If deleting the last item, remove parent as well */
+    if (updatedBundle.length <= 0) {
+      updated = bundleProducts.filter((e) => e.id !== parentID);
+    } else {
+      updated = bundleProducts;
+    }
+
+    parent.bundle = updatedBundle;
+
+    console.log("Updated after delete: ", updated);
+
+    if (window.EcwidApp) {
+      try {
+        window.EcwidApp.setAppPublicConfig(
+          JSON.stringify({ upsellProducts: updated }),
+          function () {
+            console.log("Public config saved!");
+          },
+        );
+
+        console.log("Saved upsell products in Database");
+      } catch (err) {}
+    }
+
+    set({
+      upsellProducts: updated,
+    });
   },
 
   /* ## POPUP PRODUCTS

@@ -9,31 +9,63 @@ import Products from "./Products";
 export default function ProductItem({ product }) {
   const [upsell, setUpsell] = useState([]);
 
+  const upsellProducts = useStore((state) => state.upsellProducts);
   const getUpsellProductById = useStore((state) => state.getUpsellProductById);
+  const deleteUpsellProductById = useStore(
+    (state) => state.deleteUpsellProductById,
+  );
   const getProductById = useStore((state) => state.getProductById);
-
   const setCurrentPopupProduct = useStore(
     (state) => state.setCurrentPopupProduct,
   );
 
   const populateUpsells = async (id) => {
     const bundle = await getUpsellProductById(product.id);
-    console.log("my ID and  bundle: ", product.id, bundle);
-
+    console.log("my ID and  bundle: ", bundle);
     setUpsell(bundle);
   };
 
-  const upsellProductsSubscriber = useStore.subscribe(
-    (upsellProducts, previousupsellProducts) => {
-      // console.log("Updated upsell products: ", upsellProducts);
+  // useEffect(() => {
+  //   (async () => {
+  //     let bundleProducts =
+  //       typeof upsellProducts === "function"
+  //         ? await upsellProducts()
+  //         : await upsellProducts;
 
-      populateUpsells(product.id);
-    },
-    (state) => state.upsellProducts,
-  );
+  //     if (bundleProducts && bundleProducts.length <= 0) {
+  //       return;
+  //     }
+  //     const current = bundleProducts.filter((e) => e.id === product.id)[0];
+
+  //     if (!current) {
+  //       return;
+  //     }
+
+  //     populateUpsells(product.id);
+
+  //     console.log("my upsell products [zeroed]", current, product.id);
+  //   })();
+  // }, [upsellProducts]);
 
   useEffect(() => {
-    populateUpsells(product.id);
+    useStore.subscribe(async (e) => {
+      let bundleProducts =
+        typeof e.upsellProducts === "function"
+          ? await e.upsellProducts()
+          : await e.upsellProducts;
+
+      if (bundleProducts && bundleProducts.length <= 0) {
+        setUpsell([]);
+        return;
+      }
+      const current = bundleProducts.filter((e) => e.id === product.id)[0];
+
+      if (!current) {
+        return;
+      }
+
+      populateUpsells(product.id);
+    });
   }, []);
 
   const setProduct = () => {
@@ -83,17 +115,38 @@ export default function ProductItem({ product }) {
 
               {upsell &&
                 upsell.map((e) => {
-                  console.log("look e", e);
+                  console.log("look e", e.id);
 
-                  const _product = getProductById(e);
+                  const _product = e;
 
+                  console.log(_product);
                   return (
-                    <div key={e} className="ProductItem-upsell">
+                    <div
+                      key={`${_product.id}_${product.id}`}
+                      className={`ProductItem-upsell ProductItem-upsell--${_product.id}-${product.id}`}>
                       <span className="spacing--mr1">{_product.name}</span>
 
                       {/* <button onClick={() => increaseValue()}>add</button> */}
 
-                      <a className="icolink" href="#">
+                      <button
+                        onClick={(event) => {
+                          event.preventDefault();
+                          console.log(
+                            `Delete ${_product.id} from the parent ${product.id}`,
+                          );
+                          deleteUpsellProductById(product.id, _product.id);
+                          // try {
+
+                          //   // const $item = window.document.querySelector(
+                          //   //   `.ProductItem-upsell--${_product.id}-${product.id}`,
+                          //   // );
+
+                          //   // if ($item) {
+                          //     // $item.style.display = "none";
+                          //   }
+                          // } catch (err) {}
+                        }}
+                        className="icolink">
                         <span className="svg-icon">
                           <svg
                             width="21"
@@ -105,7 +158,7 @@ export default function ProductItem({ product }) {
                             <path d="M7.413 4.78L8.52 3.157c.28-.41.743-.656 1.24-.656h1.425a1.5 1.5 0 011.22.628l1.188 1.663.814-.58-1.188-1.663A2.5 2.5 0 0011.184 1.5H9.76c-.828 0-1.6.41-2.067 1.093L6.587 4.22l.826.56zM10 7.5v8a.5.5 0 001 0v-8a.5.5 0 00-1 0zm-3 0v8a.5.5 0 001 0v-8a.5.5 0 00-1 0zm6 0v8a.5.5 0 001 0v-8a.5.5 0 00-1 0z"></path>
                           </svg>
                         </span>
-                      </a>
+                      </button>
                     </div>
                   );
                 })}
