@@ -13,7 +13,8 @@ export default function Products(props) {
   //   (state) => state.upsellProducts,
   // );
 
-  const upsellProducts = useStore((state) => state.upsellProducts);
+  /* TODO - load database on load */
+
   const populateProducts = useStore((state) => state.populateProducts);
   const products = useStore((state) => state.products);
 
@@ -21,10 +22,10 @@ export default function Products(props) {
     populateProducts();
 
     useStore.subscribe(
-      (deleteUpsellProductById, previousupsellProducts) => {
-        console.log("Deleting upsell");
+      (upsellProducts, previousupsellProducts) => {
+        console.log("upsell products loaded!");
       },
-      (state) => state.deleteUpsellProductById,
+      (state) => state.upsellProducts,
     );
   }, []);
 

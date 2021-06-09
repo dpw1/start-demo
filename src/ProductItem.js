@@ -25,48 +25,43 @@ export default function ProductItem({ product }) {
     setUpsell(bundle);
   };
 
-  // useEffect(() => {
-  //   (async () => {
-  //     let bundleProducts =
-  //       typeof upsellProducts === "function"
-  //         ? await upsellProducts()
-  //         : await upsellProducts;
+  const handlePopulateUpsell = async (subscription) => {
+    let bundleProducts;
 
-  //     if (bundleProducts && bundleProducts.length <= 0) {
-  //       return;
-  //     }
-  //     const current = bundleProducts.filter((e) => e.id === product.id)[0];
+    if (subscription) {
+      bundleProducts =
+        typeof subscription.upsellProducts === "function"
+          ? await subscription.upsellProducts()
+          : await subscription.upsellProducts;
+    } else {
+      bundleProducts =
+        typeof upsellProducts === "function"
+          ? await upsellProducts()
+          : await upsellProducts;
+    }
 
-  //     if (!current) {
-  //       return;
-  //     }
+    if (bundleProducts && bundleProducts.length <= 0) {
+      setUpsell([]);
+      return;
+    }
+    const current = bundleProducts.filter((e) => e.id === product.id)[0];
 
-  //     populateUpsells(product.id);
+    console.log("ProducItem.js updating!", current);
+    if (!current) {
+      setUpsell([]);
+      return;
+    }
 
-  //     console.log("my upsell products [zeroed]", current, product.id);
-  //   })();
-  // }, [upsellProducts]);
+    populateUpsells(product.id);
+  };
 
   useEffect(() => {
+    (async (_) => {
+      handlePopulateUpsell();
+    })();
+
     useStore.subscribe(async (e) => {
-      let bundleProducts =
-        typeof e.upsellProducts === "function"
-          ? await e.upsellProducts()
-          : await e.upsellProducts;
-
-      if (bundleProducts && bundleProducts.length <= 0) {
-        setUpsell([]);
-        return;
-      }
-      const current = bundleProducts.filter((e) => e.id === product.id)[0];
-
-      console.log("ProducItem.js updating!", current);
-      if (!current) {
-        setUpsell([]);
-        return;
-      }
-
-      populateUpsells(product.id);
+      handlePopulateUpsell(e);
     });
   }, []);
 
