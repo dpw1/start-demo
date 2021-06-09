@@ -60,7 +60,9 @@ export default function ProductItem({ product }) {
       }
       const current = bundleProducts.filter((e) => e.id === product.id)[0];
 
+      console.log("ProducItem.js updating!", current);
       if (!current) {
+        setUpsell([]);
         return;
       }
 
