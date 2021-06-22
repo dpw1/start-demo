@@ -141,7 +141,7 @@ const useStore = create((set, get) => ({
     });
   },
 
-  /* Get upsell product by ID */
+  /* Get the bundle/upsell products of a specific product ID */
   getUpsellProductById: async (id) => {
     let bundleProducts =
       typeof get().upsellProducts === "function"
