@@ -1,5 +1,3 @@
-window.ezUpsellScope = "123";
-
 /*
 ## Intro:
 Basic structure for a Shopify Javascript customization.
@@ -8,7 +6,7 @@ Basic structure for a Shopify Javascript customization.
 */
 window.ezfyEasyUpsellApp = window.ezfyEasyUpsellApp || {};
 
-ezfyEasyUpsellApp = (function () {
+window.ezfyEasyUpsellApp = (function () {
   function _loadScript(src) {
     return new Promise(function (resolve, reject) {
       var s;
@@ -110,10 +108,25 @@ ezfyEasyUpsellApp = (function () {
     document.head.append(style);
   }
 
-  function hello() {
-    const data = JSON.parse(Ecwid.getAppPublicConfig("easy-upsell-dev"));
+  function getProductID() {
+    if (/-p\d{6,}/.test(window.location.pathname)) {
+      var _id = window.location.pathname.split("-");
+      var id = parseInt(_id[_id.length - 1].replace("p", ""));
+      return id;
+    }
 
-    console.log(data);
+    return null;
+  }
+
+  function hello() {
+    const data = JSON.parse(window.Ecwid.getAppPublicConfig("easy-upsell-dev"));
+
+    const id = getProductID();
+    const upsell = window.upsellProducts.filter(
+      (e) => parseInt(e.id) === parseInt(id),
+    );
+
+    console.log("upsell: ", upsell);
   }
 
   return {
@@ -127,4 +140,4 @@ ezfyEasyUpsellApp = (function () {
   };
 })();
 
-ezfyEasyUpsellApp.init();
+window.ezfyEasyUpsellApp.init();
