@@ -53,7 +53,9 @@ export default function Products(props) {
       <div className="named-area__body">
         <div className="a-card a-card--compact">
           <div className="a-card__paddings">
-            <h1 className="settings-page__title spacing--mt2">Products</h1>
+            <h1 className="Products-title settings-page__title spacing--mt2">
+              Products
+            </h1>
 
             {products && products.hasOwnProperty("items") ? (
               products.items.map((e) => (

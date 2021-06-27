@@ -22,13 +22,8 @@ export default function PopupItem({ product, parentID }) {
       const upsell = await getUpsellProductById(parentID);
 
       if (upsell.filter((e) => e.id === product.id).length >= 1) {
-        console.log(
-          "shhh",
-          upsell.filter((e) => e.id === product.id),
-        );
         setIsAddable(false);
       }
-      console.log("my product bundle: ", upsell);
     })();
   }, []);
 

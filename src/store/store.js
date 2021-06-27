@@ -1,19 +1,6 @@
 import create from "zustand";
 import axios from "axios";
 
-const initialData = () => {
-  return [
-    {
-      id: 239361082,
-      bundle: [359233331],
-    },
-    {
-      id: 358944799,
-      bundle: [239361082, 359233331],
-    },
-  ];
-};
-
 const useStore = create((set, get) => ({
   /* ## API PRODUCTS
   ==================================== */

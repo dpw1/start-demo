@@ -8,6 +8,10 @@
     flex-direction: column;
   }
 
+  &-title {
+    margin-bottom: 25px;
+  }
+
   .SkeletonLoader {
     display: flex;
     & > *:nth-child(1) {

@@ -24,7 +24,9 @@ function App() {
 
   return (
     <div className="EasyUpsellApp">
-      <Products></Products>
+      <div className="EasyUpsellApp-container">
+        <Products></Products>
+      </div>
     </div>
   );
 }

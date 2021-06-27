@@ -1,5 +1,3 @@
-window.ezUpsellScope = "123";
-
 /*
 ## Intro:
 Basic structure for a Shopify Javascript customization.
@@ -8,7 +6,7 @@ Basic structure for a Shopify Javascript customization.
 */
 window.ezfyEasyUpsellApp = window.ezfyEasyUpsellApp || {};
 
-ezfyEasyUpsellApp = (function () {
+window.ezfyEasyUpsellApp = (function () {
   function _loadScript(src) {
     return new Promise(function (resolve, reject) {
       var s;
@@ -110,21 +108,98 @@ ezfyEasyUpsellApp = (function () {
     document.head.append(style);
   }
 
-  function hello() {
-    const data = JSON.parse(Ecwid.getAppPublicConfig("easy-upsell-dev"));
+  function _getProductID() {
+    if (/-p\d{6,}/.test(window.location.pathname)) {
+      var _id = window.location.pathname.split("-");
+      var id = parseInt(_id[_id.length - 1].replace("p", ""));
+      return id;
+    }
 
-    console.log(data);
+    return null;
+  }
+
+  function _getUpsellProducts() {
+    const data = JSON.parse(window.Ecwid.getAppPublicConfig("easy-upsell-dev"));
+
+    const id = _getProductID();
+
+    return data.upsellProducts.filter(
+      (e) => parseInt(e.id) === parseInt(id),
+    )[0];
+  }
+
+  async function injectUpsell(upsell) {
+    const $atc = await _waitForElement(`.details-product-purchase`);
+
+    if (!$atc) {
+      return;
+    }
+
+    let imagesHTML = "";
+    let productsHTML = "";
+
+    for (const [i, e] of upsell.bundle.entries()) {
+      imagesHTML += `
+      <a href="debut-theme-zoom-pro" target="_blank" class="fbt-figure ">
+      <img src="${e.hdThumbnailUrl}" title="${e.name}" alt="${e.name}">
+      </a>
+      ${i !== upsell.bundle.length - 1 && `<span class="fbt-icon">+</span>`}
+      `;
+
+      productsHTML += `
+      
+      <div class="fbt-option">
+      <label class="fbt-label" for="fbt-checkbox${i}">
+        <div class="fbt-name">
+          <input class="fbt-checkbox" type="checkbox" id="fbt-checkbox${i}" checked="">
+          <span class="fbt-this-item">This item: </span>
+          <span>${e.name}</span>
+          <div class="fbt-price">${e.defaultDisplayedPriceFormatted}</div>
+        </div>
+      </label>
+    </div>
+      
+      `;
+    }
+
+    upsell.bundle.map((e, i) => {});
+
+    const html = `
+    
+    <div class="fbt" id="ezfyFbt">
+	<div class="fbt-container">
+		<div class="fbt-products">
+			<h4 class="fbt-subtitle">Save by buying these products together:</h4>
+			<div class="fbt-figures">
+     
+      ${imagesHTML}
+      </div>
+			<p class="fbt-total"><span>Total bundle price: </span><span class="fbt-total-small">$36.00</span> <span class="fbt-total-big">$45.00</span>
+			<div class="fbt-discount"><span class="discount"><span>20% OFF </span><span class="fbt-discount--small">(YOU SAVE $9.00)</span></span></div>
+			</p><button class="fbt-button">Add Bundle</button>
+		</div>
+		<div class="fbt-options">
+			${productsHTML}
+		</div>
+	</div>
+</div>
+    `;
+
+    $atc.insertAdjacentHTML("afterend", html);
+  }
+
+  function hello() {
+    const upsell = _getUpsellProducts();
+
+    injectUpsell(upsell);
+    console.log("upsell: ", upsell);
   }
 
   return {
     init: function () {
       hello();
-
-      window.addEventListener("resize", function () {});
-
-      window.addEventListener("scroll", function () {});
     },
   };
 })();
 
-ezfyEasyUpsellApp.init();
+// window.ezfyEasyUpsellApp.init();
