@@ -129,7 +129,9 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function injectUpsell(upsell) {
-    const $atc = await _waitForElement(`.details-product-purchase`);
+    await _waitForElement(`.details-product-purchase`);
+
+    const $atc = document.querySelector(`.details-product-purchase`);
 
     if (!$atc) {
       return;
