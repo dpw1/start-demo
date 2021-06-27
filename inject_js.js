@@ -118,7 +118,7 @@ window.ezfyEasyUpsellApp = (function () {
     return null;
   }
 
-  function getUpsellProducts() {
+  function _getUpsellProducts() {
     const data = JSON.parse(window.Ecwid.getAppPublicConfig("easy-upsell-dev"));
 
     const id = _getProductID();
@@ -128,9 +128,21 @@ window.ezfyEasyUpsellApp = (function () {
     )[0];
   }
 
-  function hello() {
-    const upsell = getUpsellProducts();
+  function injectUpsell() {
+    const $atc = document.querySelector(`.details-product-purchase`);
 
+    if (!$atc) {
+      return;
+    }
+    const html = `<p>hello</p>`;
+
+    $atc.insertAdjacentHTML("afterend", html);
+  }
+
+  function hello() {
+    const upsell = _getUpsellProducts();
+
+    injectUpsell();
     console.log("upsell: ", upsell);
   }
 
