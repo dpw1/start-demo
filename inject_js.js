@@ -191,7 +191,7 @@ window.ezfyEasyUpsellApp = (function () {
   function hello() {
     const upsell = _getUpsellProducts();
 
-    // injectUpsell(upsell);
+    injectUpsell(upsell);
     console.log("upsell: ", upsell);
   }
 
