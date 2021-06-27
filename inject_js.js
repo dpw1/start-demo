@@ -195,7 +195,9 @@ window.ezfyEasyUpsellApp = (function () {
 
   return {
     init: function () {
-      hello();
+      try {
+        hello();
+      } catch (err) {}
     },
   };
 })();
