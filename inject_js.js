@@ -129,63 +129,67 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function injectUpsell(upsell) {
-    // await _waitForElement(`.details-product-purchase`);
+    try {
+      await _waitForElement(`.details-product-purchase`);
 
-    const $atc = document.querySelector(`.details-product-purchase`);
+      const $atc = document.querySelector(`.details-product-purchase`);
 
-    if (!$atc) {
-      return;
-    }
+      if (!$atc) {
+        return;
+      }
 
-    let imagesHTML = "";
-    let productsHTML = "";
+      let imagesHTML = "";
+      let productsHTML = "";
 
-    for (const [i, e] of upsell.bundle.entries()) {
-      imagesHTML += `
-      <a href="debut-theme-zoom-pro" target="_blank" class="fbt-figure ">
-      <img src="${e.hdThumbnailUrl}" title="${e.name}" alt="${e.name}">
-      </a>
-      <span class="fbt-icon">+</span>
-      `;
-
-      productsHTML += `
-      
-      <div class="fbt-option">
-      <label class="fbt-label" for="fbt-checkbox${i}">
-        <div class="fbt-name">
-          <input class="fbt-checkbox" type="checkbox" id="fbt-checkbox${i}" checked="">
-          <span class="fbt-this-item">This item: </span>
-          <span>${e.name}</span>
-          <div class="fbt-price">${e.defaultDisplayedPriceFormatted}</div>
-        </div>
-      </label>
-    </div>
-      
-      `;
-    }
-
-    const html = `
-    
-    <div class="fbt" id="ezfyFbt">
-	<div class="fbt-container">
-		<div class="fbt-products">
-			<h4 class="fbt-subtitle">Save by buying these products together:</h4>
-			<div class="fbt-figures">
-     
-      ${imagesHTML}
-      </div>
-			<p class="fbt-total"><span>Total bundle price: </span><span class="fbt-total-small">$36.00</span> <span class="fbt-total-big">$45.00</span>
-			<div class="fbt-discount"><span class="discount"><span>20% OFF </span><span class="fbt-discount--small">(YOU SAVE $9.00)</span></span></div>
-			</p><button class="fbt-button">Add Bundle</button>
-		</div>
-		<div class="fbt-options">
-			${productsHTML}
-		</div>
-	</div>
-</div>
+      for (const [i, e] of upsell.bundle.entries()) {
+        imagesHTML += `
+    <a href="debut-theme-zoom-pro" target="_blank" class="fbt-figure ">
+    <img src="${e.hdThumbnailUrl}" title="${e.name}" alt="${e.name}">
+    </a>
+    <span class="fbt-icon">+</span>
     `;
 
-    $atc.insertAdjacentHTML("afterend", html);
+        productsHTML += `
+    
+    <div class="fbt-option">
+    <label class="fbt-label" for="fbt-checkbox${i}">
+      <div class="fbt-name">
+        <input class="fbt-checkbox" type="checkbox" id="fbt-checkbox${i}" checked="">
+        <span class="fbt-this-item">This item: </span>
+        <span>${e.name}</span>
+        <div class="fbt-price">${e.defaultDisplayedPriceFormatted}</div>
+      </div>
+    </label>
+  </div>
+    
+    `;
+      }
+
+      const html = `
+  
+  <div class="fbt" id="ezfyFbt">
+<div class="fbt-container">
+  <div class="fbt-products">
+    <h4 class="fbt-subtitle">Save by buying these products together:</h4>
+    <div class="fbt-figures">
+   
+    ${imagesHTML}
+    </div>
+    <p class="fbt-total"><span>Total bundle price: </span><span class="fbt-total-small">$36.00</span> <span class="fbt-total-big">$45.00</span>
+    <div class="fbt-discount"><span class="discount"><span>20% OFF </span><span class="fbt-discount--small">(YOU SAVE $9.00)</span></span></div>
+    </p><button class="fbt-button">Add Bundle</button>
+  </div>
+  <div class="fbt-options">
+    ${productsHTML}
+  </div>
+</div>
+</div>
+  `;
+
+      $atc.insertAdjacentHTML("afterend", html);
+    } catch (err) {
+      console.log("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    }
   }
 
   function hello() {
@@ -197,9 +201,7 @@ window.ezfyEasyUpsellApp = (function () {
 
   return {
     init: function () {
-      setTimeout(() => {
-        hello();
-      }, 3500);
+      hello();
     },
   };
 })();
