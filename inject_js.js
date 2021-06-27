@@ -189,19 +189,15 @@ window.ezfyEasyUpsellApp = (function () {
   function hello() {
     const upsell = _getUpsellProducts();
 
-    injectUpsell(upsell);
+    // injectUpsell(upsell);
     console.log("upsell: ", upsell);
   }
 
   return {
     init: function () {
-      try {
-        hello();
-      } catch (err) {}
+      hello();
     },
   };
 })();
 
-try {
-  window.ezfyEasyUpsellApp.init();
-} catch (err) {}
+window.ezfyEasyUpsellApp.init();
