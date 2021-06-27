@@ -129,7 +129,7 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function injectUpsell(upsell) {
-    await _waitForElement(`.details-product-purchase`);
+    // await _waitForElement(`.details-product-purchase`);
 
     const $atc = document.querySelector(`.details-product-purchase`);
 
@@ -197,7 +197,9 @@ window.ezfyEasyUpsellApp = (function () {
 
   return {
     init: function () {
-      hello();
+      setTimeout(() => {
+        hello();
+      }, 3500);
     },
   };
 })();
