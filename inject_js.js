@@ -108,7 +108,7 @@ window.ezfyEasyUpsellApp = (function () {
     document.head.append(style);
   }
 
-  function getProductID() {
+  function _getProductID() {
     if (/-p\d{6,}/.test(window.location.pathname)) {
       var _id = window.location.pathname.split("-");
       var id = parseInt(_id[_id.length - 1].replace("p", ""));
@@ -118,14 +118,18 @@ window.ezfyEasyUpsellApp = (function () {
     return null;
   }
 
-  function hello() {
+  function getUpsellProducts() {
     const data = JSON.parse(window.Ecwid.getAppPublicConfig("easy-upsell-dev"));
 
-    const id = getProductID();
-    debugger;
-    const upsell = data.upsellProducts.filter(
+    const id = _getProductID();
+
+    return data.upsellProducts.filter(
       (e) => parseInt(e.id) === parseInt(id),
-    );
+    )[0];
+  }
+
+  function hello() {
+    const upsell = getUpsellProducts();
 
     console.log("upsell: ", upsell);
   }
