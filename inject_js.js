@@ -129,6 +129,7 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   function injectUpsell() {
+    debugger;
     const $atc = document.querySelector(`.details-product-purchase`);
 
     if (!$atc) {
