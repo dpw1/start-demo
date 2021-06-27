@@ -202,4 +202,4 @@ window.ezfyEasyUpsellApp = (function () {
   };
 })();
 
-window.ezfyEasyUpsellApp.init();
+// window.ezfyEasyUpsellApp.init();
