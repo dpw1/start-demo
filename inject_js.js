@@ -143,7 +143,7 @@ window.ezfyEasyUpsellApp = (function () {
       <a href="debut-theme-zoom-pro" target="_blank" class="fbt-figure ">
       <img src="${e.hdThumbnailUrl}" title="${e.name}" alt="${e.name}">
       </a>
-      ${i !== upsell.bundle.length - 1 && `<span class="fbt-icon">+</span>`}
+      <span class="fbt-icon">+</span>
       `;
 
       productsHTML += `
