@@ -156,11 +156,12 @@ window.ezfyEasyUpsellApp = (function () {
 
     const html = `
     
-    <div class="fbt">
+    <div class="fbt" id="ezfyFbt">
 	<div class="fbt-container">
 		<div class="fbt-products">
 			<h4 class="fbt-subtitle">Save by buying these products together:</h4>
-			<div class="fbt-figures"><a href="debut-theme-zoom-pro" target="_blank" class="fbt-figure "><img src="https://d2j6dbq0eux0bg.cloudfront.net/images/61271341/2341285234.jpg" title="Debut Theme Zoom (PRO)" alt="Debut Theme Zoom (PRO)"></a><span class="fbt-icon">+</span><a href="debut-theme-slider-pro" target="_blank" class="fbt-figure "><img src="https://d2j6dbq0eux0bg.cloudfront.net/images/61271341/2305269183.jpg" title="Debut Theme Slider (PRO)" alt="Debut Theme Slider (PRO)"></a><span class="fbt-icon">+</span><a href="debut-theme-sticky-navbar-pro" target="_blank" class="fbt-figure "><img src="https://d2j6dbq0eux0bg.cloudfront.net/images/61271341/2305599932.jpg" title="Debut Theme Sticky Navbar (PRO)" alt="Debut Theme Sticky Navbar (PRO)"></a><span class="fbt-icon">+</span></div>
+			<div class="fbt-figures"><a href="debut-theme-zoom-pro" target="_blank" class="fbt-figure ">
+      <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/61271341/2341285234.jpg" title="Debut Theme Zoom (PRO)" alt="Debut Theme Zoom (PRO)"></a><span class="fbt-icon">+</span><a href="debut-theme-slider-pro" target="_blank" class="fbt-figure "><img src="https://d2j6dbq0eux0bg.cloudfront.net/images/61271341/2305269183.jpg" title="Debut Theme Slider (PRO)" alt="Debut Theme Slider (PRO)"></a><span class="fbt-icon">+</span><a href="debut-theme-sticky-navbar-pro" target="_blank" class="fbt-figure "><img src="https://d2j6dbq0eux0bg.cloudfront.net/images/61271341/2305599932.jpg" title="Debut Theme Sticky Navbar (PRO)" alt="Debut Theme Sticky Navbar (PRO)"></a><span class="fbt-icon">+</span></div>
 			<p class="fbt-total"><span>Total bundle price: </span><span class="fbt-total-small">$36.00</span> <span class="fbt-total-big">$45.00</span>
 			<div class="fbt-discount"><span class="discount"><span>20% OFF </span><span class="fbt-discount--small">(YOU SAVE $9.00)</span></span></div>
 			</p><button class="fbt-button">Add Bundle</button>
@@ -185,10 +186,6 @@ window.ezfyEasyUpsellApp = (function () {
   return {
     init: function () {
       hello();
-
-      window.addEventListener("resize", function () {});
-
-      window.addEventListener("scroll", function () {});
     },
   };
 })();
