@@ -122,7 +122,8 @@ window.ezfyEasyUpsellApp = (function () {
     const data = JSON.parse(window.Ecwid.getAppPublicConfig("easy-upsell-dev"));
 
     const id = getProductID();
-    const upsell = window.upsellProducts.filter(
+    debugger;
+    const upsell = data.upsellProducts.filter(
       (e) => parseInt(e.id) === parseInt(id),
     );
 
