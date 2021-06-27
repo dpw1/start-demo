@@ -135,10 +135,18 @@ window.ezfyEasyUpsellApp = (function () {
       return;
     }
 
+    let imagesHTML = "";
     let productsHTML = "";
 
-    upsell.bundle.map((e, i) => {
-      return (productsHTML += `
+    for (const [i, e] of upsell.bundle.entries()) {
+      imagesHTML += `
+      <a href="debut-theme-zoom-pro" target="_blank" class="fbt-figure ">
+      <img src="${e.hdThumbnailUrl}" title="${e.name}" alt="${e.name}">
+      </a>
+      ${i !== upsell.bundle.length - 1 && `<span class="fbt-icon">+</span>`}
+      `;
+
+      productsHTML += `
       
       <div class="fbt-option">
       <label class="fbt-label" for="fbt-checkbox${i}">
@@ -151,8 +159,10 @@ window.ezfyEasyUpsellApp = (function () {
       </label>
     </div>
       
-      `);
-    });
+      `;
+    }
+
+    upsell.bundle.map((e, i) => {});
 
     const html = `
     
@@ -160,8 +170,10 @@ window.ezfyEasyUpsellApp = (function () {
 	<div class="fbt-container">
 		<div class="fbt-products">
 			<h4 class="fbt-subtitle">Save by buying these products together:</h4>
-			<div class="fbt-figures"><a href="debut-theme-zoom-pro" target="_blank" class="fbt-figure ">
-      <img src="https://d2j6dbq0eux0bg.cloudfront.net/images/61271341/2341285234.jpg" title="Debut Theme Zoom (PRO)" alt="Debut Theme Zoom (PRO)"></a><span class="fbt-icon">+</span><a href="debut-theme-slider-pro" target="_blank" class="fbt-figure "><img src="https://d2j6dbq0eux0bg.cloudfront.net/images/61271341/2305269183.jpg" title="Debut Theme Slider (PRO)" alt="Debut Theme Slider (PRO)"></a><span class="fbt-icon">+</span><a href="debut-theme-sticky-navbar-pro" target="_blank" class="fbt-figure "><img src="https://d2j6dbq0eux0bg.cloudfront.net/images/61271341/2305599932.jpg" title="Debut Theme Sticky Navbar (PRO)" alt="Debut Theme Sticky Navbar (PRO)"></a><span class="fbt-icon">+</span></div>
+			<div class="fbt-figures">
+     
+      ${imagesHTML}
+      </div>
 			<p class="fbt-total"><span>Total bundle price: </span><span class="fbt-total-small">$36.00</span> <span class="fbt-total-big">$45.00</span>
 			<div class="fbt-discount"><span class="discount"><span>20% OFF </span><span class="fbt-discount--small">(YOU SAVE $9.00)</span></span></div>
 			</p><button class="fbt-button">Add Bundle</button>
