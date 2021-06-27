@@ -162,8 +162,6 @@ window.ezfyEasyUpsellApp = (function () {
       `;
     }
 
-    upsell.bundle.map((e, i) => {});
-
     const html = `
     
     <div class="fbt" id="ezfyFbt">
@@ -202,4 +200,4 @@ window.ezfyEasyUpsellApp = (function () {
   };
 })();
 
-// window.ezfyEasyUpsellApp.init();
+window.ezfyEasyUpsellApp.init();
