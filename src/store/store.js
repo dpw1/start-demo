@@ -74,6 +74,7 @@ const useStore = create((set, get) => ({
 
     const bundleProduct = get().getProductById(bundleID);
 
+    /* If it's an already existing product, adds the extra bundle to it */
     if (parentProduct) {
       const existingBundles = () => {
         const _existing = parentProduct.bundle;
@@ -92,12 +93,14 @@ const useStore = create((set, get) => ({
       console.log(bundleProducts);
     }
 
+    /* In this "one-line-if-else", if the product is having a bundle for the first time,
+    it is added to the last line, adding both the parent and the first bundle. ([parent, bundleProduct]) */
     const currentProduct = {
       id: parentID,
       bundle:
         bundle && bundle.length >= 1
           ? [...new Set(bundle)]
-          : [bundleProduct, parent],
+          : [parent, bundleProduct],
     };
 
     const sanitizeBundleProducts = () => {
