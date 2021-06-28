@@ -14,6 +14,10 @@ export default function ProductItem({ product }) {
   const deleteUpsellProductById = useStore(
     (state) => state.deleteUpsellProductById,
   );
+
+  const getCurrentPopupProduct = useStore(
+    (state) => state.getCurrentPopupProduct,
+  );
   const getProductById = useStore((state) => state.getProductById);
   const setCurrentPopupProduct = useStore(
     (state) => state.setCurrentPopupProduct,
@@ -65,6 +69,10 @@ export default function ProductItem({ product }) {
     });
   }, []);
 
+  useEffect(() => {
+    console.log("current popup: ", getCurrentPopupProduct);
+  }, [getCurrentPopupProduct]);
+
   const setProduct = () => {
     console.log("setting current product: ", product.id);
     setCurrentPopupProduct(product.id);
@@ -94,11 +102,13 @@ export default function ProductItem({ product }) {
             <div className="list-element__data-row">
               {upsell &&
                 upsell.map((e) => {
-                  console.log("look e", e.id);
-
                   const _product = e;
 
-                  console.log(_product);
+                  /* If the upsell product is the same as the parent, do not add it to the list. */
+                  if (_product.id === product.id) {
+                    return;
+                  }
+
                   return (
                     <div
                       key={`${_product.id}_${product.id}`}

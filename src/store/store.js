@@ -24,7 +24,7 @@ const useStore = create((set, get) => ({
     });
   },
 
-  /* Get a product from the API by ID */
+  /* Get a product from the customer's catalog by ID API  */
   getProductById: (id) => {
     return get().products.items.filter((e) => e.id === parseInt(id))[0];
   },
@@ -60,6 +60,7 @@ const useStore = create((set, get) => ({
     const _parentProduct =
       bundleProducts.length >= 1 &&
       bundleProducts.filter((e) => e.id === parentID);
+
     let parentProduct = _parentProduct.length >= 1 ? _parentProduct[0] : null;
 
     console.log(
@@ -68,9 +69,11 @@ const useStore = create((set, get) => ({
       }`,
     );
 
+    /* Adds parent to bundle to show it up on front-end later on */
+    const parent = get().getProductById(parentID);
+
     const bundleProduct = get().getProductById(bundleID);
 
-    // debugger;
     if (parentProduct) {
       const existingBundles = () => {
         const _existing = parentProduct.bundle;
@@ -92,7 +95,9 @@ const useStore = create((set, get) => ({
     const currentProduct = {
       id: parentID,
       bundle:
-        bundle && bundle.length >= 1 ? [...new Set(bundle)] : [bundleProduct],
+        bundle && bundle.length >= 1
+          ? [...new Set(bundle)]
+          : [bundleProduct, parent],
     };
 
     const sanitizeBundleProducts = () => {
@@ -161,8 +166,9 @@ const useStore = create((set, get) => ({
     console.log("deleted bundle from parent: ", parent, parentID, bundleID);
     const updatedBundle = parent.bundle.filter((e) => e.id !== bundleID);
 
-    /* If deleting the last item, remove parent as well */
-    if (updatedBundle.length <= 0) {
+    /* If deleting the last item, remove parent as well.
+    We use the number "1" because we always add the parent as an upsell. */
+    if (updatedBundle.length <= 1) {
       updated = bundleProducts.filter((e) => e.id !== parentID);
     } else {
       updated = bundleProducts;
