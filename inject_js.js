@@ -188,7 +188,8 @@ window.ezfyEasyUpsellApp = (function () {
 
       $atc.insertAdjacentHTML("beforeend", html);
     } catch (err) {
-      console.log("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.error("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.error(err);
     }
   }
 
