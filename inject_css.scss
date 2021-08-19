@@ -98,7 +98,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store .fbt {
   }
 
   &-figure {
-    max-width: 100px;
+    max-width: 80px;
     width: 100%;
     position: relative;
     display: flex;
@@ -106,7 +106,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store .fbt {
 
     @media (max-width: $xxs) {
       flex-direction: column;
-      max-width: 300px;
+      max-width: 200px;
       width: 100%;
     }
 
