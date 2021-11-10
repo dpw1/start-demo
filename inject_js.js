@@ -109,6 +109,7 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   function _getProductID() {
+    debugger;
     /* if ID is present in the URL */
     if (/-p\d{6,}/.test(window.location.pathname)) {
       var _id = window.location.pathname.split("-");
