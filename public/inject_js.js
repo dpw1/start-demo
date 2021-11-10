@@ -108,24 +108,52 @@ window.ezfyEasyUpsellApp = (function () {
     document.head.append(style);
   }
 
-  function _getProductID() {
-    if (/-p\d{6,}/.test(window.location.pathname)) {
-      var _id = window.location.pathname.split("-");
-      var id = parseInt(_id[_id.length - 1].replace("p", ""));
-      return id;
-    }
+  async function _getProductID() {
+    return new Promise(async (resolve, reject) => {
+      /* if ID is present in the URL */
+      if (/-p\d{6,}/.test(window.location.pathname)) {
+        var _id = window.location.pathname.split("-");
+        var id = parseInt(_id[_id.length - 1].replace("p", ""));
+        resolve(id);
+      } else {
+        /* Try to extract ID from class name */
+        var $el = await _waitForElement(
+          `[class*="ecwid-productBrowser-ProductPage-"]`,
+        );
 
-    return null;
+        if (!$el) {
+          resolve(null);
+        }
+
+        var id = [...$el.classList]
+          .join(" ")
+          .split("-")
+          .filter((e) => /\d{5,}/.test(e))[0];
+
+        if (!id) {
+          resolve(null);
+        }
+
+        resolve(parseInt(id));
+      }
+    });
   }
 
-  function _getUpsellProducts() {
-    const data = JSON.parse(window.Ecwid.getAppPublicConfig("easy-upsell-dev"));
+  async function _getUpsellProducts() {
+    return new Promise(async (resolve, reject) => {
+      const data = JSON.parse(
+        window.Ecwid.getAppPublicConfig("easy-upsell-dev"),
+      );
 
-    const id = _getProductID();
+      console.log("my data:", data);
+      const id = await _getProductID();
 
-    return data.upsellProducts.filter(
-      (e) => parseInt(e.id) === parseInt(id),
-    )[0];
+      const products = data.upsellProducts.filter(
+        (e) => parseInt(e.id) === parseInt(id),
+      )[0];
+
+      resolve(products);
+    });
   }
 
   async function injectUpsell(upsell) {
@@ -188,12 +216,13 @@ window.ezfyEasyUpsellApp = (function () {
 
       $atc.insertAdjacentHTML("beforeend", html);
     } catch (err) {
-      console.log("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.error("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.error(err);
     }
   }
 
-  function hello() {
-    const upsell = _getUpsellProducts();
+  async function hello() {
+    const upsell = await _getUpsellProducts();
 
     injectUpsell(upsell);
     console.log("upsell: ", upsell);
