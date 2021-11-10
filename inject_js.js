@@ -109,13 +109,32 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   function _getProductID() {
+    /* if ID is present in the URL */
     if (/-p\d{6,}/.test(window.location.pathname)) {
       var _id = window.location.pathname.split("-");
       var id = parseInt(_id[_id.length - 1].replace("p", ""));
       return id;
-    }
+    } else {
+      /* Try to extract ID from class name */
+      var $el = document.querySelector(
+        `[class*="ecwid-productBrowser-ProductPage-"]`,
+      );
 
-    return null;
+      if (!$el) {
+        return null;
+      }
+
+      var id = [...$el.classList]
+        .join(" ")
+        .split("-")
+        .filter((e) => /\d{5,}/.test(e))[0];
+
+      if (!id) {
+        return null;
+      }
+
+      return parseInt(id);
+    }
   }
 
   function _getUpsellProducts() {
