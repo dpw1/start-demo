@@ -114,7 +114,7 @@ window.ezfyEasyUpsellApp = (function () {
       if (/-p\d{6,}/.test(window.location.pathname)) {
         var _id = window.location.pathname.split("-");
         var id = parseInt(_id[_id.length - 1].replace("p", ""));
-        return id;
+        resolve(id);
       } else {
         /* Try to extract ID from class name */
         var $el = await _waitForElement(
@@ -122,7 +122,7 @@ window.ezfyEasyUpsellApp = (function () {
         );
 
         if (!$el) {
-          return null;
+          resolve(null);
         }
 
         var id = [...$el.classList]
@@ -131,23 +131,29 @@ window.ezfyEasyUpsellApp = (function () {
           .filter((e) => /\d{5,}/.test(e))[0];
 
         if (!id) {
-          return null;
+          resolve(null);
         }
 
-        return parseInt(id);
+        resolve(parseInt(id));
       }
     });
   }
 
   async function _getUpsellProducts() {
-    const data = JSON.parse(window.Ecwid.getAppPublicConfig("easy-upsell-dev"));
+    return new Promise(async (resolve, reject) => {
+      const data = JSON.parse(
+        window.Ecwid.getAppPublicConfig("easy-upsell-dev"),
+      );
 
-    console.log("my data:", data);
-    const id = await _getProductID();
+      console.log("my data:", data);
+      const id = await _getProductID();
 
-    return data.upsellProducts.filter(
-      (e) => parseInt(e.id) === parseInt(id),
-    )[0];
+      const products = data.upsellProducts.filter(
+        (e) => parseInt(e.id) === parseInt(id),
+      )[0];
+
+      resolve(products);
+    });
   }
 
   async function injectUpsell(upsell) {
@@ -215,8 +221,8 @@ window.ezfyEasyUpsellApp = (function () {
     }
   }
 
-  function hello() {
-    const upsell = _getUpsellProducts();
+  async function hello() {
+    const upsell = await _getUpsellProducts();
 
     injectUpsell(upsell);
     console.log("upsell: ", upsell);
@@ -225,10 +231,6 @@ window.ezfyEasyUpsellApp = (function () {
   return {
     init: function () {
       hello();
-
-      window.addEventListener("load", function () {
-        alert("loaded");
-      });
     },
   };
 })();
