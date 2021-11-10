@@ -139,11 +139,11 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
-  function _getUpsellProducts() {
+  async function _getUpsellProducts() {
     const data = JSON.parse(window.Ecwid.getAppPublicConfig("easy-upsell-dev"));
 
     console.log("my data:", data);
-    const id = _getProductID();
+    const id = await _getProductID();
 
     return data.upsellProducts.filter(
       (e) => parseInt(e.id) === parseInt(id),
