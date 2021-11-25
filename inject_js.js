@@ -232,8 +232,10 @@ window.ezfyEasyUpsellApp = (function () {
     init: function () {
       hello();
 
-      window.Ecwid.OnCartChanged.add(function (cart) {
+      window.Ecwid.OnCartChanged.add(async function (cart) {
         console.log("the cart has changed", cart);
+
+        injectCartUpsell();
       });
     },
   };
