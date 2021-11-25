@@ -220,6 +220,7 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function hello() {
+    console.log("changing page");
     const upsell = await _getUpsellProducts();
 
     injectCartUpsell();
@@ -230,6 +231,10 @@ window.ezfyEasyUpsellApp = (function () {
   return {
     init: function () {
       hello();
+
+      window.Ecwid.OnCartChanged.add(function (cart) {
+        console.log("the cart has changed", cart);
+      });
     },
   };
 })();
