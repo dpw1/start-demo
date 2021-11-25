@@ -197,8 +197,10 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function injectCartUpsell() {
-    const isCartPage = !!document.querySelector(
+    const isCartPage = !!_waitForElement(
       `.ecwid-productBrowser-CartPage`,
+      50,
+      60,
     );
 
     if (!isCartPage) {
