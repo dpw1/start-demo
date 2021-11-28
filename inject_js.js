@@ -214,7 +214,7 @@ window.ezfyEasyUpsellApp = (function () {
         `.ecwid-productBrowser-CartPage .ec-cart__sidebar`,
       );
 
-      $sidebar.insertAdjacentHTML("beforeend", `<p>TJJIS WORKS</p>`);
+      // $sidebar.insertAdjacentHTML("beforeend", `<p>TJJIS WORKS</p>`);
     } catch (err) {
       console.error("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       console.error(err);
