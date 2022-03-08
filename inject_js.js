@@ -51,24 +51,26 @@ window.ezfyEasyUpsellApp = (function () {
     return /cart/.test(window.location.href);
   }
 
-  function _waitForElement(selector, delay = 50, tries = 250) {
+  function _waitForElement(selector, delay = 50, tries = 100) {
     const element = document.querySelector(selector);
 
     if (!window[`__${selector}`]) {
       window[`__${selector}`] = 0;
+      window[`__${selector}__delay`] = delay;
+      window[`__${selector}__tries`] = tries;
     }
 
     function _search() {
       return new Promise((resolve) => {
         window[`__${selector}`]++;
-        setTimeout(resolve, delay);
+        setTimeout(resolve, window[`__${selector}__delay`]);
       });
     }
 
     if (element === null) {
-      if (window[`__${selector}`] >= tries) {
+      if (window[`__${selector}`] >= window[`__${selector}__tries`]) {
         window[`__${selector}`] = 0;
-        return Promise.reject(null);
+        return Promise.resolve(null);
       }
 
       return _search().then(() => _waitForElement(selector));
@@ -133,11 +135,13 @@ window.ezfyEasyUpsellApp = (function () {
 
   async function injectUpsell(upsell) {
     try {
-      await _waitForElement(`.details-product-purchase`);
+      const $cart = await _waitForElement(
+        `.ec-cart__shopping.ec-cart-shopping`,
+        100,
+        40,
+      );
 
-      const $atc = document.querySelector(`.details-product-purchase`);
-
-      if (!$atc) {
+      if (!$cart) {
         return;
       }
 
@@ -189,7 +193,7 @@ window.ezfyEasyUpsellApp = (function () {
       </div>
         `;
 
-      $atc.insertAdjacentHTML("beforeend", html);
+      $cart.insertAdjacentHTML("afterend", html);
     } catch (err) {
       console.error("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       console.error(err);
@@ -222,7 +226,7 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function hello() {
-    console.log("changing page");
+    console.log("changing page xx");
     const upsell = await _getUpsellProducts();
 
     injectCartUpsell();
