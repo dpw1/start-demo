@@ -39,31 +39,6 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
-  function credits() {
-    var e = [
-      "background: linear-gradient(-47deg,#8731e8,#4528dc)",
-      "border: 1px solid #3E0E02",
-      "color: white",
-      "display: block",
-      "text-shadow: 0 1px 0 rgba(0, 0, 0, 0.3)",
-      "box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 5px 3px -5px rgba(0, 0, 0, 0.5), 0 -13px 5px -10px rgba(255, 255, 255, 0.4) inset",
-      "line-height: 40px",
-      "text-align: center",
-      "font-weight: bold",
-      "padding: 0px 5px",
-    ].join(";");
-
-    function r(e) {
-      return (e + "").replace(/&#\d+;/gm, function (e) {
-        return String.fromCharCode(e.match(/\d+/gm)[0]);
-      });
-    }
-    var n = r(
-      `&#67;&#117;&#115;&#116;&#111;&#109;&#32;&#99;&#111;&#100;&#101;&#100;&#32;&#98;&#121;&#32;&#104;&#116;&#116;&#112;&#115;&#58;&#47;&#47;&#101;&#122;&#102;&#121;&#99;&#111;&#100;&#101;&#46;&#99;&#111;&#109;`,
-    );
-    console.log(`%c ${n}`, e);
-  }
-
   function _moveDOMElement(parent, child) {
     document.querySelector(parent).appendChild(document.querySelector(child));
   }
@@ -76,24 +51,26 @@ window.ezfyEasyUpsellApp = (function () {
     return /cart/.test(window.location.href);
   }
 
-  function _waitForElement(selector, delay = 50, tries = 250) {
+  function _waitForElement(selector, delay = 50, tries = 100) {
     const element = document.querySelector(selector);
 
     if (!window[`__${selector}`]) {
       window[`__${selector}`] = 0;
+      window[`__${selector}__delay`] = delay;
+      window[`__${selector}__tries`] = tries;
     }
 
     function _search() {
       return new Promise((resolve) => {
         window[`__${selector}`]++;
-        setTimeout(resolve, delay);
+        setTimeout(resolve, window[`__${selector}__delay`]);
       });
     }
 
     if (element === null) {
-      if (window[`__${selector}`] >= tries) {
+      if (window[`__${selector}`] >= window[`__${selector}__tries`]) {
         window[`__${selector}`] = 0;
-        return Promise.reject(null);
+        return Promise.resolve(null);
       }
 
       return _search().then(() => _waitForElement(selector));
@@ -139,6 +116,20 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
+  async function getIDOfProductsInCart() {
+    return new Promise(async (resolve, reject) => {
+      Ecwid.Cart.get(function (cart) {
+        if (!cart.items || cart.items.length <= 0) {
+          resolve(null);
+        }
+
+        var ids = cart.items.map((e) => e.product.id);
+
+        resolve(ids);
+      });
+    });
+  }
+
   async function _getUpsellProducts() {
     return new Promise(async (resolve, reject) => {
       const data = JSON.parse(
@@ -146,6 +137,11 @@ window.ezfyEasyUpsellApp = (function () {
       );
 
       console.log("my data:", data);
+
+      /* TODO 
+      get ID of products in the cart
+
+      */
       const id = await _getProductID();
 
       const products = data.upsellProducts.filter(
@@ -158,11 +154,13 @@ window.ezfyEasyUpsellApp = (function () {
 
   async function injectUpsell(upsell) {
     try {
-      await _waitForElement(`.details-product-purchase`);
+      const $cart = await _waitForElement(
+        `.ec-cart__shopping.ec-cart-shopping`,
+        100,
+        40,
+      );
 
-      const $atc = document.querySelector(`.details-product-purchase`);
-
-      if (!$atc) {
+      if (!$cart) {
         return;
       }
 
@@ -214,7 +212,32 @@ window.ezfyEasyUpsellApp = (function () {
       </div>
         `;
 
-      $atc.insertAdjacentHTML("beforeend", html);
+      $cart.insertAdjacentHTML("afterend", html);
+    } catch (err) {
+      console.error("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+      console.error(err);
+    }
+  }
+
+  async function injectCartUpsell() {
+    const isCartPage = !!_waitForElement(
+      `.ecwid-productBrowser-CartPage`,
+      50,
+      60,
+    );
+
+    if (!isCartPage) {
+      return;
+    }
+
+    try {
+      await _waitForElement(`.ecwid-productBrowser-CartPage .ec-cart__sidebar`);
+
+      const $sidebar = document.querySelector(
+        `.ecwid-productBrowser-CartPage .ec-cart__sidebar`,
+      );
+
+      // $sidebar.insertAdjacentHTML("beforeend", `<p>TJJIS WORKS</p>`);
     } catch (err) {
       console.error("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       console.error(err);
@@ -222,15 +245,44 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function hello() {
+    console.log("changing page xx");
     const upsell = await _getUpsellProducts();
 
+    injectCartUpsell();
     injectUpsell(upsell);
     console.log("upsell: ", upsell);
+  }
+
+  async function listenForATCClick() {
+    const $atc = await _waitForElement(
+      `[class*='add-buttons'] > *:nth-child(2) button.form-control__button`,
+    );
+
+    if (!$atc) {
+      return;
+    }
+
+    $atc.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      alert("clicked");
+    });
   }
 
   return {
     init: function () {
       hello();
+      listenForATCClick();
+
+      window.Ecwid.OnCartChanged.add(async function (cart) {
+        console.log("the cart has changed", cart);
+
+        injectCartUpsell();
+      });
+
+      window.Ecwid.OnPageSwitch.add(function (page) {
+        console.log("page", page);
+      });
     },
   };
 })();
