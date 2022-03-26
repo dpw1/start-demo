@@ -279,6 +279,10 @@ window.ezfyEasyUpsellApp = (function () {
 
         injectCartUpsell();
       });
+
+      window.Ecwid.OnPageSwitch.add(function (page) {
+        console.log("page", page);
+      });
     },
   };
 })();
