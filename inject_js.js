@@ -116,6 +116,20 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
+  async function getIDOfProductsInCart() {
+    return new Promise(async (resolve, reject) => {
+      Ecwid.Cart.get(function (cart) {
+        if (!cart.items || cart.items.length <= 0) {
+          resolve(null);
+        }
+
+        var ids = cart.items.map((e) => e.product.id);
+
+        resolve(ids);
+      });
+    });
+  }
+
   async function _getUpsellProducts() {
     return new Promise(async (resolve, reject) => {
       const data = JSON.parse(
@@ -123,6 +137,11 @@ window.ezfyEasyUpsellApp = (function () {
       );
 
       console.log("my data:", data);
+
+      /* TODO 
+      get ID of products in the cart
+
+      */
       const id = await _getProductID();
 
       const products = data.upsellProducts.filter(
@@ -234,9 +253,26 @@ window.ezfyEasyUpsellApp = (function () {
     console.log("upsell: ", upsell);
   }
 
+  async function listenForATCClick() {
+    const $atc = await _waitForElement(
+      `[class*='add-buttons'] > *:nth-child(2) button.form-control__button`,
+    );
+
+    if (!$atc) {
+      return;
+    }
+
+    $atc.addEventListener("click", function (e) {
+      e.preventDefault();
+
+      alert("clicked");
+    });
+  }
+
   return {
     init: function () {
       hello();
+      listenForATCClick();
 
       window.Ecwid.OnCartChanged.add(async function (cart) {
         console.log("the cart has changed", cart);
