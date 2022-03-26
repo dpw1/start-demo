@@ -291,7 +291,7 @@ window.ezfyEasyUpsellApp = (function () {
 
   return {
     init: function () {
-      hello();
+      // hello();
 
       window.Ecwid.OnCartChanged.add(async function (cart) {
         console.log("the cart has changed", cart);
