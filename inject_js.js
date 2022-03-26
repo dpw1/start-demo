@@ -220,28 +220,44 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function injectCartUpsell() {
-    const isCartPage = !!_waitForElement(
-      `.ecwid-productBrowser-CartPage`,
-      50,
-      60,
-    );
+    const $body = document.querySelector(`body`);
 
-    if (!isCartPage) {
+    if (!$body) {
       return;
     }
 
-    try {
-      await _waitForElement(`.ecwid-productBrowser-CartPage .ec-cart__sidebar`);
+    const html = `
+    <div class="EzfyCart">
+	<div class="EzfyCart-title">Your cart</div>
+	<div class="EzfyCart-unlock">
+		Add X to unlock 5% OFF
+	</div>
+	<div class="EzfyCart-items">
+		
+		<div class="EzfyCart-item">
+			<img class="EzfyCart-image" src="https://cdn.shopify.com/s/files/1/1624/1285/products/watermelon-toddler-converse-9808266_200x.jpg?v=1571439890" alt="">
+			<div class="EzfyCart-item-title">Bump Shoes Watermelon Toddler Converse</div>
+			<div class="EzfyCart-price">$99.00</div>
+			<div class="EzfyCart-compare-price">$120.00</div>
+			<div class="EzfyCart-quantity">
+				<button class="EzfyCart-minus">-</button>
+				<input type="number" class="EzfyCart-amount">
+					<button class="EzfyCart-minus">+</button>
+			</div>
+		</div>
+	</div>
+	
+	<div class="EzfyCart-total">$99.00</div>
+	
+	<button class="EzfyCart-checkout">Checkout</button>
+	
+	<div class="EzfyCart-upsel">
+		
+	</div>
+</div>
+    `;
 
-      const $sidebar = document.querySelector(
-        `.ecwid-productBrowser-CartPage .ec-cart__sidebar`,
-      );
-
-      // $sidebar.insertAdjacentHTML("beforeend", `<p>TJJIS WORKS</p>`);
-    } catch (err) {
-      console.error("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-      console.error(err);
-    }
+    $body.insertAdjacentHTML(`afterbegin`, html);
   }
 
   async function hello() {
@@ -265,23 +281,27 @@ window.ezfyEasyUpsellApp = (function () {
     $atc.addEventListener("click", function (e) {
       e.preventDefault();
 
-      alert("clicked");
+      injectCartUpsell();
     });
+  }
+
+  function start() {
+    listenForATCClick();
   }
 
   return {
     init: function () {
       hello();
-      listenForATCClick();
 
       window.Ecwid.OnCartChanged.add(async function (cart) {
         console.log("the cart has changed", cart);
 
-        injectCartUpsell();
+        start();
       });
 
       window.Ecwid.OnPageSwitch.add(function (page) {
         console.log("page", page);
+        start();
       });
     },
   };
