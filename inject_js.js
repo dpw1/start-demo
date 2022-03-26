@@ -271,6 +271,7 @@ window.ezfyEasyUpsellApp = (function () {
     const upsell = await _getUpsellProducts();
 
     injectCartUpsell();
+
     injectUpsell(upsell);
     console.log("upsell: ", upsell);
   }
@@ -287,7 +288,7 @@ window.ezfyEasyUpsellApp = (function () {
     $atc.addEventListener("click", function (e) {
       e.preventDefault();
 
-      injectCartUpsell();
+      // injectCartUpsell();
     });
   }
 
@@ -295,8 +296,21 @@ window.ezfyEasyUpsellApp = (function () {
     listenForATCClick();
   }
 
+  function injectReacPlaceholder() {
+    const $body = document.querySelector(`body`);
+
+    if (!$body) {
+      return;
+    }
+
+    const html = `<div id="EzfyCartApp"></div>`;
+
+    $body.insertAdjacentHTML(`afterbegin`, html);
+  }
+
   return {
     init: function () {
+      injectReacPlaceholder();
       // hello();
 
       window.Ecwid.OnCartChanged.add(async function (cart) {
