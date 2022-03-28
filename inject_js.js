@@ -124,10 +124,10 @@ window.ezfyCartBundle = (function () {
 
     for (const id of products) {
       if (cart.filter((_e) => _e === id).length >= 1) {
-        return;
+        continue;
       }
 
-      Ecwid.Cart.addProduct({
+      window.Ecwid.Cart.addProduct({
         id,
         quantity: 1,
       });
@@ -137,7 +137,7 @@ window.ezfyCartBundle = (function () {
   function getProductsInCart() {
     let products = [];
 
-    Ecwid.Cart.get(function (cart) {
+    window.Ecwid.Cart.get(function (cart) {
       cart.items
         .map((e) => e.product)
         .map((_product) => products.push(_product.id));
