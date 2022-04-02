@@ -146,6 +146,61 @@ window.ezfyCartBundle = (function () {
     return products;
   }
 
+  async function cancelActiveCoupon() {
+    return new Promise(async (resolve, reject) => {
+      const $coupon = document.querySelector(
+        `#ec-cart-sidebar-discount-coupon-input`,
+      );
+
+      if (!$coupon) {
+        resolve(true);
+        return;
+      }
+
+      const coupon = $coupon.value;
+
+      if (!coupon || coupon === "") {
+        resolve(true);
+        return;
+      }
+
+      const queryCodeCoupon = getDiscountCodeFromQueryString();
+
+      if (coupon === queryCodeCoupon) {
+        resolve(true);
+        return;
+      }
+
+      const $forms = document.querySelectorAll(`[class*='ec-cart__discount']`);
+
+      for (var [i, each] of $forms.entries()) {
+        const $input = each.querySelector(`input.form-control__text`);
+        const $button = each.querySelector(
+          `.ec-cart-coupon__button--cancel > button`,
+        );
+
+        $button.click();
+
+        if (!$input) {
+          return;
+        }
+
+        $input.value = "";
+
+        await sleep(25);
+
+        var event = new Event("input", {
+          bubbles: true,
+          cancelable: true,
+        });
+
+        if (i >= $forms.length - 1) {
+          resolve(true);
+        }
+      }
+    });
+  }
+
   async function addDiscountCoupon() {
     const discount = getDiscountCodeFromQueryString();
 
@@ -163,7 +218,7 @@ window.ezfyCartBundle = (function () {
       return;
     }
 
-    const $forms = document.querySelectorAll(`.ec-cart__discount`);
+    const $forms = document.querySelectorAll(`[class*='ec-cart__discount']`);
 
     for (var each of $forms) {
       const $redeem = each.querySelector(`[class*='cart-coupon'] > a`);
@@ -220,6 +275,7 @@ window.ezfyCartBundle = (function () {
 
     window.Ecwid.OnPageLoaded.add(async function (page) {
       addProductsToCart();
+      await cancelActiveCoupon();
       await sleep(50);
       addDiscountCoupon();
     });
@@ -236,7 +292,7 @@ window.ezfyCartBundle = (function () {
   };
 })();
 
-// window.ezfyCartBundle.init();
+window.ezfyCartBundle.init();
 
 /* 
 Upsell temporarily disabled
