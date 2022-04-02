@@ -1,0 +1,30 @@
+.Products {
+  .list-element__content {
+    text-align: left;
+  }
+
+  .list-element__data-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &-title {
+    margin-bottom: 25px;
+  }
+
+  .SkeletonLoader {
+    display: flex;
+    & > *:nth-child(1) {
+      max-width: 60px;
+      width: 100%;
+      display: inline-block;
+    }
+
+    & > *:nth-child(2) {
+      max-width: 100px;
+      width: 100%;
+      display: inline-block;
+      margin-left: 10px;
+    }
+  }
+}
