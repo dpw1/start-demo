@@ -376,7 +376,7 @@ window.ezfyEasyUpsellApp = (function () {
 
         setTimeout(() => {
           $this.textContent = text;
-        });
+        }, 3000);
       });
     }
   }
@@ -393,7 +393,7 @@ window.ezfyEasyUpsellApp = (function () {
       start();
 
       window.Ecwid.OnCartChanged.add(async function (cart) {
-        console.log("the cart has changed", cart);
+        start();
       });
 
       window.Ecwid.OnPageSwitch.add(function (page) {
