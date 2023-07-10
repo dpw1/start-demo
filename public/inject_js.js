@@ -400,9 +400,18 @@ window.ezfyEasyUpsellApp = (function () {
         }
       });
 
-      function checkURLchange() {
+      async function checkURLchange() {
         if (window.location.href !== oldURL) {
-          start();
+          if (_isCartPage()) {
+            var $atc = await _waitForElement(`.EzfyCart-atc`);
+
+            if (!$atc) {
+              return;
+            }
+
+            start();
+          }
+
           console.log("current page: ", window.location.href, oldURL);
           oldURL = window.location.href;
         }
