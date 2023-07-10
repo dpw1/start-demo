@@ -124,7 +124,7 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
-  async function _getUpsellProducts() {
+  async function getUpsellProducts() {
     return new Promise(async (resolve, reject) => {
       const data = JSON.parse(
         window.Ecwid.getAppPublicConfig("easy-upsell-dev"),
@@ -272,7 +272,7 @@ window.ezfyEasyUpsellApp = (function () {
 
   async function injectUpsellOnCartPage() {
     console.log("changing page xx");
-    const upsell = await _getUpsellProducts();
+    const upsell = await getUpsellProducts();
 
     injectCartUpsell();
 
@@ -292,10 +292,15 @@ window.ezfyEasyUpsellApp = (function () {
     $body.insertAdjacentHTML(`afterbegin`, html);
   }
 
+  function start() {
+    injectCartUpsell();
+    getUpsellProducts();
+  }
+
   return {
     init: function () {
       injectReacPlaceholder();
-      injectCartUpsell();
+      start();
 
       window.Ecwid.OnCartChanged.add(async function (cart) {
         console.log("the cart has changed", cart);
@@ -305,13 +310,13 @@ window.ezfyEasyUpsellApp = (function () {
         console.log("page", page);
 
         if (page && page.type === "CART") {
-          injectCartUpsell();
+          start();
         }
       });
 
       function checkURLchange() {
         if (window.location.href != oldURL) {
-          injectCartUpsell();
+          start();
           oldURL = window.location.href;
         }
       }
