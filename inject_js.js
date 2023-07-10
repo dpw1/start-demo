@@ -292,7 +292,7 @@ window.ezfyCartBundle = (function () {
   };
 })();
 
-window.ezfyCartBundle.init();
+// window.ezfyCartBundle.init();
 
 /* 
 Upsell temporarily disabled
@@ -620,4 +620,4 @@ window.ezfyEasyUpsellApp = (function () {
   };
 })();
 
-// window.ezfyEasyUpsellApp.init();
+window.ezfyEasyUpsellApp.init();
