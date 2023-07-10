@@ -345,8 +345,11 @@ window.ezfyEasyUpsellApp = (function () {
       return;
     }
 
+    debugger;
+
     for (var each of $atcs) {
       each.addEventListener(`click`, async function (e) {
+        debugger;
         const $this = e.target;
         const $parent = $this.closest(`.EzfyCart-item`);
         const id = parseInt($parent.getAttribute("data-id"));
