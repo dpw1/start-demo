@@ -309,7 +309,15 @@ window.ezfyEasyUpsellApp = (function () {
         }
       });
 
-      setInterval(injectCartUpsellOnURLChange, 1000);
+      function checkURLchange() {
+        if (window.location.href != oldURL) {
+          injectCartUpsell();
+          oldURL = window.location.href;
+        }
+      }
+
+      var oldURL = window.location.href;
+      setInterval(checkURLchange, 1000);
     },
   };
 })();
