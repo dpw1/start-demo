@@ -278,12 +278,14 @@ window.ezfyEasyUpsellApp = (function () {
       <div data-id="${each.id}" class="EzfyCart-item EzfyCart-item--${each.id}">
 			<img class="EzfyCart-image" src="${each.thumbnailUrl}" alt="${each.name}">
 			<div class="EzfyCart-item-title">${each.name}</div>
-			<div class="EzfyCart-price">${each.defaultDisplayedPriceFormatted}</div>
-			<div class="EzfyCart-compare-price">${
-        each.hasOwnProperty("compareToPriceDiscountFormatted")
-          ? each.compareToPriceDiscountFormatted
-          : ""
-      } </div>
+			<div class="EzfyCart-prices">
+        <div class="EzfyCart-price">${each.defaultDisplayedPriceFormatted}</div>
+        <div class="EzfyCart-compare-price">${
+          each.hasOwnProperty("compareToPriceDiscountFormatted")
+            ? each.compareToPriceFormatted
+            : ""
+        } </div>
+      </div>
 
       <!--
 			<div class="EzfyCart-quantity">
