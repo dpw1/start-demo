@@ -297,7 +297,9 @@ window.ezfyEasyUpsellApp = (function () {
       window.Ecwid.OnPageSwitch.add(function (page) {
         console.log("page", page);
 
-        injectCartUpsell();
+        if (page && page.type === "CART") {
+          injectCartUpsell();
+        }
       });
     },
   };
