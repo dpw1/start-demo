@@ -387,9 +387,19 @@ window.ezfyEasyUpsellApp = (function () {
 
   async function restart() {
     if (_isCartPage()) {
-      var $atc = await _waitForElement(`.EzfyCart-atc`);
+      var $atc = document.querySelector(`.EzfyCart-atc`);
 
-      if (!$atc) {
+      if ($atc) {
+        return;
+      }
+
+      const $cart = await _waitForElement(
+        `.ec-cart__shopping.ec-cart-shopping`,
+        100,
+        40,
+      );
+
+      if (!$cart) {
         return;
       }
 
