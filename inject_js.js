@@ -385,12 +385,26 @@ window.ezfyEasyUpsellApp = (function () {
     handleAddToCart();
   }
 
+  async function restart() {
+    if (_isCartPage()) {
+      var $atc = await _waitForElement(`.EzfyCart-atc`);
+
+      if (!$atc) {
+        return;
+      }
+
+      start();
+    }
+  }
+
   return {
     init: function () {
       injectReacPlaceholder();
       start();
 
-      window.Ecwid.OnCartChanged.add(async function (cart) {});
+      window.Ecwid.OnCartChanged.add(async function (cart) {
+        restart();
+      });
 
       window.Ecwid.OnPageSwitch.add(function (page) {
         console.log("page", page);
@@ -402,15 +416,7 @@ window.ezfyEasyUpsellApp = (function () {
 
       async function checkURLchange() {
         if (window.location.href !== oldURL) {
-          if (_isCartPage()) {
-            var $atc = await _waitForElement(`.EzfyCart-atc`);
-
-            if (!$atc) {
-              return;
-            }
-
-            start();
-          }
+          restart();
 
           console.log("current page: ", window.location.href, oldURL);
           oldURL = window.location.href;
