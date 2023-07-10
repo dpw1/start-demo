@@ -126,27 +126,28 @@ window.ezfyEasyUpsellApp = (function () {
 
   async function getUpsellProducts() {
     return new Promise(async (resolve, reject) => {
-      const data = JSON.parse(
+      const products = JSON.parse(
         window.Ecwid.getAppPublicConfig("easy-upsell-dev"),
       );
 
-      console.log("my data:", data);
+      console.log("my data:", products);
 
       await awaitEcwid();
 
-      Ecwid.Cart.get(async function (cart) {
+      Ecwid.Cart.get(async (cart) => {
         var ids = cart.items.map((e) => e.product.id);
 
         let upsells = [];
 
         for (var id of ids) {
-          const products = data.upsellProducts.filter(
+          const upsell = data.upsellProducts.filter(
             (e) => parseInt(e.id) === parseInt(id),
           )[0];
 
-          upsells.push(products);
+          upsells.push(upsell);
         }
 
+        debugger;
         resolve(upsells);
       });
     });
