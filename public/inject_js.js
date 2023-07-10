@@ -351,8 +351,9 @@ window.ezfyEasyUpsellApp = (function () {
       });
 
       function checkURLchange() {
-        if (window.location.href != oldURL) {
+        if (window.location.href !== oldURL) {
           start();
+          console.log("current page: ", window.location.href, oldURL);
           oldURL = window.location.href;
         }
       }
