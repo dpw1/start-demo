@@ -284,11 +284,14 @@ window.ezfyEasyUpsellApp = (function () {
           ? each.compareToPriceDiscountFormatted
           : ""
       } </div>
+
+      <!--
 			<div class="EzfyCart-quantity">
         <button class="EzfyCart-minus"><span>-</span></button>
         <input type="number" class="EzfyCart-amount">
         <button class="EzfyCart-minus"><span>+</span></button>
       </div>
+      -->
 
       <button class="EzfyCart-atc">Add to Cart</button>
       </div>
