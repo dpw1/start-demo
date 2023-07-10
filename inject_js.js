@@ -220,12 +220,6 @@ window.ezfyEasyUpsellApp = (function () {
       return;
     }
 
-    const $ezfycart = document.querySelector(`.EzfyCart`);
-
-    if ($ezfycart) {
-      return;
-    }
-
     const html = `
     <div class="EzfyCart">
 	<div class="EzfyCart-title">Your cart</div>
