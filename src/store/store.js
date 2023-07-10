@@ -38,6 +38,7 @@ const useStore = create((set, get) => ({
       return new Promise(async (resolve, reject) => {
         let data = [];
 
+        console.log("init test");
         const test = JSON.parse(
           window.Ecwid.getAppPublicConfig("easy-upsell-dev"),
         );
