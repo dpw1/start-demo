@@ -154,7 +154,7 @@ window.ezfyEasyUpsellApp = (function () {
           .flat()
           .filter((e) => !ids.includes(e.id));
 
-        resolve(filtered);
+        resolve([...new Set([...filtered])]);
       });
     });
   }
@@ -256,7 +256,7 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
-  async function injectCartUpsell() {
+  async function injectCartUpsell(_products) {
     const $body = document.querySelector(`.ec-cart__sidebar-inner`)
       ? document.querySelector(`.ec-cart__sidebar-inner`)
       : await _waitForElement(`.ec-cart__sidebar-inner`);
@@ -271,13 +271,36 @@ window.ezfyEasyUpsellApp = (function () {
       return;
     }
 
+    let products = "";
+
+    for (var each of products) {
+      const html = `
+      
+      <div class="EzfyCart-item">
+			<img class="EzfyCart-image" src="${each.thumbnailUrl}" alt="${each.name}">
+			<div class="EzfyCart-item-title">${each.name}</div>
+			<div class="EzfyCart-price">${each.defaultDisplayedPriceFormatted}</div>
+			<div class="EzfyCart-compare-price">${
+        each.hasOwnproperty("compareToPriceDiscountFormatted")
+          ? each.compareToPriceDiscountFormatted
+          : ""
+      } </div>
+			<div class="EzfyCart-quantity">
+				<button class="EzfyCart-minus">-</button>
+				<input type="number" class="EzfyCart-amount">
+					<button class="EzfyCart-minus">+</button>
+			</div>
+		</div>
+      `;
+
+      products += html;
+    }
+
     const html = `
     <div class="EzfyCart">
-	<div class="EzfyCart-title">Your cart</div>
-	<div class="EzfyCart-unlock">
-		Add X to unlock 5% OFF
-	</div>
+    <p class="EzfyCart-title">Frequently Bought Together</p>
 	<div class="EzfyCart-items">
+  ${products}
 		
 		<div class="EzfyCart-item">
 			<img class="EzfyCart-image" src="https://cdn.shopify.com/s/files/1/1624/1285/products/watermelon-toddler-converse-9808266_200x.jpg?v=1571439890" alt="">
@@ -291,14 +314,9 @@ window.ezfyEasyUpsellApp = (function () {
 			</div>
 		</div>
 	</div>
-	
-	<div class="EzfyCart-total">$99.00</div>
-	
-	<button class="EzfyCart-checkout">Checkout</button>
-	
-	<div class="EzfyCart-upsel">
-		
-	</div>
+
+
+
 </div>
     `;
 
@@ -326,6 +344,8 @@ window.ezfyEasyUpsellApp = (function () {
 
     $body.insertAdjacentHTML(`afterbegin`, html);
   }
+
+  function populateUpsellProducts() {}
 
   async function start() {
     injectCartUpsell();
