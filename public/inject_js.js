@@ -339,6 +339,12 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function handleAddToCart() {
+    const $atc = await _waitForElement(`.EzfyCart-atc`);
+
+    if (!$atc) {
+      return;
+    }
+
     const $atcs = document.querySelectorAll(`.EzfyCart-atc`);
 
     if (!$atcs) {
