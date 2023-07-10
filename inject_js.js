@@ -136,13 +136,13 @@ window.ezfyEasyUpsellApp = (function () {
       get ID of products in the cart
 
       */
-      const id = await _getProductID();
+      // const id = await _getProductID();
 
-      const products = data.upsellProducts.filter(
-        (e) => parseInt(e.id) === parseInt(id),
-      )[0];
+      // const products = data.upsellProducts.filter(
+      //   (e) => parseInt(e.id) === parseInt(id),
+      // )[0];
 
-      resolve(products);
+      // resolve(products);
     });
   }
 
@@ -214,7 +214,7 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function injectCartUpsell() {
-    const $body = document.querySelector(`body`);
+    const $body = document.querySelector(`.ec-cart__sidebar-inner`);
 
     if (!$body) {
       return;
@@ -257,7 +257,7 @@ window.ezfyEasyUpsellApp = (function () {
 </div>
     `;
 
-    $body.insertAdjacentHTML(`afterbegin`, html);
+    $body.insertAdjacentHTML(`beforeend`, html);
   }
 
   async function injectUpsellOnCartPage() {
@@ -268,22 +268,6 @@ window.ezfyEasyUpsellApp = (function () {
 
     injectUpsell(upsell);
     console.log("upsell: ", upsell);
-  }
-
-  async function listenForATCClick() {
-    const $atc = await _waitForElement(
-      `[class*='add-buttons'] > *:nth-child(2) button.form-control__button`,
-    );
-
-    if (!$atc) {
-      return;
-    }
-
-    $atc.addEventListener("click", function (e) {
-      e.preventDefault();
-
-      // injectCartUpsell();
-    });
   }
 
   function injectReacPlaceholder() {
