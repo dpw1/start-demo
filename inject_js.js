@@ -132,9 +132,7 @@ window.ezfyEasyUpsellApp = (function () {
 
       console.log("my data:", data);
 
-      /* TODO 
-      get ID of products in the cart
-      */
+      await awaitEcwid();
 
       Ecwid.Cart.get(async function (cart) {
         var ids = cart.items.map((e) => e.product.id);
@@ -227,6 +225,28 @@ window.ezfyEasyUpsellApp = (function () {
       console.error("ERROR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
       console.error(err);
     }
+  }
+
+  async function awaitEcwid() {
+    return new Promise(async (resolve, reject) => {
+      if (window.hasOwnProperty("ecwidIsLoaded")) {
+        resolve();
+      }
+
+      while (!window.hasOwnProperty("Ecwid")) {
+        console.log("waiting for Ecwid          ");
+        await new Promise((resolve) => setTimeout(resolve, 10));
+      }
+
+      while (!Ecwid.hasOwnProperty("Cart")) {
+        console.log("waiting for Ecwid Cart");
+        await new Promise((resolve) => setTimeout(resolve, 10));
+      }
+
+      window.ecwidIsLoaded = true;
+
+      resolve();
+    });
   }
 
   async function injectCartUpsell() {
