@@ -68,7 +68,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     width: 100%;
   }
 
-  .EzfyCart-item {
+  .EzfyCart-item:not(:first-of-type) {
     padding: 0 10px;
     min-width: 150px;
   }
@@ -130,6 +130,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     @media (max-width: $xs) {
       font-size: 12px;
     }
+  }
+
+  .EzfyCart-title {
+    font-weight: bold;
   }
 
   .EzfyCart-prices {

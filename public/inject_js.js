@@ -375,10 +375,6 @@ window.ezfyEasyUpsellApp = (function () {
         await addToCart(id, 1);
 
         $this.textContent = `Added`;
-
-        setTimeout(() => {
-          $this.textContent = text;
-        }, 3000);
       });
     }
   }
