@@ -275,8 +275,7 @@ window.ezfyEasyUpsellApp = (function () {
 
     for (var each of _products) {
       const html = `
-      
-      <div class="EzfyCart-item">
+      <div class="EzfyCart-item EzfyCart-item--${each.id}">
 			<img class="EzfyCart-image" src="${each.thumbnailUrl}" alt="${each.name}">
 			<div class="EzfyCart-item-title">${each.name}</div>
 			<div class="EzfyCart-price">${each.defaultDisplayedPriceFormatted}</div>
@@ -286,11 +285,13 @@ window.ezfyEasyUpsellApp = (function () {
           : ""
       } </div>
 			<div class="EzfyCart-quantity">
-				<button class="EzfyCart-minus">-</button>
-				<input type="number" class="EzfyCart-amount">
-					<button class="EzfyCart-minus">+</button>
-			</div>
-		</div>
+        <button class="EzfyCart-minus"><span>-</span></button>
+        <input type="number" class="EzfyCart-amount">
+        <button class="EzfyCart-minus"><span>+</span></button>
+      </div>
+
+      <button>Add to Cart</button>
+      </div>
       `;
 
       products += html;
@@ -299,25 +300,10 @@ window.ezfyEasyUpsellApp = (function () {
     const html = `
     <div class="EzfyCart">
     <p class="EzfyCart-title">Frequently Bought Together</p>
-	<div class="EzfyCart-items">
-  ${products}
-		
-		<div class="EzfyCart-item">
-			<img class="EzfyCart-image" src="https://cdn.shopify.com/s/files/1/1624/1285/products/watermelon-toddler-converse-9808266_200x.jpg?v=1571439890" alt="">
-			<div class="EzfyCart-item-title">Bump Shoes Watermelon Toddler Converse</div>
-			<div class="EzfyCart-price">$99.00</div>
-			<div class="EzfyCart-compare-price">$120.00</div>
-			<div class="EzfyCart-quantity">
-				<button class="EzfyCart-minus">-</button>
-				<input type="number" class="EzfyCart-amount">
-					<button class="EzfyCart-minus">+</button>
-			</div>
-		</div>
-	</div>
-
-
-
-</div>
+	  <div class="EzfyCart-items">
+      ${products}
+    </div>
+    </div>
     `;
 
     $body.insertAdjacentHTML(`beforeend`, html);
