@@ -14,6 +14,7 @@ function App() {
 
   useEffect(() => {
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
+      console.log(window.EcwidApp);
       window.EcwidApp.getAppPublicConfig(function (value) {
         console.log("my datatata", JSON.parse(value));
       });
