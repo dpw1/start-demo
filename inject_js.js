@@ -273,7 +273,7 @@ window.ezfyEasyUpsellApp = (function () {
 
     let products = "";
 
-    for (var each of products) {
+    for (var each of _products) {
       const html = `
       
       <div class="EzfyCart-item">
@@ -323,16 +323,6 @@ window.ezfyEasyUpsellApp = (function () {
     $body.insertAdjacentHTML(`beforeend`, html);
   }
 
-  async function injectUpsellOnCartPage() {
-    console.log("changing page xx");
-    const upsell = await getUpsellProducts();
-
-    injectCartUpsell();
-
-    injectUpsell(upsell);
-    console.log("upsell: ", upsell);
-  }
-
   function injectReacPlaceholder() {
     const $body = document.querySelector(`body`);
 
@@ -348,8 +338,8 @@ window.ezfyEasyUpsellApp = (function () {
   function populateUpsellProducts() {}
 
   async function start() {
-    injectCartUpsell();
     const products = await getUpsellProducts();
+    injectCartUpsell(products);
     console.log(products);
   }
 
