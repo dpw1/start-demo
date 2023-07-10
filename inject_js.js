@@ -130,7 +130,7 @@ window.ezfyEasyUpsellApp = (function () {
         window.Ecwid.getAppPublicConfig("easy-upsell-dev"),
       );
 
-      console.log("my data:", products);
+      console.log("my data:", data);
 
       await awaitEcwid();
 
