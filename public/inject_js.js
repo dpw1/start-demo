@@ -392,9 +392,7 @@ window.ezfyEasyUpsellApp = (function () {
       injectReacPlaceholder();
       start();
 
-      window.Ecwid.OnCartChanged.add(async function (cart) {
-        start();
-      });
+      window.Ecwid.OnCartChanged.add(async function (cart) {});
 
       window.Ecwid.OnPageSwitch.add(function (page) {
         console.log("page", page);
