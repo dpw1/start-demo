@@ -42,7 +42,7 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   function _isCartPage() {
-    return /cart/.test(window.location.href);
+    return /cart\/?$/.test(window.location.href.split("?")[0]);
   }
 
   function _waitForElement(selector, delay = 50, tries = 100) {
