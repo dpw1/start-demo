@@ -37,8 +37,15 @@ const useStore = create((set, get) => ({
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
       return new Promise(async (resolve, reject) => {
         let data = [];
+
+        const test = JSON.parse(
+          window.Ecwid.getAppPublicConfig("easy-upsell-dev"),
+        );
+
+        console.log("test: ", test);
         window.EcwidApp.getAppPublicConfig(function (value) {
           const _data = JSON.parse(value);
+          console.log("xxx ECWID PRE DATA", _data);
           data = data = _data.upsellProducts;
           console.log("xxx ECWID DB DATA", data);
           resolve(data);
