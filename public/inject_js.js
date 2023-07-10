@@ -140,7 +140,7 @@ window.ezfyEasyUpsellApp = (function () {
         let upsells = [];
 
         for (var id of ids) {
-          const upsell = data.upsellProducts.filter(
+          const upsell = products.upsellProducts.filter(
             (e) => parseInt(e.id) === parseInt(id),
           )[0];
 
