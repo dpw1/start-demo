@@ -146,6 +146,14 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
+  function injectCartUpsellOnURLChange() {
+    var oldURL = window.location.href;
+    if (window.location.href !== oldURL) {
+      injectCartUpsell();
+      oldURL = window.location.href;
+    }
+  }
+
   async function injectUpsell(upsell) {
     try {
       const $cart = await _waitForElement(
@@ -300,6 +308,8 @@ window.ezfyEasyUpsellApp = (function () {
           injectCartUpsell();
         }
       });
+
+      setInterval(injectCartUpsellOnURLChange, 1000);
     },
   };
 })();
