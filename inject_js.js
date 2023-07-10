@@ -134,15 +134,23 @@ window.ezfyEasyUpsellApp = (function () {
 
       /* TODO 
       get ID of products in the cart
-
       */
-      // const id = await _getProductID();
 
-      // const products = data.upsellProducts.filter(
-      //   (e) => parseInt(e.id) === parseInt(id),
-      // )[0];
+      Ecwid.Cart.get(async function (cart) {
+        var ids = cart.items.map((e) => e.product.id);
 
-      // resolve(products);
+        let upsells = [];
+
+        for (var id of ids) {
+          const products = data.upsellProducts.filter(
+            (e) => parseInt(e.id) === parseInt(id),
+          )[0];
+
+          upsells.push(products);
+        }
+
+        resolve(upsells);
+      });
     });
   }
 
