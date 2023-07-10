@@ -15,7 +15,7 @@ Run _yarn start_ to start the project and get the app up and running.
 
 Once ready to test, publish it github pages:
 
-npm run deploy
+`npm run deploy`
 
 ## Editing the front-end CSS
 
