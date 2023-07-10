@@ -131,4 +131,14 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
       font-size: 12px;
     }
   }
+
+  .EzfyCart-prices {
+    display: flex;
+  }
+
+  .EzfyCart-compare-price {
+    font-size: 14px;
+    text-decoration: line-through;
+    opacity: 0.8;
+  }
 }
