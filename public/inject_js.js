@@ -340,22 +340,13 @@ window.ezfyEasyUpsellApp = (function () {
 
   async function addToCart(id, quantity) {
     return new Promise(async (resolve, reject) => {
-      const productsInCart = await getProductsInCart();
-
-      for (var [index, each] of products.entries()) {
-        const isInCart =
-          productsInCart.filter((e) => e === each.id).length >= 1;
-
-        if (!isInCart) {
-          Ecwid.Cart.addProduct({
-            id,
-            quantity,
-            callback: function (success, product, cart) {
-              resolve();
-            },
-          });
-        }
-      }
+      Ecwid.Cart.addProduct({
+        id,
+        quantity,
+        callback: function (success, product, cart) {
+          resolve();
+        },
+      });
     });
   }
 
