@@ -214,9 +214,18 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function injectCartUpsell() {
-    const $body = document.querySelector(`.ec-cart__sidebar-inner`);
+    const $body = document.querySelector(`.ec-cart__sidebar-inner`)
+      ? document.querySelector(`.ec-cart__sidebar-inner`)
+      : await _waitForElement(`.ec-cart__sidebar-inner`);
 
+    debugger;
     if (!$body) {
+      return;
+    }
+
+    const $ezfycart = document.querySelector(`.EzfyCart`);
+
+    if ($ezfycart) {
       return;
     }
 
