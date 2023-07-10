@@ -126,7 +126,7 @@ window.ezfyEasyUpsellApp = (function () {
 
   async function getUpsellProducts() {
     return new Promise(async (resolve, reject) => {
-      const products = JSON.parse(
+      const data = JSON.parse(
         window.Ecwid.getAppPublicConfig("easy-upsell-dev"),
       );
 
@@ -140,15 +140,20 @@ window.ezfyEasyUpsellApp = (function () {
         let upsells = [];
 
         for (var id of ids) {
-          const upsell = products.upsellProducts.filter(
+          const upsell = data.upsellProducts.filter(
             (e) => parseInt(e.id) === parseInt(id),
           )[0];
 
           upsells.push(upsell);
         }
 
-        debugger;
-        resolve(upsells);
+        /* Remove repeated products */
+        const filtered = upsells
+          .map((e) => e.bundle.map((e) => e.id))
+          .flat()
+          .filter((e) => !ids.includes(e));
+
+        resolve(filtered);
       });
     });
   }
