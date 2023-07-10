@@ -8,6 +8,15 @@ function App() {
   const [storeData, setStoreData] = useState(null);
   const [products, setProducts] = useState([]);
 
+  function initDatabaseOnFirstInstall() {
+    window.EcwidApp.setAppPublicConfig(
+      JSON.stringify({ upsellProducts: [] }),
+      function () {
+        console.log("New upasell product set up!");
+      },
+    );
+  }
+
   useEffect(() => {
     setStoreData(window.EcwidApp.getPayload());
   }, []);
@@ -17,12 +26,7 @@ function App() {
       console.log(window.EcwidApp);
       window.EcwidApp.getAppPublicConfig(function (value) {
         if (!value) {
-          window.EcwidApp.setAppPublicConfig(
-            JSON.stringify({ upsellProducts: [] }),
-            function () {
-              console.log("New upsell product set up!");
-            },
-          );
+          initDatabaseOnFirstInstall();
         }
       });
     }
