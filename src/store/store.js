@@ -7,7 +7,7 @@ const useStore = create((set, get) => ({
   products: [],
 
   /* ===============
-  Get store's products and populate the store's 'products' variable */
+  Get store's products and add them to the store's 'products' variable */
   populateProducts: async () => {
     /* TODO = change this URL when on production */
 
