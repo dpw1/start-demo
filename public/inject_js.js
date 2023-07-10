@@ -338,6 +338,27 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
+  async function addToCart(id, quantity) {
+    return new Promise(async (resolve, reject) => {
+      const productsInCart = await getProductsInCart();
+
+      for (var [index, each] of products.entries()) {
+        const isInCart =
+          productsInCart.filter((e) => e === each.id).length >= 1;
+
+        if (!isInCart) {
+          Ecwid.Cart.addProduct({
+            id,
+            quantity,
+            callback: function (success, product, cart) {
+              resolve();
+            },
+          });
+        }
+      }
+    });
+  }
+
   async function handleAddToCart() {
     const $atc = await _waitForElement(`.EzfyCart-atc`);
 
@@ -351,32 +372,22 @@ window.ezfyEasyUpsellApp = (function () {
       return;
     }
 
-    debugger;
-
     for (var each of $atcs) {
       each.addEventListener(`click`, async function (e) {
-        debugger;
         const $this = e.target;
+        const text = $this.textContent;
         const $parent = $this.closest(`.EzfyCart-item`);
         const id = parseInt($parent.getAttribute("data-id"));
 
-        alert(id);
+        await addToCart(id, 1);
+
+        $this.textContent = `Added`;
+
+        setTimeout(() => {
+          $this.textContent = text;
+        });
       });
     }
-
-    // const productsInCart = await getProductsInCart();
-
-    // for (var [index, each] of products.entries()) {
-    //   const isInCart = productsInCart.filter((e) => e === each.id).length >= 1;
-
-    //   if (!isInCart) {
-    //     Ecwid.Cart.addProduct({
-    //       id: each.id,
-    //       quantity: 1,
-    //       callback: function (success, product, cart) {},
-    //     });
-    //   }
-    // }
   }
 
   async function start() {
