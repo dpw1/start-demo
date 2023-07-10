@@ -275,7 +275,7 @@ window.ezfyEasyUpsellApp = (function () {
 
     for (var each of _products) {
       const html = `
-      <div class="EzfyCart-item EzfyCart-item--${each.id}">
+      <div data-id="${each.id}" class="EzfyCart-item EzfyCart-item--${each.id}">
 			<img class="EzfyCart-image" src="${each.thumbnailUrl}" alt="${each.name}">
 			<div class="EzfyCart-item-title">${each.name}</div>
 			<div class="EzfyCart-price">${each.defaultDisplayedPriceFormatted}</div>
@@ -324,12 +324,56 @@ window.ezfyEasyUpsellApp = (function () {
     $body.insertAdjacentHTML(`afterbegin`, html);
   }
 
-  function populateUpsellProducts() {}
+  function getProductsInCart() {
+    return new Promise((resolve, reject) => {
+      let products = [];
+
+      window.Ecwid.Cart.get(function (cart) {
+        cart.items
+          .map((e) => e.product)
+          .map((_product) => products.push(_product.id));
+      });
+
+      resolve(products);
+    });
+  }
+
+  async function handleAddToCart() {
+    const $atcs = document.querySelectorAll(`.EzfyCart-atc`);
+
+    if (!$atcs) {
+      return;
+    }
+
+    for (var each of $atcs) {
+      each.addEventListener(`click`, async function (e) {
+        const $this = e.target;
+        const $parent = $this.closest(`.EzfyCart-item`);
+        const id = parseInt($parent.getAttribute("data-id"));
+
+        alert(id);
+      });
+    }
+
+    // const productsInCart = await getProductsInCart();
+
+    // for (var [index, each] of products.entries()) {
+    //   const isInCart = productsInCart.filter((e) => e === each.id).length >= 1;
+
+    //   if (!isInCart) {
+    //     Ecwid.Cart.addProduct({
+    //       id: each.id,
+    //       quantity: 1,
+    //       callback: function (success, product, cart) {},
+    //     });
+    //   }
+    // }
+  }
 
   async function start() {
     const products = await getUpsellProducts();
     injectCartUpsell(products);
-    console.log(products);
+    handleAddToCart();
   }
 
   return {
