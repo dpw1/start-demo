@@ -16,7 +16,14 @@ function App() {
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
       console.log(window.EcwidApp);
       window.EcwidApp.getAppPublicConfig(function (value) {
-        console.log("my datatata", JSON.parse(value));
+        if (!value) {
+          window.EcwidApp.setAppPublicConfig(
+            JSON.stringify({ upsellProducts: [] }),
+            function () {
+              console.log("New upsell product set up!");
+            },
+          );
+        }
       });
     }
 
