@@ -218,7 +218,6 @@ window.ezfyEasyUpsellApp = (function () {
       ? document.querySelector(`.ec-cart__sidebar-inner`)
       : await _waitForElement(`.ec-cart__sidebar-inner`);
 
-    debugger;
     if (!$body) {
       return;
     }
