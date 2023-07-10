@@ -290,7 +290,7 @@ window.ezfyEasyUpsellApp = (function () {
         <button class="EzfyCart-minus"><span>+</span></button>
       </div>
 
-      <button>Add to Cart</button>
+      <button class="EzfyCart-atc">Add to Cart</button>
       </div>
       `;
 
