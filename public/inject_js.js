@@ -386,25 +386,23 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function restart() {
-    if (_isCartPage()) {
-      var $atc = document.querySelector(`.EzfyCart-atc`);
+    var $atc = document.querySelector(`.EzfyCart-atc`);
 
-      if ($atc) {
-        return;
-      }
-
-      const $cart = await _waitForElement(
-        `.ec-cart__shopping.ec-cart-shopping`,
-        100,
-        40,
-      );
-
-      if (!$cart) {
-        return;
-      }
-
-      start();
+    if ($atc) {
+      return;
     }
+
+    const $cart = await _waitForElement(
+      `.ec-cart__shopping.ec-cart-shopping`,
+      100,
+      40,
+    );
+
+    if (!$cart) {
+      return;
+    }
+
+    start();
   }
 
   return {
@@ -426,7 +424,7 @@ window.ezfyEasyUpsellApp = (function () {
 
       async function checkURLchange() {
         if (window.location.href !== oldURL) {
-          restart();
+          start();
 
           console.log("current page: ", window.location.href, oldURL);
           oldURL = window.location.href;
