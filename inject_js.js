@@ -326,9 +326,10 @@ window.ezfyEasyUpsellApp = (function () {
     $body.insertAdjacentHTML(`afterbegin`, html);
   }
 
-  function start() {
+  async function start() {
     injectCartUpsell();
-    getUpsellProducts();
+    const products = await getUpsellProducts();
+    console.log(products);
   }
 
   return {
