@@ -288,7 +288,7 @@ window.ezfyEasyUpsellApp = (function () {
   return {
     init: function () {
       injectReacPlaceholder();
-      injectUpsellOnCartPage();
+      injectCartUpsell();
 
       window.Ecwid.OnCartChanged.add(async function (cart) {
         console.log("the cart has changed", cart);
@@ -297,7 +297,7 @@ window.ezfyEasyUpsellApp = (function () {
       window.Ecwid.OnPageSwitch.add(function (page) {
         console.log("page", page);
 
-        injectUpsellOnCartPage();
+        injectCartUpsell();
       });
     },
   };
