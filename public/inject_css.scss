@@ -22,7 +22,7 @@ $xs: 767px;
 $xxs: 575px;
 $xxxs: 500px;
 
-$button-width: 158px;
+$width: 158px;
 
 $transition-basic: all 0.3s ease 0s;
 
@@ -62,9 +62,13 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     display: block;
   }
 
+  .EzfyCart-item {
+    width: $width !important;
+  }
+
   .EzfyCart-item img {
     display: block;
-    max-width: 150px;
+    max-width: $width !important;
     width: 100%;
   }
 
