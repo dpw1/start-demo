@@ -79,51 +79,6 @@ window.ezfyEasyUpsellApp = (function () {
     document.head.append(style);
   }
 
-  async function _getProductID() {
-    return new Promise(async (resolve, reject) => {
-      /* if ID is present in the URL */
-      if (/-p\d{6,}/.test(window.location.pathname)) {
-        var _id = window.location.pathname.split("-");
-        var id = parseInt(_id[_id.length - 1].replace("p", ""));
-        resolve(id);
-      } else {
-        /* Try to extract ID from class name */
-        var $el = await _waitForElement(
-          `[class*="ecwid-productBrowser-ProductPage-"]`,
-        );
-
-        if (!$el) {
-          resolve(null);
-        }
-
-        var id = [...$el.classList]
-          .join(" ")
-          .split("-")
-          .filter((e) => /\d{5,}/.test(e))[0];
-
-        if (!id) {
-          resolve(null);
-        }
-
-        resolve(parseInt(id));
-      }
-    });
-  }
-
-  async function getIDOfProductsInCart() {
-    return new Promise(async (resolve, reject) => {
-      Ecwid.Cart.get(function (cart) {
-        if (!cart.items || cart.items.length <= 0) {
-          resolve(null);
-        }
-
-        var ids = cart.items.map((e) => e.product.id);
-
-        resolve(ids);
-      });
-    });
-  }
-
   async function getUpsellProducts() {
     return new Promise(async (resolve, reject) => {
       const data = JSON.parse(
@@ -437,4 +392,4 @@ window.ezfyEasyUpsellApp = (function () {
   };
 })();
 
-// window.ezfyEasyUpsellApp.init();
+window.ezfyEasyUpsellApp.init();
