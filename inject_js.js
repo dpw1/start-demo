@@ -378,10 +378,8 @@ window.ezfyEasyUpsellApp = (function () {
       });
 
       async function checkURLchange() {
-        console.log("current page: ", window.location.href, oldURL);
-
         if (window.location.href !== oldURL) {
-          start();
+          restart();
 
           console.log("current page: ", window.location.href, oldURL);
           oldURL = window.location.href;
