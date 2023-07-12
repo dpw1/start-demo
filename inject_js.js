@@ -327,6 +327,8 @@ window.ezfyEasyUpsellApp = (function () {
         const $parent = $this.closest(`.EzfyCart-item`);
         const id = parseInt($parent.getAttribute("data-id"));
 
+        console.log("listening click id", id);
+
         if (window[`adding-${id}`]) {
           return;
         }
@@ -402,4 +404,4 @@ window.ezfyEasyUpsellApp = (function () {
   };
 })();
 
-window.ezfyEasyUpsellApp.init();
+// window.ezfyEasyUpsellApp.init();
