@@ -327,9 +327,19 @@ window.ezfyEasyUpsellApp = (function () {
         const $parent = $this.closest(`.EzfyCart-item`);
         const id = parseInt($parent.getAttribute("data-id"));
 
+        if (window[`adding-${id}`]) {
+          return;
+        }
+
         await addToCart(id, 1);
 
         $this.textContent = `Added`;
+
+        window[`adding-${id}`] = true;
+
+        setTimeout(() => {
+          window[`adding-${id}`] = false;
+        });
       });
     }
   }
