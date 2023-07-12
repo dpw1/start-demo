@@ -323,7 +323,7 @@ window.ezfyEasyUpsellApp = (function () {
     }
 
     for (var each of $atcs) {
-      each.setAttribute("data-has-listener");
+      each.setAttribute("data-has-listener", "true");
       each.addEventListener(`click`, async function (e) {
         const $this = e.target;
         const text = $this.textContent;
