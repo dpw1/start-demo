@@ -314,13 +314,16 @@ window.ezfyEasyUpsellApp = (function () {
       return;
     }
 
-    const $atcs = document.querySelectorAll(`.EzfyCart-atc`);
+    const $atcs = document.querySelectorAll(
+      `.EzfyCart-atc:not([data-has-listener])`,
+    );
 
     if (!$atcs) {
       return;
     }
 
     for (var each of $atcs) {
+      each.setAttribute("data-has-listener");
       each.addEventListener(`click`, async function (e) {
         const $this = e.target;
         const text = $this.textContent;
@@ -404,4 +407,4 @@ window.ezfyEasyUpsellApp = (function () {
   };
 })();
 
-// window.ezfyEasyUpsellApp.init();
+window.ezfyEasyUpsellApp.init();
