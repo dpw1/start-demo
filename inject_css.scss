@@ -60,8 +60,6 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     width: 100%;
     max-width: unset;
     display: block;
-    overflow-x: scroll;
-    overflow-y: hidden;
   }
 
   .EzfyCart-item,
@@ -84,6 +82,8 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     display: flex;
     justify-content: flex-start;
     width: 100%;
+    overflow-x: scroll;
+    overflow-y: hidden;
   }
 
   .EzfyCart-quantity {
@@ -145,6 +145,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
   .EzfyCart-prices {
     display: flex;
+    align-items: center;
   }
 
   .EzfyCart-item-title {
