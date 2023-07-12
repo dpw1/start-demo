@@ -173,14 +173,14 @@ window.ezfyEasyUpsellApp = (function () {
           .split(" ")
           .join("-");
 
-        url = _url.replaceAll("--", "-");
+        url = `https://ezfycode.com/shop/${_url.replaceAll("--", "-")}`;
       }
 
       const html = `
       <div  data-id="${each.id}" class="EzfyCart-item EzfyCart-item--${
         each.id
       }">
-      <a href="${url}">
+      <a target="_blank" href="${url}">
 			<img class="EzfyCart-image" src="${each.thumbnailUrl}" alt="${each.name}">
 			<div class="EzfyCart-item-title">${each.name}</div>
 			<div class="EzfyCart-prices">
