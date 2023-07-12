@@ -1,7 +1,8 @@
 window.ezfyEasyUpsellApp = window.ezfyEasyUpsellApp || {};
 
 window.ezfyEasyUpsellApp = (function () {
-  const USE_CUSTOM_URLS = true;
+  const USE_CUSTOM_URLS =
+    window.location.hostname === "ezfycode.com" ? true : false;
 
   function _loadScript(src) {
     return new Promise(function (resolve, reject) {
