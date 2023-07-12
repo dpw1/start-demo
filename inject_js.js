@@ -177,9 +177,10 @@ window.ezfyEasyUpsellApp = (function () {
       }
 
       const html = `
-      <a href="${url}" data-id="${
+      <div  data-id="${each.id}" class="EzfyCart-item EzfyCart-item--${
         each.id
-      }" class="EzfyCart-item EzfyCart-item--${each.id}">
+      }">
+      <a href="${url}">
 			<img class="EzfyCart-image" src="${each.thumbnailUrl}" alt="${each.name}">
 			<div class="EzfyCart-item-title">${each.name}</div>
 			<div class="EzfyCart-prices">
@@ -189,7 +190,7 @@ window.ezfyEasyUpsellApp = (function () {
             ? each.compareToPriceFormatted
             : ""
         } </div>
-      </a>
+      </div>
 
       <!--
 			<div class="EzfyCart-quantity">
@@ -198,6 +199,8 @@ window.ezfyEasyUpsellApp = (function () {
         <button class="EzfyCart-minus"><span>+</span></button>
       </div>
       -->
+
+      </a>
 
       <button class="EzfyCart-atc">Add to Cart</button>
       </div>
