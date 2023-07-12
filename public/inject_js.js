@@ -108,8 +108,8 @@ window.ezfyEasyUpsellApp = (function () {
         /* todo - currently returning only id, make sure it returns everything */
         /* Remove repeated products */
 
-        debugger;
         const filtered = upsells
+          .filter((e) => e !== undefined)
           .map((e) => e.bundle.map((e) => e))
           .flat()
           .filter((e) => !ids.includes(e.id));
