@@ -37,10 +37,9 @@ function App() {
 
     (async () => {
       const upsell = await upsellProducts();
+      window.upsellProducts = upsell;
       console.log("upsell prods: ", upsell);
     })();
-
-    console.log("rr my store data: ", storeData);
   }, [storeData]);
 
   return (
