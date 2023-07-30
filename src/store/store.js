@@ -36,6 +36,7 @@ const useStore = create((set, get) => ({
   upsellProducts: () => {
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
       return new Promise(async (resolve, reject) => {
+        console.log("before: ", window.upsellProducts);
         if (window.hasOwnProperty("upsellProducts")) {
           resolve(window.upsellProducts);
           return;
