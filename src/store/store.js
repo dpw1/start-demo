@@ -36,6 +36,10 @@ const useStore = create((set, get) => ({
   upsellProducts: () => {
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
       return new Promise(async (resolve, reject) => {
+        if (window.hasOwnProperty("upsellProducts")) {
+          resolve(window.upsellProducts);
+          return;
+        }
         let data = [];
 
         window.EcwidApp.getAppPublicConfig(function (value) {
@@ -43,6 +47,8 @@ const useStore = create((set, get) => ({
           console.log("xxx ECWID PRE DATA", _data);
           data = data = _data.upsellProducts;
           console.log("xxx ECWID DB DATA", data);
+
+          window.upsellProducts = data;
           resolve(data);
         });
       });
