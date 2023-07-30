@@ -18,7 +18,9 @@ function App() {
   }
 
   useEffect(() => {
-    setStoreData(window.EcwidApp.getPayload());
+    const data = window.EcwidApp.getPayload();
+    console.log("Store's data: ", data);
+    setStoreData(data);
   }, []);
 
   useEffect(() => {
