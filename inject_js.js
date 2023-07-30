@@ -119,14 +119,6 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
-  function injectCartUpsellOnURLChange() {
-    var oldURL = window.location.href;
-    if (window.location.href !== oldURL) {
-      injectCartUpsell();
-      oldURL = window.location.href;
-    }
-  }
-
   async function awaitEcwid() {
     return new Promise(async (resolve, reject) => {
       if (window.hasOwnProperty("ecwidIsLoaded")) {
