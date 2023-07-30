@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     const data = window.EcwidApp.getPayload();
-    console.log("Store's data: ", data);
+
     setStoreData(data);
   }, []);
 

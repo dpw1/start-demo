@@ -46,10 +46,11 @@ const useStore = create((set, get) => ({
           const _data = JSON.parse(value);
           // console.log("xxx ECWID PRE DATA", _data);
           data = data = _data.upsellProducts;
-          console.log("xxx ECWID DB DATA", data);
+          console.log("xxx ECWID DB DATA", data, window.upsellProducts);
 
           window.upsellProducts = data;
           resolve(data);
+          return;
         });
       });
     }
