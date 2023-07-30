@@ -44,7 +44,7 @@ const useStore = create((set, get) => ({
 
         window.EcwidApp.getAppPublicConfig(function (value) {
           const _data = JSON.parse(value);
-          console.log("xxx ECWID PRE DATA", _data);
+          // console.log("xxx ECWID PRE DATA", _data);
           data = data = _data.upsellProducts;
           console.log("xxx ECWID DB DATA", data);
 
