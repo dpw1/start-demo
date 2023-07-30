@@ -59,6 +59,8 @@ const useStore = create((set, get) => ({
         ? await get().upsellProducts()
         : await get().upsellProducts;
 
+    debugger;
+
     const _parentProduct =
       bundleProducts.length >= 1 &&
       bundleProducts.filter((e) => e.id === parentID);
