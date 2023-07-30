@@ -1,12 +1,15 @@
 import "./App.scss";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import useStore from "./store/store";
 
 import Products from "./Products";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
   const [products, setProducts] = useState([]);
+
+  const upsellProducts = useStore((state) => state.upsellProducts);
 
   function initDatabaseOnFirstInstall() {
     window.EcwidApp.setAppPublicConfig(
@@ -25,13 +28,17 @@ function App() {
 
   useEffect(() => {
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
-      console.log(window.EcwidApp);
       window.EcwidApp.getAppPublicConfig(function (value) {
         if (!value) {
           initDatabaseOnFirstInstall();
         }
       });
     }
+
+    (async () => {
+      const upsell = await upsellProducts();
+      console.log("upsell prods: ", upsell);
+    })();
 
     console.log("rr my store data: ", storeData);
   }, [storeData]);
