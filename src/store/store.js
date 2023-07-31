@@ -1,5 +1,6 @@
 import create from "zustand";
 import axios from "axios";
+import { sanitizeBundleProducts } from "../utils";
 
 const useStore = create((set, get) => ({
   /* ## API PRODUCTS
@@ -121,17 +122,11 @@ const useStore = create((set, get) => ({
           : [parent, bundleProduct],
     };
 
-    const sanitizeBundleProducts = () => {
-      return Symbol.iterator in Object(bundleProducts)
-        ? [...bundleProducts]
-        : [];
-    };
-
-    const sanitizedBundleProducts = sanitizeBundleProducts();
+    const sanitizedBundleProducts = sanitizeBundleProducts(bundleProducts);
 
     const updated = [...sanitizedBundleProducts, currentProduct];
 
-    console.log("updated -- ", updated);
+    console.log("updated -- ", updated, sanitizedBundleProducts);
 
     /* Save into Ecwid's database */
     if (window.EcwidApp) {
