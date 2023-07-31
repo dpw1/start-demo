@@ -87,8 +87,9 @@ export default function ProductItem(props) {
             </span>
             <div className="list-element__data-row">
               {upsell &&
-                upsell.length >= 1 &&
-                upsell.map((e) => {
+                upsell.hasOwnProperty("bundle") &&
+                upsell.bundle.length >= 1 &&
+                upsell.bundle.map((e) => {
                   const _product = e;
 
                   /* If the upsell product is the same as the parent, do not add it to the list. */
