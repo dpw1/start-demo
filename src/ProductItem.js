@@ -122,9 +122,9 @@ export default function ProductItem(props) {
                             if ($item) {
                               $item.style.display = "none";
                             }
-
-                            $item.remove();
-                          } catch (err) {}
+                          } catch (err) {
+                            console.log("Removing error", err);
+                          }
                         }}
                         className="icolink">
                         <span className="svg-icon">
