@@ -46,11 +46,11 @@ export default function Products({ upsellProducts }) {
                   key={e.id}
                   product={e}
                   upsellProducts={() => {
-                    console.log("uppp", upsellProducts);
-
                     const upsells = upsellProducts.filter(
                       (x) => x.id === e.id,
                     )[0];
+
+                    console.log("uppp - return", upsellProducts, upsells);
 
                     if (!upsells) {
                       return [];

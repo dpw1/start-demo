@@ -32,7 +32,7 @@ export default function ProductItem(props) {
   const handlePopulateUpsell = async (subscription) => {
     let bundleProducts = upsellProducts;
 
-    console.log("my bbbb", bundleProducts, props);
+    console.log("my bbbb", bundleProducts(), props);
 
     if (bundleProducts && bundleProducts.length <= 0) {
       setUpsell([]);
