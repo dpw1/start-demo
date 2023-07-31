@@ -48,5 +48,7 @@ export function sanitizeBundleProducts(productWithBundles) {
     });
   }
 
+  debugger;
+
   return result;
 }
