@@ -35,7 +35,7 @@ export default function Products({ upsellProducts }) {
         <div className="a-card a-card--compact">
           <div className="a-card__paddings">
             <h1 className="Products-title settings-page__title spacing--mt2">
-              Products!!
+              Products!!!
             </h1>
 
             {products &&
