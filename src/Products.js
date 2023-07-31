@@ -63,9 +63,9 @@ export default function Products({ upsellProducts }) {
                   key={e.id}
                   product={e}
                   upsellProducts={() => {
+                    debugger;
                     const res = upsellProducts.filter((x) => x.id === e.id)[0];
                     console.log(res);
-                    debugger;
                     return res;
                   }}></ProductItem>
               ))
