@@ -122,18 +122,20 @@ const useStore = create((set, get) => ({
           : [parent, bundleProduct],
     };
 
-    const sanitizedBundleProducts = sanitizeBundleProducts(bundleProducts);
+    const _bundle =
+      Symbol.iterator in Object(bundleProducts) ? [...bundleProducts] : [];
 
-    const updated = [...sanitizedBundleProducts, currentProduct];
+    const _updated = [..._bundle, currentProduct];
+    const updated = sanitizeBundleProducts(_updated);
 
-    console.log("updated -- ", updated, sanitizedBundleProducts);
+    console.log("updated -- ", updated);
 
     /* Save into Ecwid's database */
     if (window.EcwidApp) {
       try {
         const payload = JSON.stringify({ upsellProducts: updated });
 
-        console.log("payload: ", updated);
+        console.log("payload: ", { upsellProducts: updated });
 
         window.EcwidApp.setAppPublicConfig(payload, function () {
           console.log("New upsell product saved!");
