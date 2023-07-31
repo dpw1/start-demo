@@ -19,7 +19,7 @@ Cleans the bundle products. Requires an object like this:
 */
 
 export function sanitizeBundleProducts(productWithBundles) {
-  console.log("within sanitze:  ", productWithBundles);
+  console.log("within sanitze: ", productWithBundles);
   var result = [];
 
   for (var each of productWithBundles) {
