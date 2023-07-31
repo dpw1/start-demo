@@ -87,6 +87,7 @@ export default function ProductItem(props) {
             </span>
             <div className="list-element__data-row">
               {upsell &&
+                upsell.length >= 1 &&
                 upsell.map((e) => {
                   const _product = e;
 
