@@ -54,7 +54,7 @@ export default function Products({ upsellProducts }) {
         <div className="a-card a-card--compact">
           <div className="a-card__paddings">
             <h1 className="Products-title settings-page__title spacing--mt2">
-              Products!!!
+              Products!
             </h1>
 
             {products && products.hasOwnProperty("items") && upsellProducts ? (
@@ -62,9 +62,12 @@ export default function Products({ upsellProducts }) {
                 <ProductItem
                   key={e.id}
                   product={e}
-                  upsellProducts={
-                    upsellProducts.filter((x) => x.id === e.id)[0]
-                  }></ProductItem>
+                  upsellProducts={() => {
+                    const res = upsellProducts.filter((x) => x.id === e.id)[0];
+                    console.log(res);
+                    debugger;
+                    return res;
+                  }}></ProductItem>
               ))
             ) : (
               <ProductSkeleton></ProductSkeleton>
