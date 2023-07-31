@@ -136,12 +136,13 @@ const useStore = create((set, get) => ({
     /* Save into Ecwid's database */
     if (window.EcwidApp) {
       try {
-        window.EcwidApp.setAppPublicConfig(
-          JSON.stringify({ upsellProducts: updated }),
-          function () {
-            console.log("New upsell product saved!");
-          },
-        );
+        const payload = JSON.stringify({ upsellProducts: updated });
+
+        console.log("payload: ", payload);
+
+        window.EcwidApp.setAppPublicConfig(payload, function () {
+          console.log("New upsell product saved!");
+        });
       } catch (err) {
         console.error(
           "Couldn't save upsell product. [store.js - addUpsellProduct()]",
