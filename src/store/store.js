@@ -161,12 +161,11 @@ const useStore = create((set, get) => ({
         ? await get().upsellProducts()
         : await get().upsellProducts;
 
-    console.log(bundleProducts);
-
-    // console.log("Bundle products:", bundleProducts);
-
     const upsell = bundleProducts.filter((e) => e.id === id);
-    return upsell.length >= 1 ? upsell[0].bundle : [];
+
+    const res = upsell.length >= 1 ? upsell[0].bundle : [];
+    console.log("Bundle products:", upsell, bundleProducts, id, res);
+    return res;
   },
 
   deleteUpsellProductById: async (parentID, bundleID) => {
