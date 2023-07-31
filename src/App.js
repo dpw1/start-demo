@@ -51,7 +51,9 @@ function App() {
       <div className="EasyUpsellApp-container">
         <Products
           upsellProducts={async () => {
-            return await upsellProducts();
+            const upsell = await upsellProducts();
+            console.log("beforehnd", upsell);
+            return upsell;
           }}></Products>
       </div>
     </div>
