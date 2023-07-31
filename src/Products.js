@@ -35,7 +35,7 @@ export default function Products({ upsellProducts }) {
         <div className="a-card a-card--compact">
           <div className="a-card__paddings">
             <h1 className="Products-title settings-page__title spacing--mt2">
-              Products!!!
+              Products!
             </h1>
 
             {products &&
@@ -46,17 +46,10 @@ export default function Products({ upsellProducts }) {
                   key={e.id}
                   product={e}
                   upsell={() => {
-                    const upsells = upsellProducts.filter(
-                      (x) => x.id === e.id,
-                    )[0];
-
-                    console.log("uppp - return", upsellProducts, upsells);
-
-                    if (!upsells) {
-                      return [];
-                    }
-
-                    return upsells;
+                    return upsellProducts.filter((x) => x.id === e.id).length >=
+                      1
+                      ? upsellProducts.filter((x) => x.id === e.id)[0]
+                      : [];
                   }}></ProductItem>
               ))}
           </div>
