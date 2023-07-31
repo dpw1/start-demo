@@ -41,7 +41,8 @@ function App() {
       const upsell = await getUpsellProducts();
       window.upsellProducts = upsell;
       setUpsellProducts(upsell);
-      console.log("upsell prods: ", upsell);
+
+      console.log(`There are ${upsell.length} products with upsells.`);
     })();
   }, [storeData]);
 

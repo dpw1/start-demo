@@ -88,6 +88,8 @@ const useStore = create((set, get) => ({
 
     const bundleProduct = get().getProductById(bundleID);
 
+    console.log("Bundle product: ", bundleProduct);
+
     /* If it's an already existing product, adds the extra bundle to it */
     if (parentProduct) {
       const existingBundles = () => {
@@ -101,6 +103,8 @@ const useStore = create((set, get) => ({
       };
 
       bundle = [...existingBundles(), bundleProduct];
+
+      console.log("the Bundle : ", bundle);
 
       bundleProducts = bundleProducts.filter((e) => e.id !== parentID);
 
@@ -127,6 +131,8 @@ const useStore = create((set, get) => ({
 
     const updated = [...sanitizedBundleProducts, currentProduct];
 
+    console.log("updated -- ", updated);
+
     /* Save into Ecwid's database */
     if (window.EcwidApp) {
       try {
@@ -143,7 +149,7 @@ const useStore = create((set, get) => ({
       }
     }
 
-    // console.log("updated: ", updated);
+    console.log("updated: ", updated);
 
     set({
       upsellProducts: updated,
