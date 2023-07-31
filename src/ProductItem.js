@@ -7,8 +7,8 @@ import useStore from "./store/store";
 import Products from "./Products";
 
 export default function ProductItem(props) {
-  const { product, upsellProducts } = props;
-  const [upsell, setUpsell] = useState([]);
+  const { product, upsell } = props;
+  // const [upsell, setUpsell] = useState([]);
 
   const getUpsellProductById = useStore((state) => state.getUpsellProductById);
   const deleteUpsellProductById = useStore(
@@ -24,38 +24,35 @@ export default function ProductItem(props) {
   );
 
   const populateUpsells = async (id) => {
-    const bundle = await getUpsellProductById(product.id);
-    console.log("my ID and  bundle: ", bundle);
-    setUpsell(bundle);
+    // const bundle = await getUpsellProductById(product.id);
+    // console.log("my ID and  bundle: ", bundle);
+    // setUpsell(bundle);
   };
 
   const handlePopulateUpsell = async (subscription) => {
-    let bundleProducts = upsellProducts;
-
-    console.log("my bbbb", bundleProducts(), props);
-
-    if (bundleProducts && bundleProducts.length <= 0) {
-      setUpsell([]);
-      return;
-    }
-    const current = bundleProducts.filter((e) => e.id === product.id)[0];
-
-    if (!current) {
-      setUpsell([]);
-      return;
-    }
-
-    populateUpsells(product.id);
+    // let bundleProducts = upsellProducts;
+    // console.log("my bbbb", bundleProducts(), props);
+    // if (bundleProducts && bundleProducts.length <= 0) {
+    //   setUpsell([]);
+    //   return;
+    // }
+    // const current = bundleProducts.filter((e) => e.id === product.id)[0];
+    // if (!current) {
+    //   setUpsell([]);
+    //   return;
+    // }
+    // populateUpsells(product.id);
   };
 
   useEffect(() => {
-    (async (_) => {
-      handlePopulateUpsell();
-    })();
+    // (async (_) => {
+    //   // handlePopulateUpsell();
+    // })();
+    // useStore.subscribe(async (e) => {
+    //   handlePopulateUpsell(e);
+    // });
 
-    useStore.subscribe(async (e) => {
-      handlePopulateUpsell(e);
-    });
+    console.log("my upsell: ", upsell);
   }, []);
 
   useEffect(() => {
