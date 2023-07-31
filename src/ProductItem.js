@@ -90,7 +90,7 @@ export default function ProductItem(props) {
             <div className="list-element__data-row">
               {upsell &&
                 upsell.length >= 1 &&
-                upsell.map((e) => {
+                upsell.bundles.map((e) => {
                   const _product = e;
 
                   /* If the upsell product is the same as the parent, do not add it to the list. */
