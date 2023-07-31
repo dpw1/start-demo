@@ -3,7 +3,7 @@ import "./Products.scss";
 import Skeleton from "react-loading-skeleton";
 import ProductPicker from "./ProductPicker";
 import ProductItem from "./ProductItem";
-import useStore from "./store/store";
+import { useStore } from "./store/store";
 
 export default function Products({ upsellProducts }) {
   // const upsellProductsSubscriber = useStore.subscribe(
@@ -21,12 +21,7 @@ export default function Products({ upsellProducts }) {
   useEffect(() => {
     populateProducts();
 
-    useStore.subscribe(
-      (upsellProducts, previousupsellProducts) => {
-        console.log("upsell products loaded!");
-      },
-      (state) => state.upsellProducts,
-    );
+    console.log("total prods", products);
   }, []);
 
   return (

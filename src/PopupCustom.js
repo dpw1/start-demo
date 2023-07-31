@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from "react";
 import PopupItem from "./PopupItem";
 
 import "./PopupCustom.scss";
-import useStore from "./store/store";
+import { useStore } from "./store/store";
 
 export default function PopupCustom({ parentID }) {
   const products = useStore((state) => state.products);

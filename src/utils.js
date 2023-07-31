@@ -45,7 +45,6 @@ export function sanitizeBundleProducts(productWithBundles) {
   }
 
   console.log("cleaning: ", result);
-  debugger;
 
   return result;
 }

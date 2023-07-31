@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import useStore from "./store/store";
+import { useStore } from "./store/store";
 
 export default function PopupItem({ product, parentID }) {
   const addUpsellProduct = useStore((state) => state.addUpsellProduct);

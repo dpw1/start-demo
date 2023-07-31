@@ -1,10 +1,12 @@
 import "./App.scss";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import useStore from "./store/store";
-
+import { useStore } from "./store/store";
+import { shallow } from "zustand/shallow";
 import Products from "./Products";
 import Skeleton from "react-loading-skeleton";
+import { subscribeWithSelector } from "zustand/middleware";
+import { create } from "zustand";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
@@ -27,9 +29,12 @@ function App() {
 
     setStoreData(data);
 
-    useStore.subscribe(async (e) => {
-      console.log("Some change ", e);
-    });
+    useStore.subscribe(
+      (state) => state.upsellProducts,
+      (e) => {
+        console.log("upsell products update from app!", e);
+      },
+    );
   }, []);
 
   useEffect(() => {

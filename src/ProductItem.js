@@ -3,7 +3,8 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import PopupCustom from "./PopupCustom";
 import "./ProductItem.scss";
-import useStore from "./store/store";
+import { useStore } from "./store/store";
+
 import Products from "./Products";
 
 export default function ProductItem(props) {
