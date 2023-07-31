@@ -122,6 +122,8 @@ export default function ProductItem(props) {
                             if ($item) {
                               $item.style.display = "none";
                             }
+
+                            $item.remove();
                           } catch (err) {}
                         }}
                         className="icolink">
