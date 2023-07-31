@@ -29,35 +29,18 @@ export default function Products({ upsellProducts }) {
     );
   }, []);
 
-  const ProductSkeleton = () => {
-    return (
-      <React.Fragment>
-        <div className="list-element list-element--compact list-element--has-hover list-element--inline-mode SkeletonLoader">
-          <Skeleton count={1} height={50} />
-          <Skeleton count={3} height={7} />
-        </div>
-        <div className="list-element list-element--compact list-element--has-hover list-element--inline-mode SkeletonLoader">
-          <Skeleton count={1} height={50} />
-          <Skeleton count={3} height={7} />
-        </div>
-        <div className="list-element list-element--compact list-element--has-hover list-element--inline-mode SkeletonLoader">
-          <Skeleton count={1} height={50} />
-          <Skeleton count={3} height={7} />
-        </div>
-      </React.Fragment>
-    );
-  };
-
   return (
     <div className="Products  named-area">
       <div className="named-area__body">
         <div className="a-card a-card--compact">
           <div className="a-card__paddings">
             <h1 className="Products-title settings-page__title spacing--mt2">
-              Products!
+              Products!!!
             </h1>
 
-            {products && products.hasOwnProperty("items") && upsellProducts ? (
+            {products &&
+              products.hasOwnProperty("items") &&
+              upsellProducts &&
               products.items.map((e) => (
                 <ProductItem
                   key={e.id}
@@ -69,10 +52,7 @@ export default function Products({ upsellProducts }) {
                     console.log(res);
                     return res;
                   }}></ProductItem>
-              ))
-            ) : (
-              <ProductSkeleton></ProductSkeleton>
-            )}
+              ))}
           </div>
         </div>
       </div>
