@@ -52,8 +52,8 @@ export default function ProductItem(props) {
     //   handlePopulateUpsell(e);
     // });
 
+    console.log("my upsell: ", upsell);
     if (upsell && upsell.length >= 1) {
-      console.log("my upsell: ", upsell);
     }
   }, []);
 

@@ -46,7 +46,8 @@ export default function Products({ upsellProducts }) {
                   key={e.id}
                   product={e}
                   upsell={
-                    upsellProducts.filter((x) => x.id === e.id).length >= 1
+                    upsellProducts.filter((x) => x.id === e.id).bundle.length >=
+                    1
                       ? upsellProducts.filter((x) => x.id === e.id)[0].bundle
                       : []
                   }></ProductItem>
