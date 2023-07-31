@@ -5,7 +5,7 @@ import ProductPicker from "./ProductPicker";
 import ProductItem from "./ProductItem";
 import useStore from "./store/store";
 
-export default function Products(props) {
+export default function Products({ upsellProducts }) {
   // const upsellProductsSubscriber = useStore.subscribe(
   //   (upsellProducts, previousupsellProducts) => {
   //     console.log("Updated upsell products: ", upsellProducts);
@@ -57,15 +57,13 @@ export default function Products(props) {
               Products!!!
             </h1>
 
-            {products &&
-            products.hasOwnProperty("items") &&
-            window.hasOwnProperty(`upsellProducts`) ? (
+            {products && products.hasOwnProperty("items") && upsellProducts ? (
               products.items.map((e) => (
                 <ProductItem
                   key={e.id}
                   product={e}
                   upsellProducts={
-                    window.upsellProducts.filter((x) => x.id === e.id)[0]
+                    upsellProducts.filter((x) => x.id === e.id)[0]
                   }></ProductItem>
               ))
             ) : (
