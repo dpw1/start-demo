@@ -21,6 +21,8 @@ export default function PopupItem({ product, parentID }) {
     (async (_) => {
       const upsell = await getUpsellProductById(parentID);
 
+      console.log(upsell);
+
       if (upsell.filter((e) => e.id === product.id).length >= 1) {
         setIsAddable(false);
       }
