@@ -19,14 +19,10 @@ Cleans the bundle products. Requires an object like this:
 */
 
 export function sanitizeBundleProducts(productWithBundles) {
-  const bundle =
-    Symbol.iterator in Object(productWithBundles)
-      ? [...productWithBundles]
-      : [];
-
+  console.log("within sanitze: ", productWithBundles);
   var result = [];
 
-  for (var each of bundle) {
+  for (var each of productWithBundles) {
     var parentID = each.id;
     var bundles = [];
 
