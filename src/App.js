@@ -26,6 +26,10 @@ function App() {
     const data = window.EcwidApp.getPayload();
 
     setStoreData(data);
+
+    useStore.subscribe(async (e) => {
+      console.log("Some change ", e);
+    });
   }, []);
 
   useEffect(() => {
