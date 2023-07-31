@@ -138,7 +138,7 @@ const useStore = create((set, get) => ({
       try {
         const payload = JSON.stringify({ upsellProducts: updated });
 
-        console.log("payload: ", payload);
+        console.log("payload: ", updated);
 
         window.EcwidApp.setAppPublicConfig(payload, function () {
           console.log("New upsell product saved!");
