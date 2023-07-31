@@ -29,23 +29,9 @@ export default function ProductItem({ product, upsellProducts }) {
   };
 
   const handlePopulateUpsell = async (subscription) => {
-    let bundleProducts;
+    let bundleProducts = upsellProducts;
 
-    if (upsellProducts) {
-      debugger;
-    }
-
-    if (subscription) {
-      bundleProducts =
-        typeof subscription.upsellProducts === "function"
-          ? await subscription.upsellProducts()
-          : await subscription.upsellProducts;
-    } else {
-      bundleProducts =
-        typeof upsellProducts === "function"
-          ? await upsellProducts()
-          : await upsellProducts;
-    }
+    console.log("my bbbb", bundleProducts);
 
     if (bundleProducts && bundleProducts.length <= 0) {
       setUpsell([]);

@@ -48,9 +48,15 @@ export default function Products({ upsellProducts }) {
                   upsellProducts={() => {
                     console.log("uppp", upsellProducts);
 
-                    const res = upsellProducts.filter((x) => x.id === e.id)[0];
-                    console.log(res);
-                    return res;
+                    const upsells = upsellProducts.filter(
+                      (x) => x.id === e.id,
+                    )[0];
+
+                    if (!upsells) {
+                      return null;
+                    }
+
+                    return upsells;
                   }}></ProductItem>
               ))}
           </div>
