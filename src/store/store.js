@@ -184,7 +184,7 @@ const useStore = create((set, get) => ({
     }
 
     console.log("deleted bundle from parent: ", parent, parentID, bundleID);
-    const updatedBundle = parent.bundle.filter((e) => e.id !== bundleID);
+    const updatedBundle = parent.bundles.filter((e) => e.id !== bundleID);
 
     /* If deleting the last item, remove parent as well.
     We use the number "1" because we always add the parent as an upsell. */
@@ -194,7 +194,7 @@ const useStore = create((set, get) => ({
       updated = bundleProducts;
     }
 
-    parent.bundle = updatedBundle;
+    parent.bundles = updatedBundle;
 
     console.log("Updated after delete: ", updated);
 
