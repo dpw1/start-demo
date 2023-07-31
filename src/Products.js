@@ -57,9 +57,16 @@ export default function Products(props) {
               Products!!
             </h1>
 
-            {products && products.hasOwnProperty("items") ? (
+            {products &&
+            products.hasOwnProperty("items") &&
+            window.hasOwnProperty(`upsellProducts`) ? (
               products.items.map((e) => (
-                <ProductItem key={e.id} product={e}></ProductItem>
+                <ProductItem
+                  key={e.id}
+                  product={e}
+                  upsellProducts={
+                    window.upsellProducts.filter((x) => x.id === e.id)[0]
+                  }></ProductItem>
               ))
             ) : (
               <ProductSkeleton></ProductSkeleton>

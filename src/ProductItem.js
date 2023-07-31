@@ -6,10 +6,9 @@ import "./ProductItem.scss";
 import useStore from "./store/store";
 import Products from "./Products";
 
-export default function ProductItem({ product }) {
+export default function ProductItem({ product, upsellProducts }) {
   const [upsell, setUpsell] = useState([]);
 
-  const upsellProducts = useStore((state) => state.upsellProducts);
   const getUpsellProductById = useStore((state) => state.getUpsellProductById);
   const deleteUpsellProductById = useStore(
     (state) => state.deleteUpsellProductById,
@@ -31,6 +30,10 @@ export default function ProductItem({ product }) {
 
   const handlePopulateUpsell = async (subscription) => {
     let bundleProducts;
+
+    if (upsellProducts) {
+      debugger;
+    }
 
     if (subscription) {
       bundleProducts =
