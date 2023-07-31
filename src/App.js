@@ -49,7 +49,10 @@ function App() {
   return (
     <div className="EasyUpsellApp">
       <div className="EasyUpsellApp-container">
-        <Products></Products>
+        <Products
+          upsellProducts={async () => {
+            return await upsellProducts();
+          }}></Products>
       </div>
     </div>
   );
