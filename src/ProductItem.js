@@ -114,16 +114,15 @@ export default function ProductItem(props) {
                             `Delete ${_product.id} from the parent ${product.id}`,
                           );
                           deleteUpsellProductById(product.id, _product.id);
-                          // try {
+                          try {
+                            const $item = window.document.querySelector(
+                              `.ProductItem-upsell--${_product.id}-${product.id}`,
+                            );
 
-                          //   // const $item = window.document.querySelector(
-                          //   //   `.ProductItem-upsell--${_product.id}-${product.id}`,
-                          //   // );
-
-                          //   // if ($item) {
-                          //     // $item.style.display = "none";
-                          //   }
-                          // } catch (err) {}
+                            if ($item) {
+                              $item.style.display = "none";
+                            }
+                          } catch (err) {}
                         }}
                         className="icolink">
                         <span className="svg-icon">
