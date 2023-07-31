@@ -24,10 +24,10 @@ export function sanitizeBundleProducts(productWithBundles) {
 
   for (var each of productWithBundles) {
     var parentID = each.id;
-    var bundles = [];
+    var bundle = [];
 
     for (var upsell of each.bundle) {
-      bundles.push({
+      bundle.push({
         id: upsell.id,
         name: upsell.name,
         thumbnailUrl: upsell.thumbnailUrl,
@@ -40,7 +40,7 @@ export function sanitizeBundleProducts(productWithBundles) {
 
     result.push({
       id: parentID,
-      bundles,
+      bundle,
     });
   }
 
