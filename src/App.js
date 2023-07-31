@@ -9,9 +9,9 @@ import Skeleton from "react-loading-skeleton";
 function App() {
   const [storeData, setStoreData] = useState(null);
   const [products, setProducts] = useState([]);
-  const [upsellProducts, setUpsellProducts] = useState([]);
+  const [upsellProducts, setUpsellProducts] = useState(null);
 
-  const storeUpsellProducts = useStore((state) => state.upsellProducts);
+  const getUpsellProducts = useStore((state) => state.upsellProducts);
 
   function initDatabaseOnFirstInstall() {
     window.EcwidApp.setAppPublicConfig(
@@ -38,11 +38,7 @@ function App() {
     }
 
     (async () => {
-      if (window.upsellProducts) {
-        return;
-      }
-
-      const upsell = await storeUpsellProducts();
+      const upsell = await getUpsellProducts();
       window.upsellProducts = upsell;
       setUpsellProducts(upsell);
       console.log("upsell prods: ", upsell);
@@ -72,12 +68,7 @@ function App() {
     <div className="EasyUpsellApp">
       <div className="EasyUpsellApp-container">
         {upsellProducts ? (
-          <Products
-            upsellProducts={async () => {
-              const upsell = await upsellProducts();
-              console.log("beforehnd", upsell);
-              return upsell;
-            }}></Products>
+          <Products upsellProducts={upsellProducts}></Products>
         ) : (
           <ProductSkeleton></ProductSkeleton>
         )}
