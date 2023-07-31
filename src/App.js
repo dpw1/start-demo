@@ -36,7 +36,7 @@ function App() {
     }
 
     (async () => {
-      if (!window.upsellProducts) {
+      if (window.upsellProducts) {
         return;
       }
 
