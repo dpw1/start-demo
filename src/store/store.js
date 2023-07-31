@@ -40,19 +40,21 @@ const useStore = create((set, get) => ({
         if (window.hasOwnProperty("upsellProducts")) {
           resolve(window.upsellProducts);
           return;
+        } else {
+          console.log("upsell prods not found", window.upsellProducts);
+          let data = [];
+
+          window.EcwidApp.getAppPublicConfig(function (value) {
+            const _data = JSON.parse(value);
+            // console.log("xxx ECWID PRE DATA", _data);
+            data = data = _data.upsellProducts;
+            console.log("xxx ECWID DB DATA", data, window.upsellProducts);
+
+            window.upsellProducts = data;
+            resolve(data);
+            return;
+          });
         }
-        let data = [];
-
-        window.EcwidApp.getAppPublicConfig(function (value) {
-          const _data = JSON.parse(value);
-          // console.log("xxx ECWID PRE DATA", _data);
-          data = data = _data.upsellProducts;
-          console.log("xxx ECWID DB DATA", data, window.upsellProducts);
-
-          window.upsellProducts = data;
-          resolve(data);
-          return;
-        });
       });
     }
 
