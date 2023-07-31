@@ -36,6 +36,10 @@ function App() {
     }
 
     (async () => {
+      if (!window.upsellProducts) {
+        return;
+      }
+
       const upsell = await upsellProducts();
       window.upsellProducts = upsell;
       console.log("upsell prods: ", upsell);
