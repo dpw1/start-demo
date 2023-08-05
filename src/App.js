@@ -84,7 +84,7 @@ function App() {
                 <h1 className="Products-title settings-page__title spacing--mt2">
                   EZFY Cart Upsell {upsellProducts}
                 </h1>
-                <Search></Search>
+                {/* <Search></Search> */}
                 {upsellProducts ? (
                   <Products upsellProducts={upsellProducts}></Products>
                 ) : (
