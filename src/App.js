@@ -82,9 +82,9 @@ function App() {
             <div className="a-card a-card--compact">
               <div className="a-card__paddings">
                 <h1 className="Products-title settings-page__title spacing--mt2">
-                  EZFY Cart Upsell {upsellProducts}
+                  EZFY Cart Upsell
                 </h1>
-                {/* <Search></Search> */}
+                <Search></Search>
                 {upsellProducts ? (
                   <Products upsellProducts={upsellProducts}></Products>
                 ) : (
