@@ -13,6 +13,7 @@ export default function PopupCustom({ parentID }) {
   const updatePopupVisibleProducts = useStore(
     (state) => state.updatePopupVisibleProducts,
   );
+  const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
     console.log("updating popups visible", products);
@@ -21,6 +22,7 @@ export default function PopupCustom({ parentID }) {
     filtered.items = products.items.filter((e) => e.id !== parentID);
 
     updatePopupVisibleProducts(filtered);
+    setAllProducts(filtered);
 
     useStore.subscribe(
       (state) => state.popupVisibleProducts,
@@ -35,7 +37,7 @@ export default function PopupCustom({ parentID }) {
       <div className="a-card__paddings">
         <h3 className="PopupCustom-title">Products to upsell: </h3>
       </div>
-      {/* <PopupSearch allProducts={products}></PopupSearch> */}
+      <PopupSearch allProducts={allProducts}></PopupSearch>
       <div className="PopupCustom-products">
         {popupVisibleProducts &&
           popupVisibleProducts.hasOwnProperty(`items`) &&

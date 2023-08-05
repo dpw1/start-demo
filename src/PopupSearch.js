@@ -29,34 +29,29 @@ export default function PopupSearch({ allProducts }) {
   }, []);
 
   useEffect(() => {
-    console.log(allProducts);
+    console.log("popup search all produs", allProducts, search.length);
 
     if (search.length <= 0) {
       updatePopupVisibleProducts(allProducts);
+      return;
     }
 
-    if (
-      popupVisibleProducts &&
-      popupVisibleProducts.items &&
-      popupVisibleProducts.items.length >= 1
-    ) {
-      const found = popupVisibleProducts.items.filter((e) => {
-        if (e.name.toLowerCase().includes(search.toLowerCase())) {
-          return e;
-        }
+    const found = allProducts.items.filter((e) => {
+      if (e.name.toLowerCase().includes(search.toLowerCase())) {
+        return e;
+      }
 
-        return null;
-      });
+      return null;
+    });
 
-      console.log("Found this: ", found);
+    console.log("res: ", found);
 
-      const res = JSON.parse(JSON.stringify(popupVisibleProducts));
-      res.items = found;
+    const res = JSON.parse(JSON.stringify(popupVisibleProducts));
+    res.items = found;
 
-      console.log(res);
+    console.log(res);
 
-      updatePopupVisibleProducts(res);
-    }
+    updatePopupVisibleProducts(res);
   }, [search]);
 
   return (
