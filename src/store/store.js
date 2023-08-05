@@ -7,7 +7,14 @@ const useStore = create(
   subscribeWithSelector((set, get) => ({
     /* ## API PRODUCTS
     ==================================== */
+
+    /* ===============
+    All products on the store */
     products: [],
+
+    /* ===============
+    Products that are being searched/currently visible. */
+    visibleProducts: [],
 
     /* ===============
     Get store's products and add them to the store's 'products' variable */
@@ -24,6 +31,15 @@ const useStore = create(
 
       set({
         products,
+        visibleProducts: products,
+      });
+    },
+
+    /* ===============
+    Update store's products. Typically used for search */
+    updateVisibleProducts: async (products) => {
+      set({
+        visibleProducts: products,
       });
     },
 

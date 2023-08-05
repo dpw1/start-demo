@@ -7,10 +7,10 @@ import Products from "./Products";
 import Skeleton from "react-loading-skeleton";
 import { subscribeWithSelector } from "zustand/middleware";
 import { create } from "zustand";
+import Search from "./Search";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
-  const [products, setProducts] = useState([]);
   const [upsellProducts, setUpsellProducts] = useState(null);
 
   const getUpsellProducts = useStore((state) => state.upsellProducts);
@@ -78,11 +78,23 @@ function App() {
   return (
     <div className="EasyUpsellApp">
       <div className="EasyUpsellApp-container">
-        {upsellProducts ? (
-          <Products upsellProducts={upsellProducts}></Products>
-        ) : (
-          <ProductSkeleton></ProductSkeleton>
-        )}
+        <div className="named-area">
+          <div className="named-area__body">
+            <div className="a-card a-card--compact">
+              <div className="a-card__paddings">
+                <h1 className="Products-title settings-page__title spacing--mt2">
+                  EZFY Cart Upsell
+                </h1>
+                <Search></Search>
+                {upsellProducts ? (
+                  <Products upsellProducts={upsellProducts}></Products>
+                ) : (
+                  <ProductSkeleton></ProductSkeleton>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

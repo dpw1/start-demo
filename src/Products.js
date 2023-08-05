@@ -6,17 +6,8 @@ import ProductItem from "./ProductItem";
 import { useStore } from "./store/store";
 
 export default function Products({ upsellProducts }) {
-  // const upsellProductsSubscriber = useStore.subscribe(
-  //   (upsellProducts, previousupsellProducts) => {
-  //     console.log("Updated upsell products: ", upsellProducts);
-  //   },
-  //   (state) => state.upsellProducts,
-  // );
-
-  /* TODO - load database on load */
-
   const populateProducts = useStore((state) => state.populateProducts);
-  const products = useStore((state) => state.products);
+  const products = useStore((state) => state.visibleProducts);
 
   useEffect(() => {
     populateProducts();
@@ -26,28 +17,20 @@ export default function Products({ upsellProducts }) {
 
   return (
     <div className="Products  named-area">
-      <div className="named-area__body">
-        <div className="a-card a-card--compact">
-          <div className="a-card__paddings">
-            <h1 className="Products-title settings-page__title spacing--mt2">
-              Products!
-            </h1>
-
-            {products &&
-              products.hasOwnProperty("items") &&
-              upsellProducts &&
-              products.items.map((e) => (
-                <ProductItem
-                  key={e.id}
-                  product={e}
-                  upsell={
-                    upsellProducts.filter((x) => x.id === e.id).length >= 1
-                      ? upsellProducts.filter((x) => x.id === e.id)[0]
-                      : []
-                  }></ProductItem>
-              ))}
-          </div>
-        </div>
+      <div className="Products-items">
+        {products &&
+          products.hasOwnProperty("items") &&
+          upsellProducts &&
+          products.items.map((e) => (
+            <ProductItem
+              key={e.id}
+              product={e}
+              upsell={
+                upsellProducts.filter((x) => x.id === e.id).length >= 1
+                  ? upsellProducts.filter((x) => x.id === e.id)[0]
+                  : []
+              }></ProductItem>
+          ))}
       </div>
     </div>
   );
