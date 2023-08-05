@@ -4,6 +4,7 @@ import Skeleton from "react-loading-skeleton";
 import ProductPicker from "./ProductPicker";
 import ProductItem from "./ProductItem";
 import { useStore } from "./store/store";
+import { Placeholder } from "./Placeholder";
 
 export default function Products({ upsellProducts }) {
   const populateProducts = useStore((state) => state.populateProducts);
@@ -28,8 +29,7 @@ export default function Products({ upsellProducts }) {
   return (
     <div className="Products  named-area">
       <div className="Products-items">
-        {products &&
-          products.hasOwnProperty("items") &&
+        {products && products.hasOwnProperty("items") ? (
           products.items.map((e) => (
             <ProductItem
               key={e.id}
@@ -39,7 +39,10 @@ export default function Products({ upsellProducts }) {
                   ? upsell.filter((x) => x.id === e.id)[0]
                   : []
               }></ProductItem>
-          ))}
+          ))
+        ) : (
+          <Placeholder></Placeholder>
+        )}
       </div>
     </div>
   );

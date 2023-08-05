@@ -17,13 +17,10 @@ export default function PopupCustom({ parentID }) {
 
   useEffect(() => {
     console.log("updating popups visible", products);
-
     const filtered = JSON.parse(JSON.stringify(products));
     filtered.items = products.items.filter((e) => e.id !== parentID);
-
     updatePopupVisibleProducts(filtered);
     setAllProducts(filtered);
-
     useStore.subscribe(
       (state) => state.popupVisibleProducts,
       (e) => {

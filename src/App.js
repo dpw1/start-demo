@@ -4,10 +4,10 @@ import axios from "axios";
 import { useStore } from "./store/store";
 import { shallow } from "zustand/shallow";
 import Products from "./Products";
-import Skeleton from "react-loading-skeleton";
 import { subscribeWithSelector } from "zustand/middleware";
 import { create } from "zustand";
 import Search from "./Search";
+import { Placeholder } from "./Placeholder";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
@@ -45,34 +45,13 @@ function App() {
         }
       });
     }
-
     (async () => {
       const upsell = await getUpsellProducts();
       window.upsellProducts = upsell;
       setUpsellProducts(upsell);
-
       console.log(`There are ${upsell.length} products with upsells.`);
     })();
   }, [storeData]);
-
-  const ProductSkeleton = () => {
-    return (
-      <React.Fragment>
-        <div className="list-element list-element--compact list-element--has-hover list-element--inline-mode SkeletonLoader">
-          <Skeleton count={1} height={50} />
-          <Skeleton count={3} height={7} />
-        </div>
-        <div className="list-element list-element--compact list-element--has-hover list-element--inline-mode SkeletonLoader">
-          <Skeleton count={1} height={50} />
-          <Skeleton count={3} height={7} />
-        </div>
-        <div className="list-element list-element--compact list-element--has-hover list-element--inline-mode SkeletonLoader">
-          <Skeleton count={1} height={50} />
-          <Skeleton count={3} height={7} />
-        </div>
-      </React.Fragment>
-    );
-  };
 
   return (
     <div className="EasyUpsellApp">
@@ -82,13 +61,13 @@ function App() {
             <div className="a-card a-card--compact">
               <div className="a-card__paddings">
                 <h1 className="Products-title settings-page__title spacing--mt2">
-                  EZFY Cart Upsell
+                  EZFY Cart Upsell {JSON.stringify(upsellProducts)}
                 </h1>
                 <Search></Search>
                 {upsellProducts ? (
                   <Products upsellProducts={upsellProducts}></Products>
                 ) : (
-                  <ProductSkeleton></ProductSkeleton>
+                  <Placeholder></Placeholder>
                 )}
               </div>
             </div>
