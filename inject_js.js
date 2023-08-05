@@ -156,8 +156,6 @@ window.ezfyEasyUpsellApp = (function () {
       return;
     }
 
-    $ezfycart.setAttribute(`data-total-ezfy-products`, _products.length);
-
     let products = "";
 
     for (var each of _products) {
@@ -207,7 +205,7 @@ window.ezfyEasyUpsellApp = (function () {
     }
 
     const html = `
-    <div class="EzfyCart">
+    <div class="EzfyCart" data-ezfy-products-quantity="${products.length}">
     <p class="EzfyCart-title">Frequently Bought Together</p>
 	  <div class="EzfyCart-items">
       ${products}
