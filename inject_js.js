@@ -156,6 +156,8 @@ window.ezfyEasyUpsellApp = (function () {
       return;
     }
 
+    $ezfycart.setAttribute(`data-total-ezfy-products`, _products.length);
+
     let products = "";
 
     for (var each of _products) {
