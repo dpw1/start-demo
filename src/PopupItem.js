@@ -14,18 +14,13 @@ export default function PopupItem({ product, parentID }) {
 
   const addBundleProduct = (id) => {
     addUpsellProduct(currentProductID, id);
+
     setIsAddable(false);
   };
 
   useEffect(() => {
     (async (_) => {
       const upsell = await getUpsellProductById(parentID);
-
-      console.log(upsell, parentID);
-
-      /* TODO 
-      not working, probably parentID empty
-      */
 
       if (upsell.filter((e) => e.id === product.id).length >= 1) {
         setIsAddable(false);

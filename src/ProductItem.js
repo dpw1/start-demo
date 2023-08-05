@@ -68,9 +68,6 @@ export default function ProductItem(props) {
             data-upsell-products={
               upsell.hasOwnProperty("bundle") ? upsell.bundle.length : 0
             }>
-            {/* <span className="order__date-wrapper ProductItem-subtitle">
-              Upsell Products:
-            </span> */}
             <div className="list-element__data-row">
               {upsell &&
                 upsell.hasOwnProperty("bundle") &&

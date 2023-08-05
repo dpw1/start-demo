@@ -32,7 +32,6 @@ function App() {
     useStore.subscribe(
       (state) => state.upsellProducts,
       (e) => {
-        // setUpsellProducts(e);
         console.log("upsell products update from app!", e);
       },
     );
@@ -83,7 +82,7 @@ function App() {
             <div className="a-card a-card--compact">
               <div className="a-card__paddings">
                 <h1 className="Products-title settings-page__title spacing--mt2">
-                  EZFY Cart Upsell
+                  EZFY Cart Upsell {upsellProducts}
                 </h1>
                 <Search></Search>
                 {upsellProducts ? (

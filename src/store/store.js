@@ -106,18 +106,10 @@ const useStore = create(
 
       let parentProduct = _parentProduct.length >= 1 ? _parentProduct[0] : null;
 
-      console.log(
-        `Adding the bundle product ${bundleID} to ${
-          parentProduct ? `parent ${parentProduct.id}` : `new parent.`
-        }`,
-      );
-
       /* Adds parent to bundle to show it up on front-end later on */
       const parent = get().getProductById(parentID);
 
       const bundleProduct = get().getProductById(bundleID);
-
-      console.log("Bundle product: ", bundleProduct);
 
       /* If it's an already existing product, adds the extra bundle to it */
       if (parentProduct) {
@@ -132,8 +124,6 @@ const useStore = create(
         };
 
         bundle = [...existingBundles(), bundleProduct];
-
-        console.log("the Bundle : ", bundle);
 
         bundleProducts = bundleProducts.filter((e) => e.id !== parentID);
 

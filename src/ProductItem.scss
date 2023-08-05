@@ -41,7 +41,8 @@
   }
 
   [data-upsell-products="0"] {
-    display: none;
+    // display: none;
+    opacity: 0.5;
   }
 
   .ProductItem-delete {
