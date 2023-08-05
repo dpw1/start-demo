@@ -24,27 +24,6 @@ export default function ProductItem(props) {
     (state) => state.setCurrentPopupProduct,
   );
 
-  const populateUpsells = async (id) => {
-    // const bundle = await getUpsellProductById(product.id);
-    // console.log("my ID and  bundle: ", bundle);
-    // setUpsell(bundle);
-  };
-
-  const handlePopulateUpsell = async (subscription) => {
-    // let bundleProducts = upsellProducts;
-    // console.log("my bbbb", bundleProducts(), props);
-    // if (bundleProducts && bundleProducts.length <= 0) {
-    //   setUpsell([]);
-    //   return;
-    // }
-    // const current = bundleProducts.filter((e) => e.id === product.id)[0];
-    // if (!current) {
-    //   setUpsell([]);
-    //   return;
-    // }
-    // populateUpsells(product.id);
-  };
-
   useEffect(() => {
     // (async (_) => {
     //   // handlePopulateUpsell();
@@ -84,10 +63,14 @@ export default function ProductItem(props) {
               </div>
             </div>
           </div>
-          <div className="list-element__status-row">
-            <span className="order__date-wrapper ProductItem-subtitle">
+          <div
+            className="list-element__status-row"
+            data-upsell-products={
+              upsell.hasOwnProperty("bundle") ? upsell.bundle.length : 0
+            }>
+            {/* <span className="order__date-wrapper ProductItem-subtitle">
               Upsell Products:
-            </span>
+            </span> */}
             <div className="list-element__data-row">
               {upsell &&
                 upsell.hasOwnProperty("bundle") &&
@@ -103,11 +86,17 @@ export default function ProductItem(props) {
                     <div
                       key={`${_product.id}_${product.id}`}
                       className={`ProductItem-upsell ProductItem-upsell--${_product.id}-${product.id}`}>
-                      <span className="spacing--mr1">{_product.name}</span>
-
-                      {/* <button onClick={() => increaseValue()}>add</button> */}
+                      <img
+                        className="ProductItem-image"
+                        src={_product.thumbnailUrl}
+                        alt=""
+                      />
+                      <span className="ProductItem-title spacing--mr1">
+                        {_product.name}
+                      </span>
 
                       <button
+                        className="ProductItem-delete icolink"
                         onClick={(event) => {
                           event.preventDefault();
                           console.log(
@@ -125,19 +114,21 @@ export default function ProductItem(props) {
                           } catch (err) {
                             console.log("Removing error", err);
                           }
-                        }}
-                        className="icolink">
-                        <span className="svg-icon">
-                          <svg
-                            width="21"
-                            height="21"
-                            viewBox="0 0 21 21"
-                            xmlns="http://www.w3.org/2000/svg"
-                            focusable="false">
-                            <path d="M3.5 5h14a.5.5 0 000-1h-14a.5.5 0 000 1zM5 16a2 2 0 002 2h7a2 2 0 002-2V6h1v10a3 3 0 01-3 3H7a3 3 0 01-3-3V6h1v10zm0 0a2 2 0 002 2h7a2 2 0 002-2V6h1v10a3 3 0 01-3 3H7a3 3 0 01-3-3V6h1v10z"></path>
-                            <path d="M7.413 4.78L8.52 3.157c.28-.41.743-.656 1.24-.656h1.425a1.5 1.5 0 011.22.628l1.188 1.663.814-.58-1.188-1.663A2.5 2.5 0 0011.184 1.5H9.76c-.828 0-1.6.41-2.067 1.093L6.587 4.22l.826.56zM10 7.5v8a.5.5 0 001 0v-8a.5.5 0 00-1 0zm-3 0v8a.5.5 0 001 0v-8a.5.5 0 00-1 0zm6 0v8a.5.5 0 001 0v-8a.5.5 0 00-1 0z"></path>
-                          </svg>
-                        </span>
+                        }}>
+                        <svg
+                          width={18}
+                          height={18}
+                          viewBox="0 0 18 18"
+                          xmlns="http://www.w3.org/2000/svg"
+                          focusable="false">
+                          <path d="M7 0h4l1 2H6l1-2z" />
+                          <path
+                            fillRule="evenodd"
+                            clipRule="evenodd"
+                            d="M2 3c-.5523 0-1 .4477-1 1s.4477 1 1 1v11c0 1.1046.8954 2 2 2h10c1.1046 0 2-.8954 2-2V5c.5523 0 1-.4477 1-1s-.4477-1-1-1H2zm12 13V5H4v11h10z"
+                          />
+                          <path d="M6 7.5c0-.5523.4477-1 1-1s1 .4477 1 1v6c0 .5523-.4477 1-1 1s-1-.4477-1-1v-6zM10 7.5c0-.5523.4477-1 1-1s1 .4477 1 1v6c0 .5523-.4477 1-1 1s-1-.4477-1-1v-6z" />
+                        </svg>
                       </button>
                     </div>
                   );

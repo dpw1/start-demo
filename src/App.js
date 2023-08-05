@@ -32,7 +32,7 @@ function App() {
     useStore.subscribe(
       (state) => state.upsellProducts,
       (e) => {
-        setUpsellProducts(e);
+        // setUpsellProducts(e);
         console.log("upsell products update from app!", e);
       },
     );

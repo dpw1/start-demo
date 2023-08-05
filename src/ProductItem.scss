@@ -1,4 +1,7 @@
-.ProductItem {
+[id] .ProductItem {
+  $delete-button-size: 35px;
+  $delete-icon-size: $delete-button-size / 2;
+
   &-upsell {
     display: flex;
     align-items: center;
@@ -20,5 +23,51 @@
     // border-bottom: 1px solid #efefef;
     // display: block;
     // padding-bottom: 13px;
+  }
+
+  .ProductItem-image {
+    width: 27px;
+    height: auto;
+    margin-right: 10px;
+  }
+
+  .list-element__status-row {
+    font-size: 14px;
+    line-height: 22px;
+    margin-bottom: 4px;
+    margin-top: 17px;
+    border-top: 1px solid #8080801f;
+    padding-top: 6px;
+  }
+
+  [data-upsell-products="0"] {
+    display: none;
+  }
+
+  .ProductItem-delete {
+    margin-left: 10px;
+    border-radius: 50%;
+    padding: 5px;
+    width: $delete-button-size;
+    height: $delete-button-size;
+    transition: color 0.1s linear, box-shadow 0.1s linear,
+      background-color 0.1s linear;
+    &:hover {
+      background-color: #fff;
+      box-shadow: 0 3px 6px 0 rgba(0, 0, 0, 0.15);
+
+      svg {
+        color: #1b409d;
+      }
+    }
+    svg {
+      fill: #275ce0;
+      width: $delete-icon-size;
+      height: $delete-icon-size;
+    }
+  }
+
+  .ProductItem-title {
+    width: 100%;
   }
 }

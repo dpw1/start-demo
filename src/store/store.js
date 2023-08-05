@@ -17,6 +17,10 @@ const useStore = create(
     visibleProducts: [],
 
     /* ===============
+    Products that are being searched/currently visible within a popup */
+    popupVisibleProducts: [],
+
+    /* ===============
     Get store's products and add them to the store's 'products' variable */
     populateProducts: async () => {
       /* TODO = change this URL when on production */
@@ -40,6 +44,14 @@ const useStore = create(
     updateVisibleProducts: async (products) => {
       set({
         visibleProducts: products,
+      });
+    },
+
+    /* ===============
+    Update popup visible products. Typically used for search */
+    updatePopupVisibleProducts: async (products) => {
+      set({
+        popupVisibleProducts: products,
       });
     },
 
