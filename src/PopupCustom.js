@@ -35,7 +35,7 @@ export default function PopupCustom({ parentID }) {
   return (
     <div className="PopupCustom">
       <div className="a-card__paddings">
-        <h3 className="PopupCustom-title">Products to upsell: </h3>
+        <h3 className="PopupCustom-title">Products to upsell : </h3>
       </div>
       <PopupSearch allProducts={allProducts}></PopupSearch>
       <div className="PopupCustom-products">
