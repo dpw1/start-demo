@@ -17,6 +17,7 @@ function App() {
   const [initiated, setInitiated] = useState(false);
 
   const getUpsellProducts = useStore((state) => state.upsellProducts);
+  const setSettings = useStore((state) => state.setSettings);
 
   function initDatabaseOnFirstInstall(value) {
     value = JSON.parse(value);
@@ -29,7 +30,7 @@ function App() {
       : [];
     initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
 
-    console.log("Mustxx create new database? ", mustInit, initial);
+    console.log("!Must create new database? ", mustInit, initial);
     console.log("vaue", value);
 
     if (mustInit) {
@@ -37,6 +38,9 @@ function App() {
         console.log("Fresh database setup!", e);
       });
     }
+
+    setUpsellProducts(initial.upsellProducts);
+    setSettings(initial.settings);
 
     setInitiated(true);
   }
@@ -73,18 +77,15 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      if (!initiated) {
-        return;
-      }
-
-      const upsell = await getUpsellProducts();
-
-      console.log("upsell prods: ", upsell);
-      window.upsellProducts = upsell;
-      setUpsellProducts(upsell);
-      console.log(
-        `There are ${upsell && upsell.length} products with upsells.`,
-      );
+      // if (!initiated) {
+      //   return;
+      // }
+      // const upsell = await getUpsellProducts();
+      // console.log("upsell prods: ", upsell);
+      // window.upsellProducts = upsell;
+      // console.log(
+      //   `There are ${upsell && upsell.length} products with upsells.`,
+      // );
     })();
   }, [initiated]);
 
