@@ -81,7 +81,7 @@ function App() {
             <div className="a-card a-card--compact">
               <div className="a-card__paddings">
                 <h1 className="Products-title settings-page__title spacing--mt2">
-                  EZFY Cart Upsell {JSON.stringify(upsellProducts)}
+                  EZFY Cart Upsell
                 </h1>
                 <Settings></Settings>
                 <Search></Search>

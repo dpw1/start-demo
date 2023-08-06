@@ -257,6 +257,7 @@ const useStore = create(
       if (window.EcwidApp) {
         try {
           const payload = { settings, upsellProducts };
+
           window.EcwidApp.setAppPublicConfig(
             JSON.stringify(payload),
             function (e) {
