@@ -29,7 +29,7 @@ function App() {
       : [];
     initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
 
-    console.log("Must create new database? ", mustInit, initial);
+    console.log("Mustxx create new database? ", mustInit, initial);
     console.log("vaue", value);
 
     if (mustInit) {
