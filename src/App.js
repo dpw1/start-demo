@@ -66,7 +66,7 @@ function App() {
   useEffect(() => {
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
       window.EcwidApp.getAppPublicConfig(function (value) {
-        initDatabaseOnFirstInstall(value);
+        initDatabaseOnFirstInstall(JSON.parse(value));
       });
     }
     (async () => {
