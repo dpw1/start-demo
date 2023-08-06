@@ -20,10 +20,10 @@ export default function Settings() {
     setIsOpen(false);
   }
 
-  function handleIsEnabled() {}
-
   useEffect(() => {
     console.log("my settings", settings);
+
+    setIsEnabled(settings.isEnabled);
   }, [settings]);
 
   return (
