@@ -185,6 +185,8 @@ window.ezfyEasyUpsellApp = (function () {
         url = `https://ezfycode.com/shop/${_url.replaceAll("--", "-")}`;
       }
 
+      const isPopup = parseInt(each.totalOptions) <= 0 ? false : true;
+
       const html = `
       <div  data-total-options="${each.totalOptions}" data-id="${
         each.id
@@ -211,8 +213,8 @@ window.ezfyEasyUpsellApp = (function () {
 
       </a>
 
-      <button class="EzfyCart-atc">${
-        parseInt(each.totalOptions) <= 0 ? "Add to Cart" : "Pick Options"
+      <button data-is-popup="${isPopup}" class="EzfyCart-atc">${
+        isPopup ? "Pick Options" : "Add to Cart"
       }</button>
       </div>
       `;
