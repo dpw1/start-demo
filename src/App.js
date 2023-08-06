@@ -14,6 +14,7 @@ import { defaultSettings } from "./utils";
 function App() {
   const [storeData, setStoreData] = useState(null);
   const [upsellProducts, setUpsellProducts] = useState(null);
+  const [initiated, setInitiated] = useState(false);
 
   const getUpsellProducts = useStore((state) => state.upsellProducts);
 
@@ -33,11 +34,11 @@ function App() {
       mustInit = true;
     }
 
-    console.log("Must create new database: ", initial, value);
+    console.log("Must create new database? ", mustInit, initial, value);
 
     if (mustInit) {
-      window.EcwidApp.setAppPublicConfig(JSON.stringify(initial), function () {
-        console.log("Fresh database setup!");
+      window.EcwidApp.setAppPublicConfig(JSON.stringify(initial), function (e) {
+        console.log("Fresh database setup!", e);
       });
     }
   }
@@ -68,13 +69,20 @@ function App() {
         initDatabaseOnFirstInstall(value);
       });
     }
+  }, [storeData]);
+
+  useEffect(() => {
     (async () => {
+      if (!initiated) {
+        return;
+      }
+
       const upsell = await getUpsellProducts();
       window.upsellProducts = upsell;
       setUpsellProducts(upsell);
       console.log(`There are ${upsell.length} products with upsells.`);
     })();
-  }, [storeData]);
+  }, [initiated]);
 
   return (
     <div className="EasyUpsellApp">
