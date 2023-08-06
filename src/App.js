@@ -17,13 +17,29 @@ function App() {
 
   const getUpsellProducts = useStore((state) => state.upsellProducts);
 
-  function initDatabaseOnFirstInstall() {
-    window.EcwidApp.setAppPublicConfig(
-      JSON.stringify({ upsellProducts: [], settings: defaultSettings }),
-      function () {
-        console.log("Fresh database setup!");
-      },
-    );
+  function initDatabaseOnFirstInstall(value) {
+    let mustInit = false;
+
+    let initial = {};
+
+    if (!value.hasOwnProperty("upsellProducts")) {
+      initial.upsellProducts = [];
+      mustInit = true;
+    }
+
+    if (!value.hasOwnProperty("settings")) {
+      initial.settings = defaultSettings;
+      mustInit = true;
+    }
+
+    if (mustInit) {
+      window.EcwidApp.setAppPublicConfig(
+        JSON.stringify({ upsellProducts: [], settings: defaultSettings }),
+        function () {
+          console.log("Fresh database setup!");
+        },
+      );
+    }
   }
 
   useEffect(() => {
@@ -49,9 +65,7 @@ function App() {
   useEffect(() => {
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
       window.EcwidApp.getAppPublicConfig(function (value) {
-        if (!value) {
-          initDatabaseOnFirstInstall();
-        }
+        initDatabaseOnFirstInstall(value);
       });
     }
     (async () => {
