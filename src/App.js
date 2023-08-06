@@ -59,9 +59,7 @@ function App() {
         console.log("settings update from app!", e);
       },
     );
-  }, []);
 
-  useEffect(() => {
     if (window.EcwidApp && window.EcwidApp.getPayload() && !initiated) {
       window.EcwidApp.getAppPublicConfig(function (value) {
         console.log("has init?", initiated);
@@ -69,7 +67,9 @@ function App() {
         initDatabaseOnFirstInstall(value);
       });
     }
-  }, [storeData]);
+  }, []);
+
+  useEffect(() => {}, [storeData]);
 
   useEffect(() => {
     (async () => {
