@@ -1,12 +1,16 @@
 import create from "zustand";
 import axios from "axios";
-import { sanitizeBundleProducts } from "../utils";
+import { defaultSettings, sanitizeBundleProducts } from "../utils";
 import { subscribeWithSelector } from "zustand/middleware";
 
 const useStore = create(
   subscribeWithSelector((set, get) => ({
     /* ## API PRODUCTS
     ==================================== */
+
+    /* ===============
+    App settings */
+    settings: defaultSettings,
 
     /* ===============
     All products on the store */
@@ -231,6 +235,31 @@ const useStore = create(
 
       set({
         upsellProducts: updated,
+      });
+    },
+
+    setSettings: async (settings) => {
+      if (!settings) {
+        throw new Error("no settings object");
+      }
+
+      const upsellProducts = get().upsellProducts;
+
+      if (window.EcwidApp) {
+        try {
+          window.EcwidApp.setAppPublicConfig(
+            JSON.stringify({ settings, upsellProducts }),
+            function (e) {
+              console.log("Public config saved!", e);
+            },
+          );
+
+          console.log("Saved settings in Database");
+        } catch (err) {}
+      }
+
+      set({
+        settings,
       });
     },
 

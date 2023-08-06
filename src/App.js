@@ -8,6 +8,7 @@ import { subscribeWithSelector } from "zustand/middleware";
 import { create } from "zustand";
 import Search from "./Search";
 import { Placeholder } from "./Placeholder";
+import Settings from "./Settings";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
@@ -33,6 +34,13 @@ function App() {
       (state) => state.upsellProducts,
       (e) => {
         console.log("upsell products update from app!", e);
+      },
+    );
+
+    useStore.subscribe(
+      (state) => state.settings,
+      (e) => {
+        console.log("settings update from app!", e);
       },
     );
   }, []);
@@ -63,6 +71,7 @@ function App() {
                 <h1 className="Products-title settings-page__title spacing--mt2">
                   EZFY Cart Upsell {JSON.stringify(upsellProducts)}
                 </h1>
+                <Settings></Settings>
                 <Search></Search>
                 {upsellProducts ? (
                   <Products upsellProducts={upsellProducts}></Products>

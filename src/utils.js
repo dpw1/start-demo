@@ -1,3 +1,11 @@
+export const defaultSettings = {
+  isEnabled: false,
+};
+
+export function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 /*
 Cleans the bundle products. Requires an object like this:
 
@@ -17,11 +25,6 @@ Cleans the bundle products. Requires an object like this:
     }
 ]
 */
-
-export function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 export function sanitizeBundleProducts(productWithBundles) {
   console.log("within sanitze: ", productWithBundles);
   var result = [];

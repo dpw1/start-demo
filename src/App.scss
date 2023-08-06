@@ -1,4 +1,13 @@
+html,
+body {
+  background: #eceef0;
+}
+
 .EasyUpsellApp {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: block;
+  padding: 0 20px;
   &-container {
     max-width: 1200px;
     width: 100%;
@@ -48,6 +57,8 @@
     max-width: 100%;
   }
 
+  /* General styles */
+
   button.icolink {
     border: none;
     margin: 0;
@@ -61,6 +72,85 @@
     -webkit-font-smoothing: inherit;
     -moz-osx-font-smoothing: inherit;
     -webkit-appearance: none;
+    cursor: pointer;
+  }
+
+  label.checkbox {
+    display: inline-block;
+    position: relative;
+    height: 30px;
+    text-align: justify;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+  }
+
+  label.checkbox > div {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    width: 50px;
+    height: 30px;
+    padding: 2px;
+    border-radius: 15px;
+    background-color: #808f9d;
+    transition: background-color 0.2s ease-out 0s;
+  }
+
+  label.checkbox > div::before,
+  label.checkbox > div::after {
+    content: attr(data-off);
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: -20%;
+    overflow: hidden;
+    opacity: 1;
+    width: 140%;
+    margin-left: 0;
+    padding-top: 25%;
+    color: #607385;
+    font-size: 11px;
+    line-height: 1em;
+    text-align: center;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+    transition: margin 0.2s ease-out 0s, opacity 0.2s ease-out 0s,
+      color 0.2s ease-out 0s;
+    cursor: pointer;
+    font-weight: var(--text-big-font-weight, 600);
+  }
+
+  label.checkbox > div::after {
+    content: attr(data-on);
+    opacity: 0;
+    margin-left: -40%;
+    color: #0cac42;
+  }
+
+  label.checkbox > div > div {
+    display: block;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: margin 0.2s ease-out 0s;
+  }
+
+  label.checkbox input {
+    display: block;
+    position: relative;
+    z-index: 2;
+    box-sizing: border-box;
+    opacity: 0;
+    width: 50px;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
     cursor: pointer;
   }
 }

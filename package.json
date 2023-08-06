@@ -13,6 +13,7 @@
     "react-checkmark": "^1.4.0",
     "react-dom": "^16.8.6",
     "react-loading-skeleton": "^2.2.0",
+    "react-modal": "^3.16.1",
     "react-scripts": "4.0.3",
     "reactjs-popup": "^2.0.4",
     "web-vitals": "^1.0.1",

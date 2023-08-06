@@ -1,0 +1,16 @@
+.Settings {
+  .ReactModal__Overlay {
+    background-color: rgba(255, 255, 255, 0.9) !important;
+    z-index: 3 !important;
+  }
+  .ReactModal__Content {
+    position: fixed;
+    left: 50% !important;
+    top: 50% !important;
+    right: unset !important;
+    bottom: unset !important;
+    transform: translate(-50%, -50%);
+    max-width: 1200px;
+    width: 90%;
+  }
+}
