@@ -9,6 +9,7 @@ import { create } from "zustand";
 import Search from "./Search";
 import { Placeholder } from "./Placeholder";
 import Settings from "./Settings";
+import defaultSettings from "./utils";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
@@ -18,7 +19,7 @@ function App() {
 
   function initDatabaseOnFirstInstall() {
     window.EcwidApp.setAppPublicConfig(
-      JSON.stringify({ upsellProducts: [] }),
+      JSON.stringify({ upsellProducts: [], settings: defaultSettings }),
       function () {
         console.log("New upasell product set up!");
       },
