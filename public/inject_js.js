@@ -278,7 +278,7 @@ window.ezfyEasyUpsellApp = (function () {
     if (!$popup) {
       const html = `<div class="EzfyPopup">
       <div class="EzfyPopup-container">
-      
+      <p>hello</p>
     </div>
     </div>`;
 
