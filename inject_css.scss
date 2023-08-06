@@ -226,4 +226,26 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
       height: 90vh;
     }
   }
+
+  .EzfyPopup-close {
+    background-color: rgb(253, 251, 247);
+    border: 0.1rem solid rgba(46, 42, 57, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 1.2rem;
+    z-index: 5;
+    width: 4rem;
+    position: fixed;
+    top: 1.5rem;
+    right: 1.5rem;
+
+    svg {
+      height: auto;
+      margin: 0;
+      width: 2.2rem;
+    }
+  }
 }
