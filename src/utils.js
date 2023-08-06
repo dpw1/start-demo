@@ -36,6 +36,8 @@ export function sanitizeBundleProducts(productWithBundles) {
     var bundle = [];
 
     for (var upsell of each.bundle) {
+      console.log("my upsell", upsell);
+
       bundle.push({
         id: upsell.id,
         name: upsell.name,
