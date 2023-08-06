@@ -184,9 +184,9 @@ window.ezfyEasyUpsellApp = (function () {
       }
 
       const html = `
-      <div  data-id="${each.id}" class="EzfyCart-item EzfyCart-item--${
+      <div  data-total-options="${each.totalOptions}" data-id="${
         each.id
-      }">
+      }" class="EzfyCart-item EzfyCart-item--${each.id}">
       <a target="_blank" href="${url}">
 			<img class="EzfyCart-image" src="${each.thumbnailUrl}" alt="${each.name}">
 			<div class="EzfyCart-item-title">${each.name}</div>
