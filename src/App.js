@@ -76,9 +76,13 @@ function App() {
       }
 
       const upsell = await getUpsellProducts();
+
+      console.log("upsell prods: ", upsell);
       window.upsellProducts = upsell;
       setUpsellProducts(upsell);
-      console.log(`There are ${upsell.length} products with upsells.`);
+      console.log(
+        `There are ${upsell && upsell.length} products with upsells.`,
+      );
     })();
   }, [initiated]);
 

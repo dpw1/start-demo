@@ -84,6 +84,13 @@ const useStore = create(
               const _data = JSON.parse(value);
               // console.log("xxx ECWID PRE DATA", _data);
               data = data = _data.upsellProducts;
+
+              if (!data) {
+                window.upsellProducts = [];
+                resolve([]);
+                return;
+              }
+
               console.log(
                 "xxx 33ECWID DB DATA",
                 _data,
