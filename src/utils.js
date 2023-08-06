@@ -29,6 +29,19 @@ Requires an object like this:
 */
 export function sanitizeBundleProducts(productWithBundles) {
   console.log("within sanitze: ", productWithBundles);
+
+  let totalOptions = (upsell) => {
+    if (upsell.hasOwnProperty("options")) {
+      return upsell.options.length;
+    }
+
+    if (upsell.hasOwnProperty("totalOptions")) {
+      return upsell.totalOptions;
+    }
+
+    return 0;
+  };
+
   var result = [];
 
   for (var each of productWithBundles) {
@@ -46,7 +59,7 @@ export function sanitizeBundleProducts(productWithBundles) {
         compareToPriceDiscountFormatted: upsell.compareToPriceDiscountFormatted,
         compareToPriceFormatted: upsell.compareToPriceFormatted,
         url: upsell.url,
-        totalOptions: upsell.options.length,
+        totalOptions: totalOptions(upsell),
       });
     }
 
