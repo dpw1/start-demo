@@ -170,6 +170,8 @@ window.ezfyEasyUpsellApp = (function () {
 
     let products = "";
 
+    console.log("all products", products);
+
     for (var each of _products) {
       let url = each.url;
 

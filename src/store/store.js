@@ -167,8 +167,10 @@ const useStore = create(
 
       /* Save into Ecwid's database */
       if (window.EcwidApp) {
+        const settings = await get().settings;
+
         try {
-          const payload = JSON.stringify({ upsellProducts: updated });
+          const payload = JSON.stringify({ settings, upsellProducts: updated });
 
           console.log("payload: ", { upsellProducts: updated });
 
@@ -234,9 +236,11 @@ const useStore = create(
       console.log("Updated after delete: ", updated);
 
       if (window.EcwidApp) {
+        const settings = await get().settings;
+
         try {
           window.EcwidApp.setAppPublicConfig(
-            JSON.stringify({ upsellProducts: updated }),
+            JSON.stringify({ settings, upsellProducts: updated }),
             function () {
               console.log("Public config saved!");
             },
