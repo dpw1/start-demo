@@ -32,7 +32,7 @@ function App() {
       mustInit = true;
     }
 
-    console.log("Must create new database: ", initial);
+    console.log("Must create new database: ", initial, value);
 
     if (mustInit) {
       window.EcwidApp.setAppPublicConfig(JSON.stringify(initial), function () {
