@@ -243,7 +243,10 @@ const useStore = create(
         throw new Error("no settings object");
       }
 
-      const upsellProducts = await get().upsellProducts;
+      const upsellProducts =
+        typeof get().upsellProducts === "function"
+          ? await get().upsellProducts()
+          : await get().upsellProducts;
 
       if (window.EcwidApp) {
         try {
