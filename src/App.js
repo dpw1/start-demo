@@ -23,8 +23,6 @@ function App() {
 
     let initial = {};
 
-    debugger;
-
     if (!value.hasOwnProperty("upsellProducts")) {
       initial.upsellProducts = [];
       mustInit = true;
@@ -67,7 +65,7 @@ function App() {
   useEffect(() => {
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
       window.EcwidApp.getAppPublicConfig(function (value) {
-        initDatabaseOnFirstInstall();
+        initDatabaseOnFirstInstall(value);
       });
     }
     (async () => {
