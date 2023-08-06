@@ -62,8 +62,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (window.EcwidApp && window.EcwidApp.getPayload()) {
+    if (window.EcwidApp && window.EcwidApp.getPayload() && !initiated) {
       window.EcwidApp.getAppPublicConfig(function (value) {
+        console.log("has init?", initiated);
+
         initDatabaseOnFirstInstall(value);
       });
     }
