@@ -18,6 +18,7 @@ function App() {
   const getUpsellProducts = useStore((state) => state.upsellProducts);
 
   function initDatabaseOnFirstInstall(value) {
+    value = JSON.parse(value);
     let mustInit = false;
 
     let initial = {};
@@ -66,7 +67,7 @@ function App() {
   useEffect(() => {
     if (window.EcwidApp && window.EcwidApp.getPayload()) {
       window.EcwidApp.getAppPublicConfig(function (value) {
-        initDatabaseOnFirstInstall(JSON.parse(value));
+        initDatabaseOnFirstInstall();
       });
     }
     (async () => {
