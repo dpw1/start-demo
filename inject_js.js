@@ -214,7 +214,7 @@ window.ezfyEasyUpsellApp = (function () {
       </a>
 
       <button data-is-popup="${isPopup}" class="EzfyCart-atc">${
-        isPopup ? "Pick Options" : "Add to Cart"
+        isPopup ? "Choose Options" : "Add to Cart"
       }</button>
       </div>
       `;
@@ -272,10 +272,35 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
+  function injectPopupHTML() {
+    const $popup = document.querySelector(`.EzfyPopup`);
+
+    if (!$popup) {
+      const html = `<div class="EzfyPopup">
+      <div class="EzfyPopup-container">
+      
+    </div>
+    </div>`;
+
+      const $body = document.querySelector(`body`);
+
+      $body.insertAdjacentHTML("beforeend", html);
+    }
+  }
+
+  async function handlePopup() {}
+
   async function handleAddToCart() {
     const $atc = await _waitForElement(`.EzfyCart-atc`);
 
     if (!$atc) {
+      return;
+    }
+
+    const isPopup = $atc.getAttribute(`data-is-popup`).toLowerCase() === "true";
+
+    if (isPopup) {
+      handlePopup();
       return;
     }
 
@@ -317,6 +342,7 @@ window.ezfyEasyUpsellApp = (function () {
   async function start() {
     const products = await getUpsellProducts();
     injectCartUpsell(products);
+    injectPopupHTML();
     handleAddToCart();
   }
 
