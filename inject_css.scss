@@ -201,15 +201,23 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     height: 16px;
     position: relative;
     top: 3px;
-  }
 
-  .EzfyCart-item--loading .EzfyCart-atc-text {
     display: none;
   }
 
-  .EzfyCart-item--loading .EzfyCart-atc {
-    display: flex;
-    justify-content: center;
+  .EzfyCart-item--loading {
+    .EzfyCart-atc-text {
+      display: none;
+    }
+
+    .EzfyCart-atc {
+      display: flex;
+      justify-content: center;
+    }
+
+    .EzfyCart-atc-loading {
+      display: block;
+    }
   }
 
   .EzfyCart-atc-icon circle {
