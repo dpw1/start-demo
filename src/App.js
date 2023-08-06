@@ -33,12 +33,9 @@ function App() {
     }
 
     if (mustInit) {
-      window.EcwidApp.setAppPublicConfig(
-        JSON.stringify({ upsellProducts: [], settings: defaultSettings }),
-        function () {
-          console.log("Fresh database setup!");
-        },
-      );
+      window.EcwidApp.setAppPublicConfig(JSON.stringify(initial), function () {
+        console.log("Fresh database setup!");
+      });
     }
   }
 
