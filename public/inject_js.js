@@ -119,6 +119,18 @@ window.ezfyEasyUpsellApp = (function () {
     });
   }
 
+  async function getProductData(id) {
+    var url = `https://app.ecwid.com/api/v3/${window.Ecwid.getOwnerId()}/products/${id}?token=${
+      window.Ecwid.publicToken
+    }`;
+    try {
+      var { data: product } = await axios.get(url);
+      console.log(product);
+    } catch (err) {
+      console.log("err", err);
+    }
+  }
+
   async function awaitEcwid() {
     return new Promise(async (resolve, reject) => {
       if (window.hasOwnProperty("ecwidIsLoaded")) {

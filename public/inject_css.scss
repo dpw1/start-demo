@@ -71,22 +71,18 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   }
 
   .EzfyCart-item > * > * {
-    width: 135px !important;
+    width: $width !important;
   }
-
-  // .EzfyCart-item,
-  // .EzfyCart-item > * {
-  // }
 
   .EzfyCart-item img {
     display: block;
 
-    width: $width !important;
+    max-width: $width !important;
+    width: 100% !important;
   }
 
-  .EzfyCart-item:not(:first-of-type) {
-    padding: 0 10px;
-    min-width: 150px;
+  .EzfyCart-item + .EzfyCart-item {
+    margin-left: 10px !important;
   }
 
   .EzfyCart-items {

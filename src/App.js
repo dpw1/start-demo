@@ -64,6 +64,16 @@ function App() {
       },
     );
 
+    if (!window.EcwidApp.getPayload()) {
+      /* Used for dev */
+      initDatabaseOnFirstInstall(
+        JSON.stringify({
+          upsellProducts: [],
+          settings: defaultSettings,
+        }),
+      );
+    }
+
     if (window.EcwidApp && window.EcwidApp.getPayload() && !initiated) {
       window.EcwidApp.getAppPublicConfig(function (value) {
         console.log("has init?", initiated);
@@ -73,22 +83,6 @@ function App() {
     }
   }, []);
 
-  useEffect(() => {}, [storeData]);
-
-  useEffect(() => {
-    (async () => {
-      // if (!initiated) {
-      //   return;
-      // }
-      // const upsell = await getUpsellProducts();
-      // console.log("upsell prods: ", upsell);
-      // window.upsellProducts = upsell;
-      // console.log(
-      //   `There are ${upsell && upsell.length} products with upsells.`,
-      // );
-    })();
-  }, [initiated]);
-
   return (
     <div className="EasyUpsellApp">
       <div className="EasyUpsellApp-container">
@@ -97,7 +91,7 @@ function App() {
             <div className="a-card a-card--compact">
               <div className="a-card__paddings">
                 <h1 className="Products-title settings-page__title spacing--mt2">
-                  EZFY Cart Upsell
+                  EZFY Cart Upsell!
                 </h1>
                 <Settings></Settings>
                 <Search></Search>
