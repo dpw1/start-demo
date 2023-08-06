@@ -72,6 +72,7 @@ const useStore = create(
       if (window.EcwidApp && window.EcwidApp.getPayload()) {
         return new Promise(async (resolve, reject) => {
           console.log("before: ", window.upsellProducts);
+
           if (window.hasOwnProperty("upsellProducts")) {
             resolve(window.upsellProducts);
             return;
@@ -83,7 +84,12 @@ const useStore = create(
               const _data = JSON.parse(value);
               // console.log("xxx ECWID PRE DATA", _data);
               data = data = _data.upsellProducts;
-              console.log("xxx ECWID DB DATA", data, window.upsellProducts);
+              console.log(
+                "xxx ECWID DB DATA",
+                _data,
+                data,
+                window.upsellProducts,
+              );
 
               window.upsellProducts = data;
               resolve(data);
