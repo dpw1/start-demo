@@ -41,6 +41,8 @@ function App() {
         console.log("Fresh database setup!", e);
       });
     }
+
+    setInitiated(true);
   }
 
   useEffect(() => {
