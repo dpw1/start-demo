@@ -7,7 +7,9 @@ export function sleep(ms) {
 }
 
 /*
-Cleans the bundle products. Requires an object like this:
+Cleans the bundle products removing all unnecessary properties. 
+
+Requires an object like this:
 
 [
     {
@@ -42,6 +44,7 @@ export function sanitizeBundleProducts(productWithBundles) {
         compareToPriceDiscountFormatted: upsell.compareToPriceDiscountFormatted,
         compareToPriceFormatted: upsell.compareToPriceFormatted,
         url: upsell.url,
+        totalOptions: upsell.options.length,
       });
     }
 
