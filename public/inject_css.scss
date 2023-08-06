@@ -70,9 +70,13 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     min-width: $width !important;
   }
 
-  .EzfyCart-item,
-  .EzfyCart-item > * {
+  .EzfyCart-item > * > * {
+    width: 135px !important;
   }
+
+  // .EzfyCart-item,
+  // .EzfyCart-item > * {
+  // }
 
   .EzfyCart-item img {
     display: block;
