@@ -22,6 +22,8 @@ function App() {
 
     let initial = {};
 
+    debugger;
+
     if (!value.hasOwnProperty("upsellProducts")) {
       initial.upsellProducts = [];
       mustInit = true;
