@@ -1,6 +1,7 @@
 window.ezfyEasyUpsellApp = window.ezfyEasyUpsellApp || {};
 
 window.ezfyEasyUpsellApp = (function () {
+  window.ezfyUpsellData = null;
   const USE_CUSTOM_URLS =
     window.location.hostname === "ezfycode.com" ? true : false;
 
@@ -32,20 +33,27 @@ window.ezfyEasyUpsellApp = (function () {
     }
   }
 
-  function _addStyle(styleString) {
-    const style = document.createElement("style");
-    style.textContent = styleString;
-    document.head.append(style);
-  }
-
-  async function getUpsellProducts() {
+  async function loadData() {
     return new Promise(async (resolve, reject) => {
       const data = JSON.parse(
         window.Ecwid.getAppPublicConfig("easy-upsell-dev"),
       );
 
+      if (window.ezfyUpsellData !== null) {
+        resolve(window.ezfyUpsellData);
+        return;
+      }
+
+      window.ezfyUpsellData = data;
+
       console.log("my data:", data);
 
+      resolve(data);
+    });
+  }
+
+  async function getUpsellProducts() {
+    return new Promise(async (resolve, reject) => {
       await awaitEcwid();
 
       Ecwid.Cart.get(async (cart) => {
@@ -304,6 +312,7 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   async function start() {
+    await loadData();
     const products = await getUpsellProducts();
     injectCartUpsell(products);
     injectPopupHTML();
@@ -363,4 +372,4 @@ window.ezfyEasyUpsellApp = (function () {
   };
 })();
 
-window.ezfyEasyUpsellApp.init();
+// window.ezfyEasyUpsellApp.init();
