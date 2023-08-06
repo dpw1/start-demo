@@ -10,6 +10,7 @@ export default function Settings() {
   const [isEnabled, setIsEnabled] = useState(false);
 
   const setSettings = useStore((state) => state.setSettings);
+  const settings = useStore((state) => state.settings);
 
   function openModal() {
     setIsOpen(true);
@@ -21,7 +22,9 @@ export default function Settings() {
 
   function handleIsEnabled() {}
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    console.log("my settings", settings);
+  }, [settings]);
 
   return (
     <div>
