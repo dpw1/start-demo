@@ -24,17 +24,10 @@ function App() {
 
     let initial = {};
 
-    console.log(value.hasOwnProperty("upsellProducts"));
-
-    if (!value.hasOwnProperty("upsellProducts")) {
-      initial.upsellProducts = [];
-      mustInit = true;
-    }
-
-    if (!value.hasOwnProperty("settings")) {
-      initial.settings = defaultSettings;
-      mustInit = true;
-    }
+    initial.upsellProducts = value.hasOwnProperty("upsellProducts")
+      ? value.upsellProducts
+      : [];
+    initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
 
     console.log("Must create new database? ", mustInit, initial);
     console.log("vaue", value);
