@@ -211,7 +211,9 @@ window.ezfyEasyUpsellApp = (function () {
 
       </a>
 
-      <button class="EzfyCart-atc">Add to Cart</button>
+      <button class="EzfyCart-atc">${
+        each.totalOptions !== 0 ? "Pick Options" : "Add to Cart"
+      }</button>
       </div>
       `;
 
