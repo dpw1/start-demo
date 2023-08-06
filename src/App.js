@@ -24,6 +24,8 @@ function App() {
 
     let initial = {};
 
+    console.log(value.hasOwnProperty("upsellProducts"));
+
     if (!value.hasOwnProperty("upsellProducts")) {
       initial.upsellProducts = [];
       mustInit = true;
@@ -34,7 +36,8 @@ function App() {
       mustInit = true;
     }
 
-    console.log("Must create new database? ", mustInit, initial, value);
+    console.log("Must create new database? ", mustInit, initial);
+    console.log("vaue", value);
 
     if (mustInit) {
       window.EcwidApp.setAppPublicConfig(JSON.stringify(initial), function (e) {
