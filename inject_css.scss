@@ -70,7 +70,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     min-width: $width !important;
   }
 
-  .EzfyCart-item > * > * {
+  .EzfyCart-item > * > *:not([class^="EzfyCart-atc-"]) {
     width: $width !important;
   }
 
@@ -247,5 +247,9 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
       margin: 0;
       width: 2.2rem;
     }
+  }
+
+  .EzfyPopup--invisible {
+    display: none;
   }
 }
