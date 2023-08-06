@@ -195,9 +195,34 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     opacity: 0.8;
     margin-left: 10px;
   }
+
+  .EzfyCart-atc-loading {
+    width: 16px;
+    height: 16px;
+    position: relative;
+    top: 3px;
+  }
+
+  .EzfyCart-item--loading .EzfyCart-atc-text {
+    display: none;
+  }
+
+  .EzfyCart-item--loading .EzfyCart-atc {
+    display: flex;
+    justify-content: center;
+  }
+
+  .EzfyCart-atc-icon circle {
+    stroke-dasharray: 280;
+    stroke-dashoffset: 0;
+    transform-origin: center;
+    stroke: rgb(46, 42, 57);
+    animation: dash 1.4s ease-in-out infinite;
+  }
 }
 
-/* Popup */
+/* Popup 
+============================ */
 
 .EzfyPopup {
   position: fixed;
@@ -251,5 +276,37 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
   .EzfyPopup--invisible {
     display: none;
+  }
+}
+
+/* Animations 
+============================ */
+
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+@media screen and (forced-colors: active) {
+  .EzfyCart-atc-icon circle {
+    stroke: CanvasText;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 280;
+  }
+  50% {
+    stroke-dashoffset: 75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 280;
+    transform: rotate(450deg);
   }
 }
