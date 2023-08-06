@@ -243,14 +243,15 @@ const useStore = create(
         throw new Error("no settings object");
       }
 
-      const upsellProducts = get().upsellProducts;
+      const upsellProducts = await get().upsellProducts;
 
       if (window.EcwidApp) {
         try {
+          const payload = { settings, upsellProducts };
           window.EcwidApp.setAppPublicConfig(
-            JSON.stringify({ settings, upsellProducts }),
+            JSON.stringify(payload),
             function (e) {
-              console.log("Public config saved!", e);
+              console.log("Public config saved. Payload: ", payload);
             },
           );
 
