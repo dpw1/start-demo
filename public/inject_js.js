@@ -212,7 +212,7 @@ window.ezfyEasyUpsellApp = (function () {
       </a>
 
       <button class="EzfyCart-atc">${
-        each.totalOptions !== "0" ? "Pick Options" : "Add to Cart"
+        parseInt(each.totalOptions) <= 0 ? "Pick Options" : "Add to Cart"
       }</button>
       </div>
       `;
