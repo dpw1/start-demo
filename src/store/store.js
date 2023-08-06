@@ -85,7 +85,7 @@ const useStore = create(
               // console.log("xxx ECWID PRE DATA", _data);
               data = data = _data.upsellProducts;
               console.log(
-                "xxx 11ECWID DB DATA",
+                "xxx 33ECWID DB DATA",
                 _data,
                 data,
                 window.upsellProducts,
