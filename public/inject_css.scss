@@ -25,6 +25,7 @@ $xxxs: 500px;
 $width: 135px;
 
 $transition-basic: all 0.3s ease 0s;
+$close-button: 40px;
 
 @mixin gradientAnimation($start, $end, $transTime) {
   background-size: 100%;
@@ -53,8 +54,6 @@ $transition-basic: all 0.3s ease 0s;
 
 $blue: #00ffffd4;
 $pink: #ff00ffab;
-
-$close-button: 64px;
 
 html#ecwid_html body#ecwid_body .ec-size .ec-store {
   /* Upsell Cart */
