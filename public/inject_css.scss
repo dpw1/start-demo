@@ -233,7 +233,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   }
 }
 
-/* Popup 
+/* ## Popup 
 ============================ */
 
 .EzfyPopup {
@@ -252,12 +252,13 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     width: 95%;
     background: salmon;
     margin: 0 auto;
-    height: 50vh;
+    height: 75vh;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 5px;
+    overflow-y: scroll;
 
     @media (max-width: $xs) {
       height: 90vh;
@@ -290,8 +291,31 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     display: none;
   }
 }
+/* ## Product inside popup
+============================ */
+.EzfyProduct {
+  display: flex;
+  .EzfyProduct-left {
+    max-width: 45%;
+    width: 100%;
+  }
 
-/* Animations 
+  .EzfyProduct-right {
+    max-width: 55%;
+    width: 100%;
+  }
+
+  .EzfyProduct-title {
+    font-size: 52px;
+  }
+
+  .EzfyProduct-image {
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+/* ## Animations 
 ============================ */
 
 @keyframes rotator {
