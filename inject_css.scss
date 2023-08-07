@@ -435,6 +435,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
   .EzfyProduct-option-label {
     display: block;
+    padding-bottom: 5px;
   }
 
   .EzfyProduct-size-items {
@@ -496,6 +497,81 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     -webkit-appearance: none;
     line-height: 1.4;
   }
+
+  /* Checkbox 
+  ============================ */
+
+  .EzfyProduct-checkbox-input {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+
+  .EzfyProduct-checkbox input:checked + label > svg {
+    width: 13px;
+    height: 13px;
+    -webkit-animation: draw-checkbox ease-in-out 0.2s forwards;
+    animation: draw-checkbox ease-in-out 0.2s forwards;
+  }
+  .EzfyProduct-checkbox label:active::before {
+    background-color: #e6e6e6;
+  }
+  .EzfyProduct-checkbox label {
+    color: #0080d3;
+
+    cursor: pointer;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .EzfyProduct-checkbox label:before {
+    content: "";
+    height: 13px;
+    width: 13px;
+    margin-right: 10px;
+
+    border: 2px solid #1a7ac4;
+    border-radius: 3px;
+    transition: 0.15s all ease-out;
+  }
+  .EzfyProduct-checkbox svg {
+    stroke: white;
+    stroke-width: 2px;
+    height: 0;
+    width: 13px;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+    stroke-dasharray: 33;
+    background: #1a7ac4;
+  }
+
+  .EzfyProduct-checkbox {
+    margin-right: 10px;
+
+    margin-bottom: 5px;
+  }
+
+  .EzfyProduct-checkbox-cost {
+    margin-left: 5px;
+    color: #757575;
+  }
+
+  .EzfyProduct-checkbox-text {
+    color: #191919;
+  }
+
+  .EzfyProduct-checkbox-items {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+  }
 }
 
 /* ## Animations 
@@ -527,5 +603,22 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   100% {
     stroke-dashoffset: 280;
     transform: rotate(450deg);
+  }
+}
+@-webkit-keyframes draw-checkbox {
+  0% {
+    stroke-dashoffset: 33;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes draw-checkbox {
+  0% {
+    stroke-dashoffset: 33;
+  }
+  100% {
+    stroke-dashoffset: 0;
   }
 }
