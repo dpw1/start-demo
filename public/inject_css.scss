@@ -250,7 +250,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
   .EzfyPopup-container {
     max-width: 1100px;
-    width: 95%;
+    width: 85%;
     background: white;
     margin: 0 auto;
     height: 75vh;
@@ -299,6 +299,15 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 ============================ */
 .EzfyProduct {
   display: flex;
+
+  .EzfyProduct-prices {
+    margin-top: -20px;
+    margin-bottom: 20px;
+  }
+
+  .EzfyProduct-price {
+    font-size: 26px;
+  }
   .EzfyProduct-left {
     max-width: 45%;
     width: 100%;
@@ -307,10 +316,12 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyProduct-right {
     max-width: 55%;
     width: 100%;
+    padding-left: 40px;
   }
 
   .EzfyProduct-title {
     font-size: 52px;
+    margin-top: 0;
   }
 
   .EzfyProduct-image {
@@ -320,6 +331,23 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyProduct-figure {
     width: 100%;
     margin: 0;
+  }
+
+  .EzfyProduct-radio-cost {
+    color: #757575;
+    display: inline-block;
+    margin-left: 10px;
+  }
+
+  .EzfyProduct-radio-field {
+    display: inline-block;
+    cursor: pointer;
+  }
+
+  .EzfyProduct-option-label {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.3;
   }
 }
 
