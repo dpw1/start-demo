@@ -205,6 +205,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     display: none;
   }
 
+  .EzfyCart-atc-text {
+    pointer-events: none;
+  }
+
   .EzfyCart-item--loading {
     .EzfyCart-atc-text {
       display: none;
