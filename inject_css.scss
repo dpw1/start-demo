@@ -300,6 +300,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 .EzfyProduct {
   display: flex;
 
+  * {
+    font-family: inherit;
+  }
+
   #EzfyPopupATC {
     margin-top: 24px;
     display: block;
