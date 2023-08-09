@@ -83,7 +83,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   }
 
   .EzfyCart-item + .EzfyCart-item {
-    margin-left: 10px !important;
+    margin-left: 5px !important;
   }
 
   .EzfyCart-items {
@@ -621,6 +621,21 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     height: 55px;
     padding: 8px;
   }
+
+  /* Date picker 
+  ============================ */
+  .EzfyProduct-option--date {
+    position: relative;
+  }
+
+  .EzfyProduct-textfield-date-picker + * {
+    display: none;
+    position: absolute;
+    top: 60px;
+    width: calc(100% - 6px) !important;
+  }
+
+  /* end */
 }
 
 /* ## Animations 
