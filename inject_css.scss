@@ -304,6 +304,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     margin-top: 24px;
   }
 
+  .EzfyProduct-options {
+    max-width: 300px;
+  }
+
   .EzfyProduct-option + .EzfyProduct-option {
     margin-top: 24px;
   }
@@ -571,6 +575,39 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     display: flex;
     flex-direction: column;
     align-items: baseline;
+  }
+
+  /* Input & Textarea 
+  ============================ */
+
+  .EzfyProduct-textfield-input,
+  .EzfyProduct-textfield-textarea {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    border: 1px solid #8faec6;
+    border-radius: 3px;
+    outline: none;
+    background-color: transparent;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08) inset;
+    color: #191919;
+    transition: border-color 0.15s ease-out 0s;
+    -webkit-appearance: none;
+    line-height: 1.4;
+    min-height: 24px;
+    max-width: calc(100% - 22px);
+    display: block;
+    padding: 4px 8px;
+    line-height: 1;
+    font-size: 14px;
+    background: #fbfbfb;
+  }
+
+  .EzfyProduct-textfield-input:hover,
+  .EzfyProduct-textfield-input:active,
+  .EzfyProduct-textfield-textarea:hover,
+  .EzfyProduct-textfield-textarea:active {
+    background: #fff;
   }
 }
 
