@@ -353,6 +353,11 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
   /* ## Radio Button
   ========================== */
+
+  .EzfyProduct-radios * {
+    cursor: pointer;
+  }
+
   .EzfyProduct-radio-cost {
     color: #757575;
     display: inline-block;
@@ -608,6 +613,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyProduct-textfield-textarea:hover,
   .EzfyProduct-textfield-textarea:active {
     background: #fff;
+  }
+
+  .EzfyProduct-textfield-textarea {
+    height: 55px;
   }
 }
 
