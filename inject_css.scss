@@ -321,6 +321,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     height: 48px;
     background-color: #333;
     color: #fff;
+    max-width: calc(300px - 4px);
 
     &:hover {
       background-color: #595959;
