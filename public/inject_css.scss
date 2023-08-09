@@ -321,6 +321,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     height: 48px;
     background-color: #333;
     color: #fff;
+
+    &:hover {
+      background-color: #595959;
+    }
     @media (max-width: $xs) {
       height: 38px;
     }
@@ -583,6 +587,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     top: 3px;
     stroke-dasharray: 33;
     background: #1a7ac4;
+    transform: scale(1.1);
   }
 
   .EzfyProduct-checkbox {
