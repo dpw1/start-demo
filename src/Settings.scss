@@ -6,11 +6,42 @@
   .ReactModal__Content {
     position: fixed;
     left: 50% !important;
-    top: 0% !important;
+
     right: unset !important;
     bottom: unset !important;
     transform: translateX(-50%);
     max-width: 1200px;
     width: 90%;
+  }
+
+  .Settings-button {
+    border: none;
+    margin: 0;
+    padding: 0;
+    width: auto;
+    overflow: visible;
+
+    background: transparent;
+
+    color: inherit;
+    font: inherit;
+
+    line-height: normal;
+
+    -webkit-font-smoothing: inherit;
+    -moz-osx-font-smoothing: inherit;
+
+    -webkit-appearance: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0 0 auto;
+    margin-bottom: 10px;
+    cursor: POINTER;
+  }
+
+  .Settings-button svg {
+    width: 33px;
+    height: 33px;
   }
 }

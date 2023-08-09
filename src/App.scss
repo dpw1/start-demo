@@ -3,13 +3,15 @@ body {
   background: #eceef0;
 }
 
+$width: 800px;
+
 .EasyUpsellApp {
-  max-width: 1200px;
+  max-width: $width;
   margin: 0 auto;
   display: block;
   padding: 0 20px;
   &-container {
-    max-width: 1200px;
+    max-width: $width;
     width: 100%;
     margin: 0 auto;
     margin-top: 10px;

@@ -48,12 +48,12 @@ export default function ProductItem(props) {
 
   return (
     <div className="ProductItem list-element list-element--compact list-element--has-hover list-element--inline-mode">
-      <div className="list-element__image">
-        <img src={product.thumbnailUrl} alt={product.name} />
-      </div>
+      <div className="ProductItem-top">
+        <figure className="ProductItem-figure list-element__image">
+          <img src={product.thumbnailUrl} alt={product.name} />
+        </figure>
 
-      <div className="list-element__content">
-        <div className="list-element__info">
+        <div className="ProductItem-name">
           <div className="list-element__header">
             <div className="list-element__main-info">
               <div className="list-element__title">
@@ -63,6 +63,37 @@ export default function ProductItem(props) {
               </div>
             </div>
           </div>
+        </div>
+
+        <Popup
+          modal={true}
+          onOpen={() => {
+            setProduct();
+          }}
+          trigger={() => {
+            return (
+              <button
+                type="button"
+                className="ProductItem-button btn btn-small btn-primary">
+                <span className="svg-icon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 12 12"
+                    focusable="false">
+                    <path d="M6.712 5.314H11v1.39H6.712V11H5.267V6.706H1V5.314h4.267V1h1.446v4.314z"></path>
+                  </svg>
+                </span>
+                <span className="gwt-InlineLabel">Add Upsell Products</span>
+              </button>
+            );
+          }}
+          position="center center">
+          <PopupCustom parentID={product.id}></PopupCustom>
+        </Popup>
+      </div>
+
+      <div className="ProductItem-bottom list-element__content">
+        <div className="list-element__info">
           <div
             className="list-element__status-row"
             data-upsell-products={
@@ -73,12 +104,10 @@ export default function ProductItem(props) {
                 upsell.hasOwnProperty("bundle") &&
                 upsell.bundle.map((e) => {
                   const _product = e;
-
                   /* If the upsell product is the same as the parent, do not add it to the list. */
                   if (_product.id === product.id) {
                     return;
                   }
-
                   return (
                     <div
                       key={`${_product.id}_${product.id}`}
@@ -91,7 +120,6 @@ export default function ProductItem(props) {
                       <span className="ProductItem-title spacing--mr1">
                         {_product.name}
                       </span>
-
                       <button
                         className="ProductItem-delete icolink"
                         onClick={(event) => {
@@ -104,7 +132,6 @@ export default function ProductItem(props) {
                             const $item = window.document.querySelector(
                               `.ProductItem-upsell--${_product.id}-${product.id}`,
                             );
-
                             if ($item) {
                               $item.style.display = "none";
                             }
@@ -134,30 +161,6 @@ export default function ProductItem(props) {
           </div>
         </div>
       </div>
-
-      <Popup
-        modal={true}
-        onOpen={() => {
-          setProduct();
-        }}
-        trigger={() => {
-          return (
-            <button type="button" className="btn btn-small btn-primary">
-              <span className="svg-icon">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 12 12"
-                  focusable="false">
-                  <path d="M6.712 5.314H11v1.39H6.712V11H5.267V6.706H1V5.314h4.267V1h1.446v4.314z"></path>
-                </svg>
-              </span>
-              <span className="gwt-InlineLabel">Add Upsell Products</span>
-            </button>
-          );
-        }}
-        position="center center">
-        <PopupCustom parentID={product.id}></PopupCustom>
-      </Popup>
     </div>
   );
 }
