@@ -668,10 +668,14 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     width: calc(100% - 6px) !important;
   }
 
+  .EzfyProduct-mini-title {
+    font-weight: bold;
+    font-size: 16px;
+  }
+
   .EzfyProduct-available {
     display: block;
     margin-bottom: -10px;
-    font-weight: bold;
   }
 
   .EzfyProduct-atc-wrapper {
