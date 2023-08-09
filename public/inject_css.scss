@@ -699,6 +699,38 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   /* end */
 }
 
+/* ## Mobile 
+============================ */
+
+@media (max-width: $xs) {
+  .EzfyProduct {
+    flex-direction: column;
+  }
+
+  .EzfyProduct-left,
+  .EzfyProduct-right {
+    padding: 0;
+    max-width: 100%;
+  }
+
+  .EzfyProduct-figure {
+    margin-bottom: 20px;
+  }
+
+  .EzfyProduct-options {
+    max-width: 100%;
+  }
+
+  #EzfyPopupATC {
+    max-width: 100%;
+  }
+
+  .EzfyProduct select,
+  .EzfyProduct textarea,
+  .EzfyProduct input {
+    max-width: calc(100% - 22px);
+  }
+}
 /* ## Animations 
 ============================ */
 
