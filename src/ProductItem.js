@@ -56,10 +56,8 @@ export default function ProductItem(props) {
         <div className="ProductItem-name">
           <div className="list-element__header">
             <div className="list-element__main-info">
-              <div className="list-element__title">
-                <span>
-                  {product.name} {product.id}
-                </span>
+              <div className="ProductItem-name-text list-element__title">
+                {product.name}
               </div>
             </div>
           </div>
@@ -99,65 +97,76 @@ export default function ProductItem(props) {
             data-upsell-products={
               upsell.hasOwnProperty("bundle") ? upsell.bundle.length : 0
             }>
-            <div className="list-element__data-row">
-              {upsell &&
-                upsell.hasOwnProperty("bundle") &&
-                upsell.bundle.map((e) => {
-                  const _product = e;
-                  /* If the upsell product is the same as the parent, do not add it to the list. */
-                  if (_product.id === product.id) {
-                    return;
-                  }
-                  return (
-                    <div
-                      key={`${_product.id}_${product.id}`}
-                      className={`ProductItem-upsell ProductItem-upsell--${_product.id}-${product.id}`}>
-                      <img
-                        className="ProductItem-image"
-                        src={_product.thumbnailUrl}
-                        alt=""
-                      />
-                      <span className="ProductItem-title spacing--mr1">
-                        {_product.name}
-                      </span>
-                      <button
-                        className="ProductItem-delete icolink"
-                        onClick={(event) => {
-                          event.preventDefault();
-                          console.log(
-                            `Delete ${_product.id} from the parent ${product.id}`,
-                          );
-                          deleteUpsellProductById(product.id, _product.id);
-                          try {
-                            const $item = window.document.querySelector(
-                              `.ProductItem-upsell--${_product.id}-${product.id}`,
-                            );
-                            if ($item) {
-                              $item.style.display = "none";
-                            }
-                          } catch (err) {
-                            console.log("Removing error", err);
-                          }
-                        }}>
-                        <svg
-                          width={18}
-                          height={18}
-                          viewBox="0 0 18 18"
-                          xmlns="http://www.w3.org/2000/svg"
-                          focusable="false">
-                          <path d="M7 0h4l1 2H6l1-2z" />
-                          <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M2 3c-.5523 0-1 .4477-1 1s.4477 1 1 1v11c0 1.1046.8954 2 2 2h10c1.1046 0 2-.8954 2-2V5c.5523 0 1-.4477 1-1s-.4477-1-1-1H2zm12 13V5H4v11h10z"
+            {upsell && upsell.hasOwnProperty("bundle") && (
+              <React.Fragment>
+                <p className="ProductItem-bottom-title">Upsell products</p>
+                <div className="list-element__data-row ProductItem-bottom-wrapper">
+                  {upsell.bundle.map((e) => {
+                    const _product = e;
+                    /* If the upsell product is the same as the parent, do not add it to the list. */
+                    if (_product.id === product.id) {
+                      return;
+                    }
+                    return (
+                      <div
+                        key={`${_product.id}_${product.id}`}
+                        className={`ProductItem-upsell ProductItem-upsell--${_product.id}-${product.id}`}>
+                        <figure className="ProductItem-upsell-figure">
+                          <img
+                            className="ProductItem-upsell-image"
+                            src={_product.thumbnailUrl}
+                            alt=""
                           />
-                          <path d="M6 7.5c0-.5523.4477-1 1-1s1 .4477 1 1v6c0 .5523-.4477 1-1 1s-1-.4477-1-1v-6zM10 7.5c0-.5523.4477-1 1-1s1 .4477 1 1v6c0 .5523-.4477 1-1 1s-1-.4477-1-1v-6z" />
-                        </svg>
-                      </button>
-                    </div>
-                  );
-                })}
-            </div>
+                        </figure>
+                        <div className="ProductItem-info">
+                          <span className="ProductItem-title spacing--mr1">
+                            {_product.name}
+                          </span>
+
+                          {/* <span className="ProductItem-price spacing--mr1">
+                            $0.00
+                          </span> */}
+                        </div>
+                        <button
+                          className="ProductItem-delete icolink"
+                          onClick={(event) => {
+                            event.preventDefault();
+                            console.log(
+                              `Delete ${_product.id} from the parent ${product.id}`,
+                            );
+                            deleteUpsellProductById(product.id, _product.id);
+                            try {
+                              const $item = window.document.querySelector(
+                                `.ProductItem-upsell--${_product.id}-${product.id}`,
+                              );
+                              if ($item) {
+                                $item.style.display = "none";
+                              }
+                            } catch (err) {
+                              console.log("Removing error", err);
+                            }
+                          }}>
+                          <svg
+                            width={18}
+                            height={18}
+                            viewBox="0 0 18 18"
+                            xmlns="http://www.w3.org/2000/svg"
+                            focusable="false">
+                            <path d="M7 0h4l1 2H6l1-2z" />
+                            <path
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M2 3c-.5523 0-1 .4477-1 1s.4477 1 1 1v11c0 1.1046.8954 2 2 2h10c1.1046 0 2-.8954 2-2V5c.5523 0 1-.4477 1-1s-.4477-1-1-1H2zm12 13V5H4v11h10z"
+                            />
+                            <path d="M6 7.5c0-.5523.4477-1 1-1s1 .4477 1 1v6c0 .5523-.4477 1-1 1s-1-.4477-1-1v-6zM10 7.5c0-.5523.4477-1 1-1s1 .4477 1 1v6c0 .5523-.4477 1-1 1s-1-.4477-1-1v-6z" />
+                          </svg>
+                        </button>
+                      </div>
+                    );
+                  })}{" "}
+                </div>
+              </React.Fragment>
+            )}
           </div>
         </div>
       </div>

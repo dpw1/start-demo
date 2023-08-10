@@ -69,6 +69,9 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
   .EzfyCart-figure {
     margin: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .EzfyCart-item {

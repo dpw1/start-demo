@@ -90,8 +90,8 @@ function App() {
           <div className="named-area__body">
             <div className="a-card a-card--compact">
               <div className="a-card__paddings">
-                <h1 className="Products-title settings-page__title spacing--mt2">
-                  EZFY Cart Upsell!
+                <h1 className="EasyUpsellApp-title settings-page__title spacing--mt2">
+                  EZFY Cart Upsell
                 </h1>
                 <Settings></Settings>
                 <Search></Search>

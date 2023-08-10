@@ -14,6 +14,12 @@
     width: 90%;
   }
 
+  .Settings-button-text {
+    position: relative;
+    top: -3px;
+    margin-right: 5px;
+  }
+
   .Settings-button {
     border: none;
     margin: 0;
@@ -41,7 +47,7 @@
   }
 
   .Settings-button svg {
-    width: 33px;
-    height: 33px;
+    width: 19px;
+    height: 19px;
   }
 }
