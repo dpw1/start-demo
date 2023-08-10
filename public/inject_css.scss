@@ -691,10 +691,11 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   }
 
   .EzfyProduct-textfield-date-picker + * {
-    display: none;
-    position: absolute;
-    top: 60px;
-    width: calc(100% - 6px) !important;
+    display: block;
+    // display: none;
+    // position: absolute;
+    // top: 60px;
+    // width: calc(100% - 6px) !important;
   }
 
   .EzfyProduct-mini-title {
