@@ -367,6 +367,8 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
     @media (max-width: $xs) {
       max-width: 100%;
+      margin-top: 40px;
+      margin-bottom: 15px;
     }
   }
 
@@ -383,6 +385,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyProduct-title {
     font-size: 52px;
     margin-top: 0;
+
+    @media (max-width: $xs) {
+      font-size: 40px;
+    }
   }
 
   .EzfyProduct-image {
