@@ -83,7 +83,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   }
 
   .EzfyCart-item + .EzfyCart-item {
-    margin-left: 5px !important;
+    margin-left: 8px !important;
   }
 
   .EzfyCart-items {
@@ -390,10 +390,14 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
       font-size: 40px;
     }
   }
+  .EzfyProduct-figure {
+    margin: 0 !important;
+  }
 
   .EzfyProduct-image {
     max-width: 100%;
     width: 100%;
+    border-radius: 3px;
   }
   .EzfyProduct-figure {
     width: 100%;
