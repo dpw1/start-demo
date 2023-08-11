@@ -74,20 +74,20 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     justify-content: center;
   }
 
-  .EzfyCart-item {
-    min-width: $width !important;
-  }
+  // .EzfyCart-item {
+  //   min-width: $width !important;
+  // }
 
-  .EzfyCart-item > * > *:not([class^="EzfyCart-atc-"]) {
-    width: $width !important;
-  }
+  // .EzfyCart-item > * > *:not([class^="EzfyCart-atc-"]) {
+  //   width: $width !important;
+  // }
 
-  .EzfyCart-item img {
-    display: block;
+  // .EzfyCart-item img {
+  //   display: block;
 
-    max-width: $width !important;
-    width: 100% !important;
-  }
+  //   max-width: $width !important;
+  //   width: 100% !important;
+  // }
 
   .EzfyCart-item + .EzfyCart-item {
     margin-left: 8px !important;
