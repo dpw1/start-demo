@@ -22,7 +22,7 @@ $xs: 749px;
 $xxs: 575px;
 $xxxs: 500px;
 
-$width: 135px;
+$width: 150px;
 
 $transition-basic: all 0.3s ease 0s;
 $close-button: 40px;
@@ -74,9 +74,16 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     justify-content: center;
   }
 
-  // .EzfyCart-item {
-  //   min-width: $width !important;
-  // }
+  .EzfyCart-item {
+    border: 1px solid #e6e6e6 !important;
+    border-radius: 3px !important;
+    background-color: #fff !important;
+    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1) !important;
+    transition: box-shadow 0.2s ease 0s, background-color 0.2s ease 0s !important;
+
+    width: auto !important;
+    min-width: 150px !important;
+  }
 
   // .EzfyCart-item > * > *:not([class^="EzfyCart-atc-"]) {
   //   width: $width !important;
@@ -180,6 +187,9 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyCart-prices {
     display: flex;
     align-items: center;
+
+    padding-left: 10px !important;
+    padding-right: 10px !important;
   }
 
   .EzfyCart-item-title {
@@ -193,6 +203,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     -webkit-box-orient: vertical;
     height: 30px;
     margin-bottom: 10px !important;
+
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin-top: 10px !important;
   }
   .EzfyCart-price {
     font-size: 12px;
@@ -215,6 +229,15 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
   .EzfyCart-atc-text {
     pointer-events: none;
+  }
+
+  .EzfyCart-atc {
+    width: calc(100% - 20px) !important;
+    margin: 0 auto !important;
+    display: block !important;
+    white-space: nowrap;
+    margin-bottom: 10px !important;
+    margin-top: 10px !important;
   }
 
   .EzfyCart-item--loading {
