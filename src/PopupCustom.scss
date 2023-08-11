@@ -2,7 +2,31 @@
   max-height: 90vh;
   overflow-y: scroll;
   height: 50vh;
-
+  position: relative;
+  padding-top: 10px;
+  .PopupCustom-close {
+    background-color: #fdfbf7;
+    border: 0.1rem solid rgba(46, 42, 57, 0.1);
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 12.5px;
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    transform: scale(0.75);
+  }
   &-title {
     text-align: center;
     margin-top: 10px;
@@ -23,6 +47,10 @@
     .popup-content {
       max-width: 500px;
       width: 100%;
+
+      @media (max-width: 767px) {
+        width: 90%;
+      }
     }
   }
 }

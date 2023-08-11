@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { useStore } from "./store/store";
+import "./PopupItem.scss";
 
 export default function PopupItem({ product, parentID }) {
   const addUpsellProduct = useStore((state) => state.addUpsellProduct);
@@ -59,7 +60,9 @@ export default function PopupItem({ product, parentID }) {
             <path d="M6.712 5.314H11v1.39H6.712V11H5.267V6.706H1V5.314h4.267V1h1.446v4.314z"></path>
           </svg>
         </span>
-        <span className="gwt-InlineLabel">{isAddable ? "Add" : "Added"}</span>
+        <span className="PopupItem-button-text gwt-InlineLabel">
+          {isAddable ? "Add" : "Added"}
+        </span>
       </button>
     </div>
   );

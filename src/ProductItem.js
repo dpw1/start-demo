@@ -81,12 +81,16 @@ export default function ProductItem(props) {
                     <path d="M6.712 5.314H11v1.39H6.712V11H5.267V6.706H1V5.314h4.267V1h1.446v4.314z"></path>
                   </svg>
                 </span>
-                <span className="gwt-InlineLabel">Add Upsell Products</span>
+                <span className="ProductItem-button-text gwt-InlineLabel">
+                  Add Upsell Products
+                </span>
               </button>
             );
           }}
           position="center center">
-          <PopupCustom parentID={product.id}></PopupCustom>
+          {(close) => (
+            <PopupCustom close={close} parentID={product.id}></PopupCustom>
+          )}
         </Popup>
       </div>
 

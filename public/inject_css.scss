@@ -307,6 +307,9 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     position: fixed;
     top: 1.5rem;
     right: 1.5rem;
+    @media (max-width: $xs) {
+      top: 40px;
+    }
 
     svg {
       height: auto;
@@ -595,6 +598,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     line-height: 1.4;
     padding-left: 8px;
     background-color: #fbfbfb;
+
+    @media (max-width: $xs) {
+      max-width: 100% !important;
+    }
   }
 
   /* Checkbox 

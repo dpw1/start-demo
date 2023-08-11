@@ -7,6 +7,9 @@ $border-radius: 5px;
   position: relative;
   display: flex;
   flex-direction: column;
+  @media (max-width: 749px) {
+    padding: 8px;
+  }
 
   .ProductItem-upsell + .ProductItem-upsell {
     margin-left: 20px;
@@ -36,6 +39,10 @@ $border-radius: 5px;
     width: 100%;
     align-items: center;
     flex-direction: row;
+
+    @media (max-width: 749px) {
+      overflow-x: scroll;
+    }
   }
 
   .ProductItem-bottom-wrapper {
@@ -46,6 +53,10 @@ $border-radius: 5px;
     flex-direction: row;
     overflow-x: scroll;
     padding-bottom: 10px;
+
+    @media (max-width: 749px) {
+      overflow-x: visible;
+    }
   }
 
   .ProductItem-upsell {
@@ -120,6 +131,12 @@ $border-radius: 5px;
     padding-top: 10px;
     /* border-bottom: 1px solid #b9b9b933; */
     margin-top: 0px;
+  }
+
+  .ProductItem-button-text {
+    @media (max-width: 749px) {
+      display: none;
+    }
   }
 
   .ProductItem-delete {
