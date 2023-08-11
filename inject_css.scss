@@ -748,20 +748,12 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     margin-bottom: -7px;
   }
 
-  /* end */
-}
-
-/* ## Mobile exclusive
-============================ */
-@media (max-width: $xs) {
-  .EzfyProduct select,
-  .EzfyProduct textarea,
-  .EzfyProduct input {
-    max-width: calc(100% - 22px) !important;
-  }
-
   /* ## Splide slider 
   ============================ */
+  .splide {
+    position: sticky;
+    top: 0;
+  }
 
   .splide__pagination {
     bottom: -10px;
@@ -780,6 +772,18 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .splide[data-is-slider="false"] ul,
   .splide[data-is-slider="false"] li {
     list-style: none !important;
+  }
+
+  /* end */
+}
+
+/* ## Mobile exclusive
+============================ */
+@media (max-width: $xs) {
+  .EzfyProduct select,
+  .EzfyProduct textarea,
+  .EzfyProduct input {
+    max-width: calc(100% - 22px) !important;
   }
 }
 
