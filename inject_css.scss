@@ -222,7 +222,6 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     width: 16px;
     height: 16px;
     position: relative;
-    top: 3px;
 
     display: none;
   }
@@ -234,7 +233,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyCart-atc {
     width: calc(100% - 20px) !important;
     margin: 0 auto !important;
-    display: block !important;
+    display: flex !important;
     white-space: nowrap;
     margin-bottom: 10px !important;
     margin-top: 10px !important;
