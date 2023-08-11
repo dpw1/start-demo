@@ -774,6 +774,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     list-style: none !important;
   }
 
+  .splide__pagination__page.is-active {
+    background: #000000d1;
+  }
+
   /* end */
 }
 
