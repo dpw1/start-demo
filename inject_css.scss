@@ -27,29 +27,8 @@ $width: 150px;
 $transition-basic: all 0.3s ease 0s;
 $close-button: 40px;
 
-@mixin gradientAnimation($start, $end, $transTime) {
-  background-size: 100%;
-  background-image: linear-gradient($start, $end);
-  position: relative;
-  z-index: 100;
-  &:before {
-    background-image: linear-gradient($end, $start);
-    content: "";
-    display: block;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    width: 100%;
-    z-index: -100;
-    transition: opacity $transTime;
-  }
-  &:hover {
-    &:before {
-      opacity: 1;
-    }
-  }
+:root {
+  --ezfy-figure-height: 100px;
 }
 
 $blue: #00ffffd4;
@@ -72,6 +51,23 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 0 !important;
+    height: var(--ezfy-figure-height);
+    transition: all 0.12s ease-out 0s !important;
+    box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1) !important;
+    &:hover {
+      transition: all 0.12s ease-out 0s;
+      box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+
+  .EzfyCart-items--active {
+    cursor: grabbing;
+    cursor: -webkit-grabbing;
+  }
+
+  .EzfyCart-items[data-dragging="true"] a {
+    pointer-events: none;
   }
 
   .EzfyCart-item {
@@ -423,6 +419,8 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     max-width: 100%;
     width: 100%;
     border-radius: 3px;
+    max-height: 100%;
+    object-fit: contain;
   }
   .EzfyProduct-figure {
     width: 100%;
@@ -760,6 +758,28 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyProduct textarea,
   .EzfyProduct input {
     max-width: calc(100% - 22px) !important;
+  }
+
+  /* ## Splide slider 
+  ============================ */
+
+  .splide__pagination {
+    bottom: -10px;
+  }
+
+  .splide[data-is-slider="false"] {
+    visibility: visible;
+    position: sticky;
+    top: 0px;
+  }
+
+  .splide[data-is-slider="false"] .splide__list {
+    padding: unset;
+  }
+
+  .splide[data-is-slider="false"] ul,
+  .splide[data-is-slider="false"] li {
+    list-style: none !important;
   }
 }
 
