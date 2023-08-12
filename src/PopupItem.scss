@@ -1,8 +1,13 @@
 .PopupItem {
+  display: flex;
+  align-items: center;
   .PopupItem-figure {
     display: flex;
     align-items: center;
     justify-content: center;
     margin-left: 0 !important;
+  }
+  .PopupItem-image {
+    display: block;
   }
 }

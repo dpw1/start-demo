@@ -50,7 +50,11 @@ export default function ProductItem(props) {
     <div className="ProductItem list-element list-element--compact list-element--has-hover list-element--inline-mode">
       <div className="ProductItem-top">
         <figure className="ProductItem-figure list-element__image">
-          <img src={product.thumbnailUrl} alt={product.name} />
+          <img
+            className="ProductItem-image"
+            src={product.thumbnailUrl}
+            alt={product.name}
+          />
         </figure>
 
         <div className="ProductItem-name">
