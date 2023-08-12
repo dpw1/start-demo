@@ -10,7 +10,7 @@
     right: unset !important;
     bottom: unset !important;
     transform: translateX(-50%);
-    max-width: 1200px;
+    max-width: 800px;
     width: 90%;
   }
 
@@ -49,5 +49,29 @@
   .Settings-button svg {
     width: 19px;
     height: 19px;
+  }
+
+  .Settings-close {
+    background-color: #fdfbf7;
+    border: 0.1rem solid rgba(46, 42, 57, 0.1);
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 12.5px;
+    z-index: 5;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    transform: scale(0.75);
   }
 }

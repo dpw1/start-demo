@@ -1,0 +1,32 @@
+.Filter {
+  height: 40px;
+  padding-right: 20px;
+
+  * {
+    font-size: 14px;
+  }
+
+  .react-dropdown-select {
+    height: 40px;
+    border-radius: 5px;
+  }
+  .react-dropdown-select-dropdown {
+    width: 230px;
+    .react-dropdown-select-content {
+      width: 230px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .react-dropdown-select-item-selected {
+    background: #d3dee8 !important;
+    color: #0a1c2e !important;
+    border-bottom: 1px solid #fff;
+
+    &:before {
+      content: "✓ ";
+    }
+  }
+}

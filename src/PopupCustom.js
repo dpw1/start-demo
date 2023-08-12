@@ -6,8 +6,6 @@ import { useStore } from "./store/store";
 import PopupSearch from "./PopupSearch";
 
 export default function PopupCustom({ parentID, close }) {
-  const [visibleProducts, setVisibleProducts] = useState([]);
-
   const products = useStore((state) => state.products);
   const popupVisibleProducts = useStore((state) => state.popupVisibleProducts);
   const updatePopupVisibleProducts = useStore(

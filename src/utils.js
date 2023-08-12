@@ -2,8 +2,59 @@ export const defaultSettings = {
   isEnabled: false,
 };
 
+export const availableFilters = [
+  {
+    value: "show_products_with_upsell",
+    label: "Show only products with upsells",
+  },
+  {
+    value: "test",
+    label: "Test",
+  },
+];
+
 export function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function findEqualById(arr1, arr2) {
+  try {
+    return arr1.filter((obj1) => arr2.some((obj2) => obj2.id === obj1.id));
+  } catch (err) {
+    return [];
+  }
+}
+
+export function overwriteById(arr, newObj) {
+  try {
+    const updatedArray = arr.map((obj) =>
+      obj.id === newObj.id ? newObj : obj,
+    );
+    return updatedArray;
+  } catch (err) {
+    return [];
+  }
+}
+
+/* Returns object of new visible products */
+export function applyFiltersOnProducts(
+  visibleProducts,
+  upsellProducts,
+  activeFilters,
+) {
+  if (!activeFilters || activeFilters.length <= 0) {
+    return visibleProducts;
+  }
+  for (var each of activeFilters) {
+    if (each.value === "show_products_with_upsell") {
+      var products = JSON.parse(JSON.stringify(visibleProducts));
+
+      var filtered = findEqualById(products.items, upsellProducts);
+      products.items = filtered;
+
+      return products;
+    }
+  }
 }
 
 /*

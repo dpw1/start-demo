@@ -10,6 +10,7 @@ import Search from "./Search";
 import { Placeholder } from "./Placeholder";
 import Settings from "./Settings";
 import { defaultSettings } from "./utils";
+import { Filter } from "./Filter";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
@@ -94,7 +95,10 @@ function App() {
                   EZFY Cart Upsell
                 </h1>
                 <Settings></Settings>
-                <Search></Search>
+                <div style={{ display: "flex" }}>
+                  <Filter></Filter>
+                  <Search></Search>
+                </div>
                 {upsellProducts ? (
                   <Products upsellProducts={upsellProducts}></Products>
                 ) : (

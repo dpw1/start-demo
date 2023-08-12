@@ -5,18 +5,20 @@ import "./Search.scss";
 import { useStore } from "./store/store";
 
 import Products from "./Products";
+import { applyFiltersOnProducts } from "./utils";
 
 export default function Search() {
   const [search, setSearch] = useState("");
   const [allProducts, setAllProducts] = useState([]);
-  const [products, setProducts] = useState([]);
 
   let productsStored = false;
 
-  const databaseProducts = useStore((state) => state.products);
   const updateVisibleProducts = useStore(
     (state) => state.updateVisibleProducts,
   );
+  const visibleProducts = useStore((state) => state.visibleProducts);
+  const upsellProducts = useStore((state) => state.upsellProducts);
+  const activeFilters = useStore((state) => state.activeFilters);
 
   useEffect(() => {
     useStore.subscribe(
@@ -36,7 +38,14 @@ export default function Search() {
   }, []);
 
   useEffect(() => {
-    console.log(allProducts);
+    console.log("search", allProducts);
+
+    useStore.subscribe(
+      (state) => state.activeFilters,
+      (e) => {
+        setSearch("");
+      },
+    );
 
     if (search.length <= 0) {
       console.log("updating all products", allProducts);
@@ -44,7 +53,9 @@ export default function Search() {
     }
 
     if (allProducts && allProducts.items && allProducts.items.length >= 1) {
-      const found = allProducts.items.filter((e) => {
+      console.log(activeFilters);
+
+      let found = allProducts.items.filter((e) => {
         if (e.name.toLowerCase().includes(search.toLowerCase())) {
           return e;
         }
@@ -52,7 +63,27 @@ export default function Search() {
         return null;
       });
 
-      console.log("Found this: ", found);
+      /* TODO - BUG 
+
+      can't search for products found i keep typing
+      */
+
+      /* Search again if there are filters */
+      if (activeFilters && activeFilters.length >= 1) {
+        found = applyFiltersOnProducts(
+          allProducts,
+          upsellProducts,
+          activeFilters,
+        ).items.filter((e) => {
+          if (e.name.toLowerCase().includes(search.toLowerCase())) {
+            return e;
+          }
+
+          return null;
+        });
+      }
+
+      console.log("searcgable: ", "filters ", activeFilters);
 
       const res = JSON.parse(JSON.stringify(allProducts));
       res.items = found;

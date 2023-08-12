@@ -1,6 +1,10 @@
 import create from "zustand";
 import axios from "axios";
-import { defaultSettings, sanitizeBundleProducts } from "../utils";
+import {
+  defaultSettings,
+  overwriteById,
+  sanitizeBundleProducts,
+} from "../utils";
 import { subscribeWithSelector } from "zustand/middleware";
 
 const useStore = create(
@@ -23,6 +27,10 @@ const useStore = create(
     /* ===============
     Products that are being searched/currently visible within a popup */
     popupVisibleProducts: [],
+
+    /* ===============
+    All filters to visualize products */
+    activeFilters: [],
 
     /* ===============
     Get store's products and add them to the store's 'products' variable */
@@ -282,6 +290,18 @@ const useStore = create(
 
       set({
         settings,
+      });
+    },
+
+    setActiveFilters: async (newFilters = null) => {
+      if (!newFilters) {
+        return;
+      }
+
+      console.log(newFilters);
+
+      set({
+        activeFilters: newFilters,
       });
     },
 
