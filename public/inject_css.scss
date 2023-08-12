@@ -22,7 +22,7 @@ $xs: 749px;
 $xxs: 575px;
 $xxxs: 500px;
 
-$width: 150px;
+$width: 50%;
 
 $transition-basic: all 0.3s ease 0s;
 $close-button: 40px;
@@ -81,27 +81,35 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     min-width: $width !important;
   }
 
-  // .EzfyCart-item > * > *:not([class^="EzfyCart-atc-"]) {
-  //   width: $width !important;
-  // }
-
-  // .EzfyCart-item img {
-  //   display: block;
-
-  //   max-width: $width !important;
-  //   width: 100% !important;
-  // }
-
   .EzfyCart-item + .EzfyCart-item {
     margin-left: 8px !important;
+  }
+
+  .EzfyCart-items .splide__arrow {
+    width: 25px !important;
+    height: 25px !important;
+    background: white !important;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px !important;
+    padding: 7px !important;
+    transform: translateY(-20px) !important;
+  }
+
+  .EzfyCart-items .splide__arrow--next {
+    right: -10px !important;
+  }
+
+  .EzfyCart-items .splide__arrow--prev {
+    transform: rotate(180deg) translateY(20px) !important;
+    left: -10px !important;
   }
 
   .EzfyCart-items {
     display: flex;
     justify-content: flex-start;
     width: 100%;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    position: relative;
+    transition: all 0.32s !important;
+
     padding-bottom: 20px;
     &::-webkit-scrollbar {
       width: 10px;
