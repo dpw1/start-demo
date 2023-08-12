@@ -1,7 +1,7 @@
-// .PopupItem {
-//   .PopupItem-button-text {
-//     @media (max-width: 749px) {
-//       display: none;
-//     }
-//   }
-// }
+.PopupItem {
+  .PopupItem-figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

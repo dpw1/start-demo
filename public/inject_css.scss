@@ -747,6 +747,16 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     display: block;
   }
 
+  .EzfyProduct-atc-errors {
+    color: #e56464;
+    margin: 4px 0;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 600;
+    transition: color 0.15s ease-out 0s;
+    line-height: 1.4;
+    font-size: 14px;
+  }
+
   .EzfyProduct-description {
     margin-top: 30px;
   }
@@ -776,6 +786,9 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     padding: unset;
   }
 
+  max-height: 100%;
+  object-fit: contain;
+
   .splide[data-is-slider="false"] ul,
   .splide[data-is-slider="false"] li {
     list-style: none !important;
@@ -783,6 +796,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
   .splide__pagination__page.is-active {
     background: #000000d1;
+  }
+
+  .splide__list {
+    align-items: center;
   }
 
   /* end */

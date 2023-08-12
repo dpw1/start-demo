@@ -31,9 +31,9 @@ export default function PopupItem({ product, parentID }) {
 
   return (
     <div className="PopupItem  list-element list-element--compact list-element--has-hover list-element--inline-mode">
-      <div className="list-element__image">
+      <figure className="list-element__image PopupItem-figure">
         <img src={product.thumbnailUrl} alt={product.name} />
-      </div>
+      </figure>
 
       <div className="list-element__content">
         <div className="list-element__info">
