@@ -7,6 +7,7 @@ import { useStore } from "./store/store";
 import {
   applyFiltersOnProducts,
   availableFilters,
+  convertUpsellProductsToObject,
   findEqualById,
 } from "./utils";
 
@@ -47,12 +48,16 @@ export const Filter = () => {
             return;
           }
 
-          console.log("filters", filters);
+          console.log(
+            "filters aand upsell",
+            filters,
+            convertUpsellProductsToObject(upsellProducts),
+          );
           setActiveFilters(filters);
 
           const update = applyFiltersOnProducts(
             visibleProducts,
-            upsellProducts,
+            convertUpsellProductsToObject(upsellProducts),
             filters,
           );
 

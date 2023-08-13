@@ -72,8 +72,6 @@ export function applyFiltersOnProducts(
     return visibleProducts;
   }
 
-  upsellProducts = convertUpsellProductsToObject(upsellProducts);
-
   var products = JSON.parse(JSON.stringify(visibleProducts));
 
   for (var each of activeFilters) {
