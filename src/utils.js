@@ -42,15 +42,13 @@ export function findEqualById(arr1, arr2) {
 /* When in production, sometimes the upsellProducts will return a function. 
 This ensures it's always an object. */
 export function convertUpsellProductsToObject(upsellProducts = null) {
-  if (!upsellProducts || upsellProducts.length <= 0) {
-    console.log(upsellProducts);
-    throw new Error(`upsell is empty`);
-    return [];
+  if (typeof upsellProducts === "function") {
+    const res = upsellProducts();
+    console.log("upsell produs cleaned", res);
+    return res;
   }
-  const res =
-    typeof upsellProducts === "function" ? upsellProducts() : upsellProducts;
 
-  return res;
+  return upsellProducts;
 }
 
 export function overwriteById(arr, newObj) {
