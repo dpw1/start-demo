@@ -2,6 +2,7 @@ import create from "zustand";
 import axios from "axios";
 import {
   defaultSettings,
+  localURL,
   overwriteById,
   sanitizeBundleProducts,
 } from "../utils";
@@ -35,13 +36,7 @@ const useStore = create(
     /* ===============
     Get store's products and add them to the store's 'products' variable */
     populateProducts: async () => {
-      /* TODO = change this URL when on production */
-
-      const url = /localhost/.test(window.location.href)
-        ? `https://app.ecwid.com/api/v3/37374877/products?token=secret_EkQGe8SC4V4DHgSrnkmXsQsneDQ9JwQ4`
-        : `https://app.ecwid.com/api/v3/${
-            window.EcwidApp.getPayload().store_id
-          }/products?token=${window.EcwidApp.getPayload().access_token}`;
+      const url = localURL;
 
       const { data: products } = await axios.get(url);
 

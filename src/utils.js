@@ -2,6 +2,24 @@ export const defaultSettings = {
   isEnabled: false,
 };
 
+export const localURL = /localhost/.test(window.location.href)
+  ? /* local dev */
+    `https://app.ecwid.com/api/v3/37374877/products?token=secret_EkQGe8SC4V4DHgSrnkmXsQsneDQ9JwQ4`
+  : /* production */
+    `https://app.ecwid.com/api/v3/${
+      window.EcwidApp.getPayload().store_id
+    }/products?token=${window.EcwidApp.getPayload().access_token}`;
+
+export function getProductURLHref(productID) {
+  const id = /localhost/.test(window.location.href)
+    ? "37374877"
+    : window.EcwidApp.getPayload().store_id;
+
+  const url = `https://my.ecwid.com/store/${id}#product:mode=edit&id=${productID}`;
+
+  return url;
+}
+
 export const availableFilters = [
   {
     value: "show_products_with_upsell",

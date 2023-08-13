@@ -6,6 +6,7 @@ import "./ProductItem.scss";
 import { useStore } from "./store/store";
 
 import Products from "./Products";
+import { getProductURLHref } from "./utils";
 
 export default function ProductItem(props) {
   const { product, upsell } = props;
@@ -32,7 +33,7 @@ export default function ProductItem(props) {
     //   handlePopulateUpsell(e);
     // });
 
-    console.log("my upsell: ", upsell);
+    console.log("my prod: ", product);
     if (upsell && upsell.length >= 1) {
     }
   }, []);
@@ -49,23 +50,28 @@ export default function ProductItem(props) {
   return (
     <div className="ProductItem list-element list-element--compact list-element--has-hover list-element--inline-mode">
       <div className="ProductItem-top">
-        <figure className="ProductItem-figure list-element__image">
-          <img
-            className="ProductItem-image"
-            src={product.thumbnailUrl}
-            alt={product.name}
-          />
-        </figure>
-
-        <div className="ProductItem-name">
-          <div className="list-element__header">
-            <div className="list-element__main-info">
-              <div className="ProductItem-name-text list-element__title">
-                {product.name}
+        <a
+          className="ProductItem-link"
+          href={getProductURLHref(product.id)}
+          target="_blank"
+          rel="noreferrer">
+          <figure className="ProductItem-figure list-element__image">
+            <img
+              className="ProductItem-image"
+              src={product.thumbnailUrl}
+              alt={product.name}
+            />
+          </figure>
+          <div className="ProductItem-name">
+            <div className="list-element__header">
+              <div className="list-element__main-info">
+                <div className="ProductItem-name-text list-element__title">
+                  {product.name}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </a>
 
         <Popup
           modal={true}
