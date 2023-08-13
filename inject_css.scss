@@ -122,6 +122,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
     svg {
       transform: rotate(180deg) translateY(20px) !important;
+      transform-origin: bottom;
     }
   }
 
