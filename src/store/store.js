@@ -116,9 +116,9 @@ const useStore = create(
     /* Adds a product to the upsell */
     addUpsellProduct: async (parentID, bundleID) => {
       let bundle;
-      let bundleProducts = convertUpsellProductsToObject(
-        await get().upsellProducts,
-      );
+
+      const _bundleProducts = await get().upsellProducts;
+      let bundleProducts = convertUpsellProductsToObject(_bundleProducts);
 
       const _parentProduct =
         bundleProducts.length >= 1 &&
@@ -196,9 +196,8 @@ const useStore = create(
 
     /* Get the bundle/upsell products of a specific product ID */
     getUpsellProductById: async (id) => {
-      let bundleProducts = convertUpsellProductsToObject(
-        await get().upsellProducts,
-      );
+      const _bundleProducts = await get().upsellProducts;
+      let bundleProducts = convertUpsellProductsToObject(_bundleProducts);
 
       const upsell = bundleProducts.filter((e) => e.id === id);
 
@@ -208,9 +207,8 @@ const useStore = create(
     },
 
     deleteUpsellProductById: async (parentID, bundleID) => {
-      let bundleProducts = convertUpsellProductsToObject(
-        await get().upsellProducts,
-      );
+      const _bundleProducts = await get().upsellProducts;
+      let bundleProducts = convertUpsellProductsToObject(_bundleProducts);
 
       let updated = [];
 
@@ -261,9 +259,8 @@ const useStore = create(
         throw new Error("no settings object");
       }
 
-      const upsellProducts = convertUpsellProductsToObject(
-        await get().upsellProducts,
-      );
+      const _upsellProducts = await get().upsellProducts;
+      const upsellProducts = convertUpsellProductsToObject(_upsellProducts);
 
       if (window.EcwidApp) {
         try {
