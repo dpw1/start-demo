@@ -22,7 +22,7 @@ $xs: 749px;
 $xxs: 575px;
 $xxxs: 500px;
 
-$width: 50%;
+$width: 45%;
 
 $transition-basic: all 0.3s ease 0s;
 $close-button: 40px;
@@ -70,6 +70,8 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     height: var(--ezfy-figure-height);
     transition: all 0.12s ease-out 0s !important;
     box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.1) !important;
+    overflow: hidden;
+
     &:hover {
       transition: all 0.12s ease-out 0s;
       box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1) !important;
@@ -96,6 +98,10 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     @at-root .EzfyCart-items:not([id]) .EzfyCart-item {
       width: $width !important;
       min-width: $width !important;
+    }
+
+    .EzfyCart-items:not([id]) .EzfyCart-item + .EzfyCart-item {
+      margin-left: 10% !important;
     }
   }
 
