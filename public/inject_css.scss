@@ -93,7 +93,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     transition: box-shadow 0.2s ease 0s, background-color 0.2s ease 0s !important;
 
     /* Width only for non-slider */
-    @at-root .EzfyCart-items:not([id]) {
+    @at-root .EzfyCart-items:not([id]) .EzfyCart-item {
       width: $width !important;
       min-width: $width !important;
     }
