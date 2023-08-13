@@ -64,7 +64,7 @@ export function applyFiltersOnProducts(
 
   for (var each of activeFilters) {
     if (each.value === "show_products_with_upsell") {
-      console.log("apply - products", products);
+      console.log("apply - products", products, upsellProducts);
 
       var filtered = findEqualById(products.items, upsellProducts);
 
