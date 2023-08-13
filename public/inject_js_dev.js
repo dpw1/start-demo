@@ -5105,20 +5105,21 @@ window.ezfyEasyUpsellApp = (function () {
 
         products += html;
       }
-      
-      
-      
+
       window.ezfyCartUpsellTotalProducts = _products.length;
-      
-      const enableSplide = window.ezfyCartUpsellTotalProducts >= 3 ? true : false;
+
+      const enableSplide =
+        window.ezfyCartUpsellTotalProducts >= 3 ? true : false;
 
       const html = `
-    <div class="EzfyCart EzfyCart--loading" data-ezfy-products-quantity="${_products.length}">
+    <div class="EzfyCart EzfyCart--loading" data-ezfy-products-quantity="${
+      _products.length
+    }">
     <p class="EzfyCart-title">Frequently Bought Together</p>
-	  <div class="EzfyCart-items ${enableSplide ? 'splide' : ''}">
-	   ${enableSplide ? '<div class="splide__track"><ul class="splide__list">' : ''}
+	  <div class="EzfyCart-items ${enableSplide ? "splide" : ""}">
+	   ${enableSplide ? '<div class="splide__track"><ul class="splide__list">' : ""}
     		${products}
-		${enableSplide ? '</ul></div>' : ''}
+		${enableSplide ? "</ul></div>" : ""}
 	      
     </div>
     </div>
@@ -5208,9 +5209,9 @@ window.ezfyEasyUpsellApp = (function () {
       if (keyCode === 27) {
         const $popup = document.querySelector(`.EzfyPopup`);
         $popup.classList.add(`EzfyPopup--invisible`);
-         try {
-        window.ezfyUpsellPopupSlider.destroy();
-      } catch (err) {}
+        try {
+          window.ezfyUpsellPopupSlider.destroy();
+        } catch (err) {}
       }
     });
 
@@ -5772,42 +5773,38 @@ window.ezfyEasyUpsellApp = (function () {
       { perPage: 1, autoHeight: true, height: 300 },
     );
 
-
     window.ezfyUpsellPopupSlider.mount();
   }
-  
-  function openProductLinksInPopupOnClick(event){
-  	
-  	    event.preventDefault();
-        
-        console.log("click")
 
-        const $this = event.target;
+  function openProductLinksInPopupOnClick(event) {
+    event.preventDefault();
 
-        let $atc;
+    console.log("click");
 
-        $atc = $this.querySelector(`.EzfyCart-atc`);
+    const $this = event.target;
 
-        if ($atc) {
-          handlePopupOpen($atc);
-          return;
-        }
+    let $atc;
 
-        const $parent = $this.closest(`.EzfyCart-item`);
+    $atc = $this.querySelector(`.EzfyCart-atc`);
 
-        $atc = $parent.querySelector(`.EzfyCart-atc`);
+    if ($atc) {
+      handlePopupOpen($atc);
+      return;
+    }
 
-        if ($atc) {
-          handlePopupOpen($atc);
-          return;
-        }
-  	
+    const $parent = $this.closest(`.EzfyCart-item`);
+
+    $atc = $parent.querySelector(`.EzfyCart-atc`);
+
+    if ($atc) {
+      handlePopupOpen($atc);
+      return;
+    }
   }
 
   async function openProductLinksInPopup() {
-  	
-  	return;
-  	
+    return;
+
     if (!OPEN_PRODUCTS_IN_POPUP) {
       return;
     }
@@ -5824,8 +5821,8 @@ window.ezfyEasyUpsellApp = (function () {
       each.setAttribute("data-has-listener", "true");
       each.addEventListener(`click`, async function (e) {
         e.preventDefault();
-        
-        console.log("click")
+
+        console.log("click");
 
         const $this = e.target;
 
@@ -5988,48 +5985,48 @@ window.ezfyEasyUpsellApp = (function () {
 
     var height = Math.max(...heights);
 
-    document.documentElement.style.setProperty(`--ezfy-figure-height`, `${height}px`);
-    
-    /* Make slider same height */
-    
-    
-	const $slider = await document.querySelector(`.EzfyCart-items.is-initialized`)
-  	
-  	if ($slider){
-  		
-  		$slider.setAttribute(`style`, `height: ${$slider.offsetHeight}px;`)
-  	}
- 
-  }
-  
-  async function addSliderToProducts(){
-  	
-  	if (!window.ezfyCartUpsellTotalProducts || window.ezfyCartUpsellTotalProducts<= 2){
-  		return;
-  	}
-  	
-  	await loadSplide();
-  	
-
-  	
-  	window.ezfyUpsellListOfProductsSlider = new Splide(
-      '.splide.EzfyCart-items',
-      { perPage: 2, autoHeight: false,  type   : 'loop'},
+    document.documentElement.style.setProperty(
+      `--ezfy-figure-height`,
+      `${height}px`,
     );
-    
+
+    /* Make slider same height */
+
+    const $slider = await document.querySelector(
+      `.EzfyCart-items.is-initialized`,
+    );
+
+    if ($slider) {
+      $slider.setAttribute(`style`, `height: ${$slider.offsetHeight}px;`);
+    }
+  }
+
+  async function addSliderToProducts() {
+    if (
+      !window.ezfyCartUpsellTotalProducts ||
+      window.ezfyCartUpsellTotalProducts <= 2
+    ) {
+      return;
+    }
+
+    await loadSplide();
+
+    window.ezfyUpsellListOfProductsSlider = new Splide(
+      ".splide.EzfyCart-items",
+      { perPage: 2, autoHeight: false, type: "loop", gap: "20px" },
+    );
+
     window.ezfyUpsellListOfProductsSlider.mount();
-    
+
     const $el = document.querySelector(`.EzfyCart--loading`);
     $el.classList.remove(`EzfyCart--loading`);
-	    
-        
+
     // const $track = document.querySelector(`.EzfyCart-items .splide__track`);
     // const height = $track.offsetHeight
     // $track.setAttribute("style", `height:${height}px;`)
-    
 
-  	console.log()
-  	// debugger;
+    console.log();
+    // debugger;
   }
 
   async function start() {
@@ -6042,7 +6039,6 @@ window.ezfyEasyUpsellApp = (function () {
     handleInputOnChange();
     addSliderToProducts();
     makeImagesSameHeight();
-    
   }
 
   async function restart() {
@@ -6111,7 +6107,7 @@ window.ezfyEasyUpsellApp = (function () {
   }
 
   return {
-  	openProductLinksInPopupOnClick: openProductLinksInPopupOnClick,
+    openProductLinksInPopupOnClick: openProductLinksInPopupOnClick,
     handlePopupClose: handlePopupClose,
     init: async function () {
       const data = await loadData();
