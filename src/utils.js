@@ -39,6 +39,18 @@ export function findEqualById(arr1, arr2) {
   }
 }
 
+/* When in production, sometimes the upsellProducts will return a function. 
+This ensures it's always an object. */
+export function convertUpsellProductsToObject(upsellProducts = null) {
+  if (!upsellProducts || upsellProducts.length <= 0) {
+    return [];
+  }
+  const res =
+    typeof upsellProducts === "function" ? upsellProducts() : upsellProducts;
+
+  return res;
+}
+
 export function overwriteById(arr, newObj) {
   try {
     const updatedArray = arr.map((obj) =>

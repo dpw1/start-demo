@@ -1,6 +1,7 @@
 import create from "zustand";
 import axios from "axios";
 import {
+  convertUpsellProductsToObject,
   defaultSettings,
   localURL,
   overwriteById,
@@ -115,10 +116,9 @@ const useStore = create(
     /* Adds a product to the upsell */
     addUpsellProduct: async (parentID, bundleID) => {
       let bundle;
-      let bundleProducts =
-        typeof get().upsellProducts === "function"
-          ? await get().upsellProducts()
-          : await get().upsellProducts;
+      let bundleProducts = convertUpsellProductsToObject(
+        await get().upsellProducts,
+      );
 
       const _parentProduct =
         bundleProducts.length >= 1 &&
@@ -196,10 +196,9 @@ const useStore = create(
 
     /* Get the bundle/upsell products of a specific product ID */
     getUpsellProductById: async (id) => {
-      let bundleProducts =
-        typeof get().upsellProducts === "function"
-          ? await get().upsellProducts()
-          : await get().upsellProducts;
+      let bundleProducts = convertUpsellProductsToObject(
+        await get().upsellProducts,
+      );
 
       const upsell = bundleProducts.filter((e) => e.id === id);
 
@@ -209,10 +208,9 @@ const useStore = create(
     },
 
     deleteUpsellProductById: async (parentID, bundleID) => {
-      let bundleProducts =
-        typeof get().upsellProducts === "function"
-          ? await get().upsellProducts()
-          : await get().upsellProducts;
+      let bundleProducts = convertUpsellProductsToObject(
+        await get().upsellProducts,
+      );
 
       let updated = [];
 
@@ -263,10 +261,9 @@ const useStore = create(
         throw new Error("no settings object");
       }
 
-      const upsellProducts =
-        typeof get().upsellProducts === "function"
-          ? await get().upsellProducts()
-          : await get().upsellProducts;
+      const upsellProducts = convertUpsellProductsToObject(
+        await get().upsellProducts,
+      );
 
       if (window.EcwidApp) {
         try {
