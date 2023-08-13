@@ -25,7 +25,6 @@ export const Filter = () => {
   );
 
   useEffect(() => {
-    console.log("my upsell prods", upsellProducts);
     useStore.subscribe(
       (state) => state.upsellProducts,
       (e) => {
@@ -36,6 +35,10 @@ export const Filter = () => {
 
     setUpsellProducts(storeUpsellProducts);
   }, []);
+
+  useEffect(() => {
+    console.log("my upsell prods", upsellProducts);
+  }, [upsellProducts]);
 
   return (
     <div className="Filter">
