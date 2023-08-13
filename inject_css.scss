@@ -118,8 +118,11 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   }
 
   .EzfyCart-items .splide__arrow--prev {
-    transform: rotate(180deg) translateY(20px) !important;
     left: -10px !important;
+
+    svg {
+      transform: rotate(180deg) translateY(20px) !important;
+    }
   }
 
   .EzfyCart-items {
@@ -410,7 +413,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   }
 
   .EzfyProduct-prices {
-    margin-top: -20px;
+    margin-top: 10px;
     margin-bottom: 20px;
   }
 
