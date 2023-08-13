@@ -13,9 +13,7 @@ import {
 
 const selectedValues = [];
 
-export const Filter = () => {
-  const upsellProducts = useStore((state) => state.upsellProducts);
-
+export const Filter = ({ upsellProducts }) => {
   const products = useStore((state) => state.products);
   const setActiveFilters = useStore((state) => state.setActiveFilters);
   const visibleProducts = useStore((state) => state.visibleProducts);
@@ -48,16 +46,12 @@ export const Filter = () => {
             return;
           }
 
-          console.log(
-            "filters aand upsell",
-            filters,
-            convertUpsellProductsToObject(upsellProducts),
-          );
+          console.log("filters aand upsell", filters, upsellProducts);
           setActiveFilters(filters);
 
           const update = applyFiltersOnProducts(
             visibleProducts,
-            convertUpsellProductsToObject(upsellProducts),
+            upsellProducts,
             filters,
           );
 

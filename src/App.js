@@ -96,7 +96,7 @@ function App() {
                 </h1>
                 <Settings></Settings>
                 <div style={{ display: "flex" }}>
-                  <Filter></Filter>
+                  <Filter upsellProducts={upsellProducts}></Filter>
                   <Search></Search>
                 </div>
                 {upsellProducts ? (
