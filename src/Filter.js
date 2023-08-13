@@ -46,7 +46,7 @@ export const Filter = ({ upsellProducts }) => {
             return;
           }
 
-          console.log("filters aand upsell", filters, upsellProducts);
+          console.log("NEW CODE filters aand upsell", filters, upsellProducts);
           setActiveFilters(filters);
 
           const update = applyFiltersOnProducts(

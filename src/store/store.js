@@ -1,7 +1,6 @@
 import create from "zustand";
 import axios from "axios";
 import {
-  convertUpsellProductsToObject,
   defaultSettings,
   localURL,
   overwriteById,
@@ -115,10 +114,10 @@ const useStore = create(
 
     /* Adds a product to the upsell */
     addUpsellProduct: async (parentID, bundleID) => {
-      let bundle;
-
-      const _bundleProducts = await get().upsellProducts;
-      let bundleProducts = convertUpsellProductsToObject(_bundleProducts);
+      const bundleProducts =
+        typeof get().upsellProducts === "function"
+          ? await get().upsellProducts()
+          : await get().upsellProducts;
 
       const _parentProduct =
         bundleProducts.length >= 1 &&
@@ -196,8 +195,10 @@ const useStore = create(
 
     /* Get the bundle/upsell products of a specific product ID */
     getUpsellProductById: async (id) => {
-      const _bundleProducts = await get().upsellProducts;
-      let bundleProducts = convertUpsellProductsToObject(_bundleProducts);
+      let bundleProducts =
+        typeof get().upsellProducts === "function"
+          ? await get().upsellProducts()
+          : await get().upsellProducts;
 
       const upsell = bundleProducts.filter((e) => e.id === id);
 
@@ -207,8 +208,10 @@ const useStore = create(
     },
 
     deleteUpsellProductById: async (parentID, bundleID) => {
-      const _bundleProducts = await get().upsellProducts;
-      let bundleProducts = convertUpsellProductsToObject(_bundleProducts);
+      let bundleProducts =
+        typeof get().upsellProducts === "function"
+          ? await get().upsellProducts()
+          : await get().upsellProducts;
 
       let updated = [];
 
@@ -259,8 +262,10 @@ const useStore = create(
         throw new Error("no settings object");
       }
 
-      const _upsellProducts = await get().upsellProducts;
-      const upsellProducts = convertUpsellProductsToObject(_upsellProducts);
+      const upsellProducts =
+        typeof get().upsellProducts === "function"
+          ? await get().upsellProducts()
+          : await get().upsellProducts;
 
       if (window.EcwidApp) {
         try {
