@@ -13,10 +13,10 @@ import {
 
 const selectedValues = [];
 
-export const Filter = () => {
+export const Filter = ({ upsellProducts: _upsellProducts }) => {
   const [upsellProducts, setUpsellProducts] = useState([]);
 
-  const storeUpsellProducts = useStore((state) => state.upsellProducts);
+  // const storeUpsellProducts = useStore((state) => state.upsellProducts);
   const products = useStore((state) => state.products);
   const setActiveFilters = useStore((state) => state.setActiveFilters);
   const visibleProducts = useStore((state) => state.visibleProducts);
@@ -33,7 +33,7 @@ export const Filter = () => {
       },
     );
 
-    setUpsellProducts(storeUpsellProducts);
+    setUpsellProducts(_upsellProducts);
   }, []);
 
   useEffect(() => {
