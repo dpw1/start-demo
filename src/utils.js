@@ -59,12 +59,19 @@ export function applyFiltersOnProducts(
   if (!activeFilters || activeFilters.length <= 0) {
     return visibleProducts;
   }
+
+  var products = JSON.parse(JSON.stringify(visibleProducts));
+
   for (var each of activeFilters) {
     if (each.value === "show_products_with_upsell") {
-      var products = JSON.parse(JSON.stringify(visibleProducts));
+      console.log("apply - products", products);
 
       var filtered = findEqualById(products.items, upsellProducts);
+
+      console.log("apply - filtered", filtered);
       products.items = filtered;
+
+      debugger;
 
       return products;
     }

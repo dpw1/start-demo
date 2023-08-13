@@ -33,7 +33,6 @@ export default function ProductItem(props) {
     //   handlePopulateUpsell(e);
     // });
 
-    console.log("my prod: ", product);
     if (upsell && upsell.length >= 1) {
     }
   }, []);
