@@ -22,16 +22,6 @@ export const Filter = () => {
     (state) => state.updateVisibleProducts,
   );
 
-  useEffect(() => {
-    useStore.subscribe(
-      (state) => state.visibleProducts,
-      (e) => {
-        console.log("Visible products update from filter!", e);
-      },
-    );
-    return () => {};
-  }, []);
-
   return (
     <div className="Filter">
       <Select
@@ -66,6 +56,12 @@ export const Filter = () => {
             filters,
           );
 
+          console.log(
+            "filter update",
+            update,
+            "--- visible prods",
+            visibleProducts,
+          );
           if (!update) {
             updateVisibleProducts(products);
           }
