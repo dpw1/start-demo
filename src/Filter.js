@@ -50,7 +50,7 @@ export const Filter = ({ upsellProducts: _upsellProducts }) => {
           return (
             <div style={{ display: "flex", alignItems: "center" }}>
               <b style={{ marginRight: 5 }}>{state.values.length}</b> Filter
-              {state.values.length !== 1 ? "s" : ""} -- {upsellProducts.length}
+              {state.values.length !== 1 ? "s" : ""}
             </div>
           );
         }}
