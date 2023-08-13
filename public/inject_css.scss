@@ -425,6 +425,9 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyProduct-prices {
     margin-top: 10px;
     margin-bottom: 20px;
+
+    display: flex;
+    align-items: center;
   }
 
   .EzfyProduct-price {
@@ -595,6 +598,11 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     color: #757575;
   }
 
+  .EzfyProduct-compare-price {
+    text-decoration: line-through;
+    opacity: 0.5;
+    margin-left: 10px;
+  }
   /* ## Select 
 ============================ */
   .EzfyProduct-option--select select {

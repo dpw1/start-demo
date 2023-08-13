@@ -1,5 +1,5 @@
 export const defaultSettings = {
-  isEnabled: false,
+  isEnabled: true,
 };
 
 export const localURL = /localhost/.test(window.location.href)
