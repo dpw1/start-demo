@@ -41,7 +41,8 @@ export const Filter = () => {
         contentRenderer={({ props, state }) => {
           return (
             <div style={{ display: "flex", alignItems: "center" }}>
-              <b style={{ marginRight: 5 }}>{state.values.length}</b> selected
+              <b style={{ marginRight: 5 }}>{state.values.length}</b> Filter
+              {state.values.length !== 1 ? "s" : ""}
             </div>
           );
         }}

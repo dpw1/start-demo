@@ -7,10 +7,6 @@ export const availableFilters = [
     value: "show_products_with_upsell",
     label: "Show only products with upsells",
   },
-  {
-    value: "test",
-    label: "Test",
-  },
 ];
 
 export function sleep(ms) {
