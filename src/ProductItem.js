@@ -35,6 +35,8 @@ export default function ProductItem(props) {
 
     if (upsell && upsell.length >= 1) {
     }
+
+    console.log("xx product", product);
   }, []);
 
   useEffect(() => {
@@ -61,12 +63,27 @@ export default function ProductItem(props) {
               alt={product.name}
             />
           </figure>
-          <div className="ProductItem-name">
-            <div className="list-element__header">
-              <div className="list-element__main-info">
-                <div className="ProductItem-name-text list-element__title">
-                  {product.name}
+          <div className="ProductItem-info">
+            <div className="ProductItem-info-container ProductItem-info-top">
+              <div className="ProductItem-name">
+                <div className="list-element__header">
+                  <div className="list-element__main-info">
+                    <div className="ProductItem-name-text list-element__title">
+                      {product.name}
+                    </div>
+                  </div>
                 </div>
+              </div>
+
+              <div className="ProductItem-price">
+                {product.defaultDisplayedPriceFormatted}
+              </div>
+            </div>
+            <div className="ProductItem-info-container">
+              <div className="ProductItem-enabled">
+                {product.enabled ? "Enabled" : "Disabled"}
+                {" and "}
+                {product.inStock ? "in stock" : "out of stock"}
               </div>
             </div>
           </div>
@@ -79,21 +96,23 @@ export default function ProductItem(props) {
           }}
           trigger={() => {
             return (
-              <button
-                type="button"
-                className="ProductItem-button btn btn-small btn-primary">
-                <span className="svg-icon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 12 12"
-                    focusable="false">
-                    <path d="M6.712 5.314H11v1.39H6.712V11H5.267V6.706H1V5.314h4.267V1h1.446v4.314z"></path>
-                  </svg>
-                </span>
-                <span className="ProductItem-button-text gwt-InlineLabel">
-                  Add Upsell Products
-                </span>
-              </button>
+              <div className="ProductItem-button-wrapper">
+                <button
+                  type="button"
+                  className="ProductItem-button btn btn-small btn-primary">
+                  <span className="svg-icon">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      viewBox="0 0 12 12"
+                      focusable="false">
+                      <path d="M6.712 5.314H11v1.39H6.712V11H5.267V6.706H1V5.314h4.267V1h1.446v4.314z"></path>
+                    </svg>
+                  </span>
+                  <span className="ProductItem-button-text gwt-InlineLabel">
+                    Add Upsell Products
+                  </span>
+                </button>
+              </div>
             );
           }}
           position="center center">
@@ -112,7 +131,9 @@ export default function ProductItem(props) {
             }>
             {upsell && upsell.hasOwnProperty("bundle") && (
               <React.Fragment>
-                <p className="ProductItem-bottom-title">Upsell products</p>
+                <p className="ProductItem-bottom-title">
+                  {upsell.bundle.length - 1} Upsell product(s)
+                </p>
                 <div className="list-element__data-row ProductItem-bottom-wrapper">
                   {upsell.bundle.map((e) => {
                     const _product = e;
@@ -131,7 +152,7 @@ export default function ProductItem(props) {
                             alt=""
                           />
                         </figure>
-                        <div className="ProductItem-info">
+                        <div className="ProductItem-upsell-info">
                           <span className="ProductItem-title spacing--mr1">
                             {_product.name}
                           </span>

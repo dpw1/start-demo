@@ -71,8 +71,6 @@ export function applyFiltersOnProducts(
       console.log("apply - filtered", filtered);
       products.items = filtered;
 
-      debugger;
-
       return products;
     }
   }
