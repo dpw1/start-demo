@@ -114,7 +114,8 @@ const useStore = create(
 
     /* Adds a product to the upsell */
     addUpsellProduct: async (parentID, bundleID) => {
-      const bundleProducts =
+      let bundle;
+      let bundleProducts =
         typeof get().upsellProducts === "function"
           ? await get().upsellProducts()
           : await get().upsellProducts;
