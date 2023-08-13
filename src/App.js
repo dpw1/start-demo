@@ -96,8 +96,12 @@ function App() {
                 </h1>
                 <Settings></Settings>
                 <div style={{ display: "flex" }}>
-                  <Filter upsellProducts={upsellProducts}></Filter>
-                  <Search></Search>
+                  {upsellProducts && (
+                    <React.Fragment>
+                      <Filter upsellProducts={upsellProducts}></Filter>
+                      <Search></Search>
+                    </React.Fragment>
+                  )}
                 </div>
                 {upsellProducts ? (
                   <Products upsellProducts={upsellProducts}></Products>
