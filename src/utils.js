@@ -43,6 +43,7 @@ export function findEqualById(arr1, arr2) {
 This ensures it's always an object. */
 export function convertUpsellProductsToObject(upsellProducts = null) {
   if (!upsellProducts || upsellProducts.length <= 0) {
+    throw new Error(`upsell is empty`);
     return [];
   }
   const res =
