@@ -13,13 +13,24 @@ import {
 
 const selectedValues = [];
 
-export const Filter = ({ upsellProducts }) => {
+export const Filter = () => {
+  const [upsellProducts, setUpsellProducts] = useState([]);
   const products = useStore((state) => state.products);
   const setActiveFilters = useStore((state) => state.setActiveFilters);
   const visibleProducts = useStore((state) => state.visibleProducts);
   const updateVisibleProducts = useStore(
     (state) => state.updateVisibleProducts,
   );
+
+  useEffect(() => {
+    useStore.subscribe(
+      (state) => state.upsellProducts,
+      (e) => {
+        console.log("upsell products update from app!", e);
+        setUpsellProducts(e);
+      },
+    );
+  }, []);
 
   return (
     <div className="Filter">
@@ -31,7 +42,7 @@ export const Filter = ({ upsellProducts }) => {
           return (
             <div style={{ display: "flex", alignItems: "center" }}>
               <b style={{ marginRight: 5 }}>{state.values.length}</b> Filter
-              {state.values.length !== 1 ? "s" : ""}
+              {state.values.length !== 1 ? "s" : ""} -- {upsellProducts.length}
             </div>
           );
         }}
