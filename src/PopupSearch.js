@@ -76,7 +76,7 @@ export default function PopupSearch({ allProducts }) {
           type="text"
           className="field__input"
           id="gwt-uid-3188"
-          placeholder="Search product!"
+          placeholder="Search product"
           aria-label="Search product"
           onChange={(e) => setSearch(e.target.value)}
         />{" "}
