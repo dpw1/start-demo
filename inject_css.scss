@@ -76,6 +76,11 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     }
   }
 
+  .EzfyCart-image {
+    object-fit: cover;
+    height: 100%;
+  }
+
   .EzfyCart-items--active {
     cursor: grabbing;
     cursor: -webkit-grabbing;
