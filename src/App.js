@@ -91,7 +91,7 @@ function App() {
             <div className="a-card a-card--compact">
               <div className="EasyUpsellApp-block a-card__paddings">
                 <h1 className="EasyUpsellApp-title settings-page__title spacing--mt2">
-                  EZFY Cart Upsell
+                  Checkout Upsell by EZFY
                 </h1>
                 <Settings></Settings>
                 <div style={{ display: "flex" }}>

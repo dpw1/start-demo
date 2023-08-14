@@ -472,6 +472,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyProduct-figure {
     width: 100%;
     margin: 0;
+    display: flex;
 
     @media (min-width: $xs) {
       position: sticky;
