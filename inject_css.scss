@@ -22,8 +22,6 @@ $xs: 749px;
 $xxs: 575px;
 $xxxs: 500px;
 
-$width: 45%;
-
 $transition-basic: all 0.3s ease 0s;
 $close-button: 40px;
 
@@ -96,12 +94,12 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
 
     /* Width only for non-slider */
     @at-root .EzfyCart-items:not([id]) .EzfyCart-item {
-      width: $width !important;
-      min-width: $width !important;
+      width: 48% !important;
+      min-width: 48% !important;
     }
 
     @at-root .EzfyCart-items:not([id]) .EzfyCart-item + .EzfyCart-item {
-      margin-left: 10% !important;
+      margin-left: 5% !important;
     }
   }
 
