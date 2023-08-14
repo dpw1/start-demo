@@ -26,7 +26,7 @@ $transition-basic: all 0.3s ease 0s;
 $close-button: 40px;
 
 :root {
-  --ezfy-figure-height: 100px;
+  --ezfy-figure-height: 170px;
 }
 
 $blue: #00ffffd4;
@@ -239,6 +239,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   .EzfyCart-item-title {
     font-size: 12px !important;
     margin-top: 5px;
+    height: 30px;
 
     overflow: hidden;
     text-overflow: ellipsis;

@@ -1,6 +1,5 @@
 import "./App.scss";
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useStore } from "./store/store";
 import { shallow } from "zustand/shallow";
 import Products from "./Products";
@@ -90,9 +89,9 @@ function App() {
         <div className="named-area">
           <div className="named-area__body">
             <div className="a-card a-card--compact">
-              <div className="a-card__paddings">
+              <div className="EasyUpsellApp-block a-card__paddings">
                 <h1 className="EasyUpsellApp-title settings-page__title spacing--mt2">
-                  EZFY Cart Upsell!
+                  EZFY Cart Upsell
                 </h1>
                 <Settings></Settings>
                 <div style={{ display: "flex" }}>

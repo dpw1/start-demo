@@ -39,7 +39,7 @@ export default function PopupItem({ product, parentID }) {
         <div className="list-element__info">
           <div className="list-element__header">
             <div className="list-element__main-info">
-              <div className="list-element__title">
+              <div className="PopupItem-product-name list-element__title">
                 <span>{product.name}</span>
               </div>
             </div>

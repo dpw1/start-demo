@@ -20,6 +20,9 @@ export const Filter = ({ upsellProducts: _upsellProducts }) => {
   const products = useStore((state) => state.products);
   const setActiveFilters = useStore((state) => state.setActiveFilters);
   const visibleProducts = useStore((state) => state.visibleProducts);
+  const setStoreUpsellProducts = useStore(
+    (state) => state.setStoreUpsellProducts,
+  );
   const updateVisibleProducts = useStore(
     (state) => state.updateVisibleProducts,
   );
@@ -34,6 +37,7 @@ export const Filter = ({ upsellProducts: _upsellProducts }) => {
     );
 
     setUpsellProducts(_upsellProducts);
+    setStoreUpsellProducts(_upsellProducts);
   }, []);
 
   useEffect(() => {

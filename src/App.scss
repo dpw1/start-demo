@@ -10,7 +10,16 @@ $width: 800px;
   margin: 0 auto;
   display: block;
   padding: 0 20px;
+  min-height: 1000px;
 
+  @media (max-width: 749px) {
+    padding: 0 5px;
+  }
+
+  .EasyUpsellApp-block {
+    height: 690px !important;
+    overflow-y: scroll !important;
+  }
   &-container {
     max-width: $width;
     width: 100%;
@@ -159,8 +168,12 @@ $width: 800px;
 
   .EasyUpsellApp-title {
     font-size: 32px;
-    text-align: left;
+    text-align: center;
     font-weight: 500;
+    @media (max-width: 749px) {
+      margin-top: 10px;
+      margin-bottom: 20px;
+    }
   }
 }
 

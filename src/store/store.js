@@ -2,11 +2,19 @@ import create from "zustand";
 import axios from "axios";
 import {
   defaultSettings,
-  localURL,
   overwriteById,
   sanitizeBundleProducts,
 } from "../utils";
+
 import { subscribeWithSelector } from "zustand/middleware";
+
+const localURL = /localhost/.test(window.location.href)
+  ? /* local dev */
+    `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
+  : /* production */
+    `https://app.ecwid.com/api/v3/${
+      window.EcwidApp.getPayload().store_id
+    }/products?token=${window.EcwidApp.getPayload().access_token}`;
 
 const useStore = create(
   subscribeWithSelector((set, get) => ({
@@ -85,7 +93,6 @@ const useStore = create(
 
             window.EcwidApp.getAppPublicConfig(function (value) {
               const _data = JSON.parse(value);
-              // console.log("xxx ECWID PRE DATA", _data);
               data = data = _data.upsellProducts;
 
               if (!data) {
@@ -103,6 +110,11 @@ const useStore = create(
 
               window.upsellProducts = data;
               resolve(data);
+
+              set({
+                upsellProducts: data,
+              });
+
               return;
             });
           }
@@ -110,6 +122,13 @@ const useStore = create(
       }
 
       return [];
+    },
+
+    setStoreUpsellProducts: (data) => {
+      console.log("data: ", data);
+      set({
+        upsellProducts: data,
+      });
     },
 
     /* Adds a product to the upsell */

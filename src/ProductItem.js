@@ -26,17 +26,15 @@ export default function ProductItem(props) {
   );
 
   useEffect(() => {
-    // (async (_) => {
-    //   // handlePopulateUpsell();
-    // })();
-    // useStore.subscribe(async (e) => {
-    //   handlePopulateUpsell(e);
-    // });
-
     if (upsell && upsell.length >= 1) {
     }
 
-    console.log("xx product", product);
+    useStore.subscribe(
+      (state) => state.upsellProducts,
+      (e) => {
+        console.log("xx update");
+      },
+    );
   }, []);
 
   useEffect(() => {
@@ -132,7 +130,7 @@ export default function ProductItem(props) {
             {upsell && upsell.hasOwnProperty("bundle") && (
               <React.Fragment>
                 <p className="ProductItem-bottom-title">
-                  {upsell.bundle.length - 1} Upsell product(s)
+                  {/* {upsell.bundle.length - 1}*/} Upsell product(s)
                 </p>
                 <div className="list-element__data-row ProductItem-bottom-wrapper">
                   {upsell.bundle.map((e) => {

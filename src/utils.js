@@ -2,14 +2,6 @@ export const defaultSettings = {
   isEnabled: true,
 };
 
-export const localURL = /localhost/.test(window.location.href)
-  ? /* local dev */
-    `https://app.ecwid.com/api/v3/37374877/products?token=secret_EkQGe8SC4V4DHgSrnkmXsQsneDQ9JwQ4`
-  : /* production */
-    `https://app.ecwid.com/api/v3/${
-      window.EcwidApp.getPayload().store_id
-    }/products?token=${window.EcwidApp.getPayload().access_token}`;
-
 export function getProductURLHref(productID) {
   const id = /localhost/.test(window.location.href)
     ? "37374877"
@@ -25,6 +17,7 @@ export const availableFilters = [
     value: "show_products_with_upsell",
     label: "Show only products with upsells",
   },
+  /* TODO - alphabetical order, recently added, hide disabled */
 ];
 
 export function sleep(ms) {
