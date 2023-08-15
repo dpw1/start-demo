@@ -86,6 +86,7 @@ $font-size-mobile-sm: 12px;
     width: 100%;
     align-items: center;
     flex-direction: row;
+    overflow: hidden;
 
     @media (max-width: 749px) {
       overflow-x: scroll;
@@ -101,6 +102,7 @@ $font-size-mobile-sm: 12px;
     flex-direction: row;
     overflow-x: scroll;
     padding-bottom: 10px;
+    padding-right: 30px;
 
     @media (max-width: 749px) {
       overflow-x: visible;
@@ -155,9 +157,9 @@ $font-size-mobile-sm: 12px;
   }
 
   .ProductItem-upsell-figure {
-    min-width: 93px;
-    width: 93px;
-    height: 93px;
+    min-width: 70px;
+    width: 70px;
+    height: 70px;
     margin: 0;
     padding: 0;
     max-width: 100%;
@@ -256,7 +258,7 @@ $font-size-mobile-sm: 12px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
   }
 
