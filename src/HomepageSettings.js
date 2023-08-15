@@ -6,6 +6,11 @@ import { useStore } from "./store/store";
 export default function HomepageSettings() {
   const setSettings = useStore((state) => state.setSettings);
   const [isEnabled, setIsEnabled] = useState(false);
+  const settings = useStore((state) => state.settings);
+
+  useEffect(() => {
+    setIsEnabled(settings.isEnabled);
+  }, [settings]);
 
   return (
     <div className="HomepageSettings">
