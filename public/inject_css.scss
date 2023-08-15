@@ -529,6 +529,8 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     align-items: center;
     flex-direction: column;
     justify-content: center;
+    min-width: 40px;
+    width: max-content;
   }
 
   .EzfyProduct-size input + * {
