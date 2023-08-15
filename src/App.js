@@ -10,14 +10,17 @@ import { Placeholder } from "./Placeholder";
 import Settings from "./Settings";
 import { defaultSettings } from "./utils";
 import { Filter } from "./Filter";
+import HomepageSettings from "./HomepageSettings";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
   const [upsellProducts, setUpsellProducts] = useState(null);
   const [initiated, setInitiated] = useState(false);
 
-  const getUpsellProducts = useStore((state) => state.upsellProducts);
+  const settings = useStore((state) => state.settings);
   const setSettings = useStore((state) => state.setSettings);
+
+  const getUpsellProducts = useStore((state) => state.upsellProducts);
 
   function initDatabaseOnFirstInstall(value) {
     value = JSON.parse(value);
@@ -91,9 +94,10 @@ function App() {
             <div className="a-card a-card--compact">
               <div className="EasyUpsellApp-block a-card__paddings">
                 <h1 className="EasyUpsellApp-title settings-page__title spacing--mt2">
-                  Checkout Upsell by EZFY
+                  Checkout Upsell
                 </h1>
-                <Settings></Settings>
+                <HomepageSettings></HomepageSettings>
+                {/* <Settings></Settings> */}
                 <div style={{ display: "flex" }}>
                   {upsellProducts && (
                     <React.Fragment>
