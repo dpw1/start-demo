@@ -77,6 +77,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   }
 
   .EzfyCart-image {
+    width: 100% !important;
     object-fit: cover;
     height: 100% !important;
   }
@@ -133,8 +134,8 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
     left: -10px !important;
 
     svg {
-      transform: rotate(180deg) translateY(20px) !important;
-      transform-origin: bottom;
+      transform: rotate(180deg) !important;
+      transform-origin: center;
     }
   }
 
