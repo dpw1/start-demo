@@ -5036,10 +5036,9 @@ window.ezfyEasyUpsellApp = (function () {
 
   async function injectCartUpsell(_products, isRestart = false) {
     return new Promise(async (resolve) => {
-
-
-        
-    const selector = isMobile() ? `.ec-cart__checkout ~ .ec-cart-next` : `.ec-cart__sidebar-inner`
+      const selector = isMobile()
+        ? `.ec-cart__checkout ~ .ec-cart-next`
+        : `.ec-cart__sidebar-inner`;
       const $placeholder = document.querySelector(selector)
         ? document.querySelector(selector)
         : await _waitForElement(selector);
@@ -5153,7 +5152,11 @@ window.ezfyEasyUpsellApp = (function () {
       if ($ezfycart) {
         $ezfycart.innerHTML = html;
       } else {
-        $placeholder.insertAdjacentHTML(`beforeend`, html);
+        if (isMobile()) {
+          $placeholder.insertAdjacentHTML(`beforebegin`, html);
+        } else {
+          $placeholder.insertAdjacentHTML(`beforeend`, html);
+        }
       }
 
       resolve();
@@ -5169,13 +5172,9 @@ window.ezfyEasyUpsellApp = (function () {
 
     const html = `<div id="EzfyCartApp"></div>`;
 
-    if (isMobile()){
-        
-        $body.insertAdjacentHTML(`beforebegin`, html);
-    } else{
+    $body.insertAdjacentHTML(`beforebegin`, html);
 
-        $body.insertAdjacentHTML(`afterbegin`, html);
-    }
+    $body.insertAdjacentHTML(`afterbegin`, html);
   }
 
   function getProductsInCart() {
