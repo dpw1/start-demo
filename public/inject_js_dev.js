@@ -5036,9 +5036,13 @@ window.ezfyEasyUpsellApp = (function () {
 
   async function injectCartUpsell(_products, isRestart = false) {
     return new Promise(async (resolve) => {
-      const $placeholder = document.querySelector(`.ec-cart__sidebar-inner`)
-        ? document.querySelector(`.ec-cart__sidebar-inner`)
-        : await _waitForElement(`.ec-cart__sidebar-inner`);
+
+
+        
+    const selector = isMobile() ? `.ec-cart__checkout ~ .ec-cart-next` : `.ec-cart__sidebar-inner`
+      const $placeholder = document.querySelector(selector)
+        ? document.querySelector(selector)
+        : await _waitForElement(selector);
 
       if (!$placeholder) {
         return;
@@ -5165,7 +5169,13 @@ window.ezfyEasyUpsellApp = (function () {
 
     const html = `<div id="EzfyCartApp"></div>`;
 
-    $body.insertAdjacentHTML(`afterbegin`, html);
+    if (isMobile()){
+        
+        $body.insertAdjacentHTML(`beforebegin`, html);
+    } else{
+
+        $body.insertAdjacentHTML(`afterbegin`, html);
+    }
   }
 
   function getProductsInCart() {
@@ -5257,6 +5267,10 @@ window.ezfyEasyUpsellApp = (function () {
       },
       false,
     );
+  }
+
+  function isMobile() {
+    return window.matchMedia("(max-width: 749px)").matches;
   }
 
   async function populatePopupWithProductData(productJSON) {

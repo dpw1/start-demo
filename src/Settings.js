@@ -5,6 +5,17 @@ import Modal from "react-modal";
 import "./Settings.scss";
 import { useStore } from "./store/store";
 
+/* TOdo future settings 
+---
+
+always randomize products' order
+upsell styles
+inject custom css
+
+
+
+*/
+
 export default function Settings() {
   const [modalIsOpen, setIsOpen] = React.useState(false);
   const [isEnabled, setIsEnabled] = useState(false);
