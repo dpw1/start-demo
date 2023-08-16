@@ -36,7 +36,11 @@ function App() {
       initial.upsellProducts = [];
     }
 
-    initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
+    try {
+      initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
+    } catch (err) {
+      initial.settings = [];
+    }
 
     console.log("!Must create new database? ", mustInit, initial);
     console.log("vaue", value);
@@ -84,7 +88,7 @@ function App() {
 
     if (window.EcwidApp && window.EcwidApp.getPayload() && !initiated) {
       window.EcwidApp.getAppPublicConfig(function (value) {
-        console.log("has init?", initiated);
+        console.log("has init?", initiated, value);
 
         initDatabaseOnFirstInstall(value);
       });
