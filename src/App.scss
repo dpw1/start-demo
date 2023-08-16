@@ -3,7 +3,7 @@ body {
   background: #eceef0;
 }
 
-$width: 800px;
+$width: 1200px;
 
 .EasyUpsellApp {
   max-width: $width;
@@ -12,13 +12,28 @@ $width: 800px;
   padding: 0 20px;
   min-height: 1000px;
 
+  .Text--p {
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+  }
+
+  .Text--h3 {
+    display: table;
+    font-size: 16px;
+    line-height: 1;
+    font-weight: 600;
+    color: #0a1c2e;
+    word-wrap: break-word;
+    word-break: break-word;
+  }
+
   @media (max-width: 749px) {
     padding: 0 5px;
   }
 
   .EasyUpsellApp-block {
-    height: 690px !important;
-    overflow-y: scroll !important;
+    background: #eceef0 !important;
   }
   &-container {
     max-width: $width;

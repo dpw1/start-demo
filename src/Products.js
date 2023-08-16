@@ -6,6 +6,8 @@ import ProductItem from "./ProductItem";
 import { useStore } from "./store/store";
 import { Placeholder } from "./Placeholder";
 import NoProductsFound from "./NoProductsFound";
+import { Filter } from "./Filter";
+import Search from "./Search";
 
 export default function Products({ upsellProducts }) {
   const populateProducts = useStore((state) => state.populateProducts);
@@ -16,19 +18,28 @@ export default function Products({ upsellProducts }) {
   useEffect(() => {
     populateProducts();
 
-    console.log("total prods", products);
-
     useStore.subscribe(
       (state) => state.upsellProducts,
       (e) => {
         setUpsell(e);
-        console.log("visible upsells updated, let's upd!", e);
       },
     );
   }, []);
 
   return (
     <div className="Products  named-area">
+      <div className="Products-intro">
+        <p className="Text--h3">Products</p>
+        <div className="Text--p">
+          All products in your store can be found on the list below. Select one
+          product to add upsells to it.
+        </div>
+      </div>
+      <div style={{ display: "flex" }}>
+        <Filter upsellProducts={upsellProducts}></Filter>
+        <Search></Search>
+      </div>
+
       <div className="Products-items">
         {products &&
         products.hasOwnProperty("items") &&

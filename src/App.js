@@ -11,6 +11,8 @@ import Settings from "./Settings";
 import { defaultSettings } from "./utils";
 import { Filter } from "./Filter";
 import HomepageSettings from "./HomepageSettings";
+import TextContentBlock from "./TextContentBlock";
+import Tutorial from "./Tutorial";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
@@ -102,12 +104,40 @@ function App() {
           <div className="named-area__body">
             <div className="a-card a-card--compact">
               <div className="EasyUpsellApp-block a-card__paddings">
-                <h1 className="EasyUpsellApp-title settings-page__title spacing--mt2">
-                  Checkout Upsell
-                </h1>
-                <HomepageSettings></HomepageSettings>
+                <TextContentBlock
+                  title={"Checkout Upsell"}
+                  subtitle={"Summary"}
+                  additionalDescription={
+                    "Show a carousel with products related to what your customer has added to cart on the checkout page."
+                  }
+                  description={"Brief explanation on how to get started."}>
+                  <Tutorial></Tutorial>
+                </TextContentBlock>
+
+                <TextContentBlock
+                  subtitle={"Upsell products"}
+                  description={() => (
+                    <div>Manage your upsell products here.</div>
+                  )}>
+                  {" "}
+                  <div style={{ display: "flex" }}>
+                    {upsellProducts && <React.Fragment></React.Fragment>}
+                  </div>
+                  {upsellProducts ? (
+                    <Products upsellProducts={upsellProducts}></Products>
+                  ) : (
+                    <Placeholder></Placeholder>
+                  )}
+                </TextContentBlock>
+
+                <TextContentBlock
+                  subtitle={"App settings"}
+                  description={"Configure the app settings here."}>
+                  <HomepageSettings></HomepageSettings>
+                </TextContentBlock>
+                {/* <HomepageSettings></HomepageSettings> */}
                 {/* <Settings></Settings> */}
-                <div style={{ display: "flex" }}>
+                {/* <div style={{ display: "flex" }}>
                   {upsellProducts && (
                     <React.Fragment>
                       <Filter upsellProducts={upsellProducts}></Filter>
@@ -119,7 +149,7 @@ function App() {
                   <Products upsellProducts={upsellProducts}></Products>
                 ) : (
                   <Placeholder></Placeholder>
-                )}
+                )} */}
               </div>
             </div>
           </div>

@@ -1,0 +1,29 @@
+@import "./variables.scss";
+
+.Tutorial {
+  .Tutorial-container {
+    display: flex;
+
+    @media (max-width: $xs) {
+      flex-direction: column;
+    }
+  }
+
+  .Tutorial-figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    @media (max-width: $xs) {
+      max-width: 320px;
+
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    img {
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+      max-width: 100%;
+      width: 100%;
+    }
+  }
+}

@@ -127,7 +127,7 @@ export default function ProductItem(props) {
             data-upsell-products={
               upsell.hasOwnProperty("bundle") ? upsell.bundle.length : 0
             }>
-            {upsell && upsell.hasOwnProperty("bundle") && (
+            {upsell && upsell.hasOwnProperty("bundle") ? (
               <React.Fragment>
                 <p className="ProductItem-bottom-title">
                   {/* {upsell.bundle.length - 1}*/} Upsell product(s)
@@ -198,6 +198,11 @@ export default function ProductItem(props) {
                   })}{" "}
                 </div>
               </React.Fragment>
+            ) : (
+              <div style={{ fontSize: 12 }}>
+                There are no upsells setup for this product yet. Click on "Add
+                upsell products" to add.
+              </div>
             )}
           </div>
         </div>
