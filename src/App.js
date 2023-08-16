@@ -28,9 +28,14 @@ function App() {
 
     let initial = {};
 
-    initial.upsellProducts = value.hasOwnProperty("upsellProducts")
-      ? value.upsellProducts
-      : [];
+    try {
+      initial.upsellProducts = value.hasOwnProperty("upsellProducts")
+        ? value.upsellProducts
+        : [];
+    } catch (err) {
+      initial.upsellProducts = [];
+    }
+
     initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
 
     console.log("!Must create new database? ", mustInit, initial);
