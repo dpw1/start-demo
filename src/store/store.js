@@ -8,13 +8,17 @@ import {
 
 import { subscribeWithSelector } from "zustand/middleware";
 
-const localURL = /localhost/.test(window.location.href)
-  ? /* local dev */
-    `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
-  : /* production */
-    `https://app.ecwid.com/api/v3/${
-      window.EcwidApp.getPayload().store_id
-    }/products?token=${window.EcwidApp.getPayload().access_token}`;
+// const localURL = /localhost/.test(window.location.href)
+//   ? /* local dev */
+//     `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
+//   : /* production */
+//     `https://app.ecwid.com/api/v3/${
+//       window.EcwidApp.getPayload().store_id
+//     }/products?token=${window.EcwidApp.getPayload().access_token}`;
+
+const localURL = `https://app.ecwid.com/api/v3/${
+  window.EcwidApp.getPayload().store_id
+}/products?token=${window.EcwidApp.getPayload().access_token}`;
 
 const useStore = create(
   subscribeWithSelector((set, get) => ({

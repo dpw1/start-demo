@@ -31,7 +31,7 @@ function minifyFile(inputFilePath, outputFilePath) {
   const minifiedJS = uglify.minify(minifiedHTML).code;
 
   fs.writeFileSync(outputFilePath, minifiedJS, "utf8");
-  console.log("File minified and saved:", outputFilePath);
+  console.log("File minified and saved.");
 }
 
 function processJavascriptCode(code) {
