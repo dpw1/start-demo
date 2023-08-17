@@ -14,7 +14,7 @@ export default function Tutorial() {
           </p>
           <div className="Text--p">
             This app creates a carousel featuring products related to what your
-            customer has added to cart.
+            customer has added to their cart.
           </div>
 
           <br />

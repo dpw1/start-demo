@@ -94,15 +94,18 @@ function App() {
               <div className="EasyUpsellApp-block a-card__paddings">
                 <TextContentBlock
                   title={"Checkout Upsell"}
-                  subtitle={"Summary"}
+                  subtitle={"Status"}
                   additionalDescription={
                     "Show a carousel with products related to what your customer has added to cart on the checkout page."
                   }
+                  description={"Current status of the app."}>
+                  <TotalProducts></TotalProducts>
+                </TextContentBlock>
+
+                <TextContentBlock
+                  subtitle={"Tutorial"}
                   description={"Brief explanation on how to get started."}>
                   <Tutorial></Tutorial>
-                </TextContentBlock>
-                <TextContentBlock>
-                  <TotalProducts></TotalProducts>
                 </TextContentBlock>
 
                 <TextContentBlock
