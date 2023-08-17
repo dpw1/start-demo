@@ -8,31 +8,43 @@ export default function Tutorial() {
       <div className="Tutorial-container">
         <div className="Tutorial-left">
           <p className="HomepageSettings-text Text--h3">
-            Offer products at the checkout page
+            Offer related products at the checkout page
           </p>
           <div className="Text--p">
-            This app creates a carousel with recommendations based on what your
-            customer has added to the cart.
+            This app creates a carousel with products related to what your
+            customer has added to cart.
           </div>
 
           <br />
 
           <div className="Text--p">
-            These recommendations are configured manually. To configure it,
-            please do the following:
+            How to add related products to show up in the carousel (detailed
+            instructions can be{" "}
+            <a
+              target="_blank"
+              href="https://support.ecwid.com/hc/en-us/articles/208078945-Related-products"
+              rel="noreferrer">
+              found here
+            </a>
+            ):
           </div>
           <ol>
             <li className="Text--p">
-              Choose one of your products from the list below in the next
-              section.
+              <a
+                target="_blank"
+                href="https://my.ecwid.com/#products"
+                rel="noreferrer">
+                Go to the products page (click here)
+              </a>
+              .
             </li>
             <li className="Text--p">
-              Once you've found it, click on "Add Upsell Products." A popup will
-              appear.
+              Choose the product you wish to recommend related products.
             </li>
+            <li className="Text--p">Click on the "related products" tab.</li>
             <li className="Text--p">
-              In this popup, choose the products you'd like to display on the
-              carousel.
+              Click Enable (if you haven't set up related products for this item
+              before) and configure the products.
             </li>
           </ol>
         </div>
