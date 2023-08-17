@@ -10,6 +10,9 @@ export default function HomepageSettings() {
   const setSettings = useStore((state) => state.setSettings);
 
   const [isEnabled, setIsEnabled] = useState(defaultSettings.isEnabled);
+  const [enableSecondImageOnHover, setEnableSecondImageOnHover] = useState(
+    defaultSettings.enableSecondImageOnHover,
+  );
   const [appTitle, setAppTitle] = useState(defaultSettings.appTitle);
   const [enableAddToCart, setEnableAddToCart] = useState(
     defaultSettings.enableAddToCart,
@@ -106,6 +109,37 @@ export default function HomepageSettings() {
 
                 setSettings({
                   enableAddToCart: !enableAddToCart,
+                });
+                return;
+              }}
+              type="checkbox"
+            />{" "}
+            <div className="HomepageSettings-text" data-on={``} data-off="">
+              {" "}
+              <div />{" "}
+            </div>
+          </label>
+        </div>{" "}
+      </div>
+
+      <div className="HomepageSettings-item HomepageSettings-item--checkbox form-area__content form-area__content--no-margin">
+        <div className="HomepageSettings-description">
+          <p className="HomepageSettings-text">Show second image on hover</p>
+
+          <p className="HomepageSettings-subtitle">
+            Show product's second image when hovering over the main image.
+          </p>
+        </div>
+        <div className="HomepageSettings-setting text-default">
+          <label className="checkbox micro">
+            <input
+              name=""
+              checked={enableSecondImageOnHover}
+              onChange={() => {
+                setEnableSecondImageOnHover(!enableSecondImageOnHover);
+
+                setSettings({
+                  enableSecondImageOnHover: !enableSecondImageOnHover,
                 });
                 return;
               }}

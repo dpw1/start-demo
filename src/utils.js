@@ -6,6 +6,7 @@ export const defaultSettings = {
   isEnabled: true,
   appTitle: `Complete your purchase`,
   enableAddToCart: true,
+  enableSecondImageOnHover: true,
 };
 
 export function getProductURLHref(productID) {
