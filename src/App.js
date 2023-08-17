@@ -34,7 +34,9 @@ function App() {
       initial.upsellProducts = value.hasOwnProperty("upsellProducts")
         ? value.upsellProducts
         : [];
-    } catch (err) {}
+    } catch (err) {
+      initial.upsellProducts = [];
+    }
 
     try {
       initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
