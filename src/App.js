@@ -31,6 +31,11 @@ function App() {
     let initial = {};
 
     initial.upsellProducts = [];
+    // try {
+    //   initial.upsellProducts = value.hasOwnProperty("upsellProducts")
+    //     ? value.upsellProducts
+    //     : [];
+    // } catch (err) {}
 
     try {
       initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
