@@ -3,22 +3,24 @@ import { useStore } from "./store/store";
 import "./TotalProducts.scss";
 
 export default function TotalProducts() {
-  const [total, setTotal] = useState(null);
+  const [totalWithUpsell, setTotalWithUpsell] = useState(null);
 
   useEffect(() => {
     useStore.subscribe(
       (state) => state.upsellProducts,
       (e) => {
         console.log("upsell products update from app!!!", e);
-        setTotal(e.length);
+        setTotalWithUpsell(e.length);
       },
     );
   }, []);
 
   return (
-    <div data-total-products={total ? total : "null"} className="TotalProducts">
+    <div
+      data-total-products={totalWithUpsell ? totalWithUpsell : "null"}
+      className="TotalProducts">
       <div className="TotalProducts-image">
-        {total !== null && total <= 0 ? (
+        {totalWithUpsell !== null && totalWithUpsell <= 0 ? (
           <svg
             className="TotalProducts-icon--x"
             xmlns="http://www.w3.org/2000/svg"
@@ -37,11 +39,11 @@ export default function TotalProducts() {
         )}
       </div>
       <div className="TotalProducts-content Text--h3">
-        {total === null
+        {totalWithUpsell === null
           ? "Loading..."
-          : total >= 1
-          ? `You have ${total} product(s) with related products. Yay!`
-          : total <= 0 &&
+          : totalWithUpsell >= 1
+          ? `You have ${totalWithUpsell} product(s) with related products setup. Yay!`
+          : totalWithUpsell <= 0 &&
             `There are no products with related products setup yet. Please follow the instructions above to get started.`}
       </div>
     </div>
