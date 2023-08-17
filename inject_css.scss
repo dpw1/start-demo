@@ -60,6 +60,7 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
   }
 
   .EzfyCart-figure {
+    position: relative !important;
     margin: 0 !important;
     display: flex;
     align-items: center;
@@ -74,6 +75,17 @@ html#ecwid_html body#ecwid_body .ec-size .ec-store {
       transition: all 0.12s ease-out 0s;
       box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.1) !important;
     }
+  }
+
+  .EzfyCart-figure:hover .EzfyCart-image-hover {
+    opacity: 1 !important;
+    transition: all 0.12s ease-out !important;
+  }
+
+  .EzfyCart-image-hover {
+    position: absolute !important;
+    opacity: 0 !important;
+    transition: all 0.12s ease-out !important;
   }
 
   .EzfyCart-image {
