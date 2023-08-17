@@ -46,8 +46,7 @@ function App() {
       initial.settings = defaultSettings;
     }
 
-    console.log("!Must create new database? ", mustInit, initial);
-    console.log("vaue", value);
+    console.log("Current database status:", value);
 
     if (mustInit) {
       window.EcwidApp.setAppPublicConfig(JSON.stringify(initial), function (e) {
