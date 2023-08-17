@@ -13,6 +13,7 @@ import { Filter } from "./Filter";
 import HomepageSettings from "./HomepageSettings";
 import TextContentBlock from "./TextContentBlock";
 import Tutorial from "./Tutorial";
+import TotalProducts from "./TotalProducts";
 
 function App() {
   const [storeData, setStoreData] = useState(null);
@@ -65,20 +66,6 @@ function App() {
 
     setStoreData(data);
 
-    useStore.subscribe(
-      (state) => state.upsellProducts,
-      (e) => {
-        console.log("upsell products update from app!", e);
-      },
-    );
-
-    useStore.subscribe(
-      (state) => state.settings,
-      (e) => {
-        console.log("settings update from app!", e);
-      },
-    );
-
     if (!window.EcwidApp.getPayload()) {
       /* Used for dev */
       initDatabaseOnFirstInstall(
@@ -113,6 +100,9 @@ function App() {
                   }
                   description={"Brief explanation on how to get started."}>
                   <Tutorial></Tutorial>
+                </TextContentBlock>
+                <TextContentBlock>
+                  <TotalProducts></TotalProducts>
                 </TextContentBlock>
 
                 <TextContentBlock

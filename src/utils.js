@@ -224,7 +224,6 @@ function getProductsFromCategoryWithId(id = 0, quantity = 5) {
 
       const { data: _products } = await axios.get(productsURL);
       products = removeUnavailableProducts(_products.items);
-      debugger;
 
       window.store__products = products;
     }
@@ -239,7 +238,7 @@ function getProductsFromCategoryWithId(id = 0, quantity = 5) {
         }
       } else {
         /* get random products */
-        debugger;
+
         found = products.sort(() => Math.random() - 0.5).slice(0, quantity);
       }
     }
