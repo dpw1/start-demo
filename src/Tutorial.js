@@ -9,7 +9,8 @@ export default function Tutorial() {
       <div className="Tutorial-container">
         <div className="Tutorial-left">
           <p className="HomepageSettings-text Text--h3">
-            Related products at the checkout page with quick view & add to cart
+            Related products carousel at the checkout page with quick view & add
+            to cart
           </p>
           <div className="Text--p">
             This app creates a carousel with products related to what your
