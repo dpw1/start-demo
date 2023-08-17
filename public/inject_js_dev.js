@@ -6,7 +6,7 @@
 //     window.location.hostname === "ezfycode.com" ? true : false;
 
 //   window.ezfyCheckoutAppHasBeenLoaded = false;
-//   /* Settings 
+//   /* Settings
 // 	====================== */
 //   const OPEN_PRODUCTS_IN_POPUP = true;
 
@@ -5072,12 +5072,12 @@
 //         console.log(each.totalOptions);
 
 //         const html = `
-//       <li  
+//       <li
 // 	      class="EzfyCart-item splide__slide EzfyCart-item--${each.id}"
-// 	      data-total-options="${each.totalOptions}" 
+// 	      data-total-options="${each.totalOptions}"
 // 	      data-id-ezfy-upsell-cart="${each.id}" >
-//       <a 
-      
+//       <a
+
 //       onclick="window.ezfyEasyUpsellApp.openProductLinksInPopupOnClick(event)"
 //       data-id-ezfy-upsell-cart="${each.id}" target="_blank" href="#">
 //     	<figure class="EzfyCart-figure">
@@ -5105,10 +5105,10 @@
 
 //       </a>
 
-//       <button 
-//       data-is-popup="${isPopup}" 
+//       <button
+//       data-is-popup="${isPopup}"
 //       data-is-link-popup="${OPEN_PRODUCTS_IN_POPUP}"
-      
+
 //       class="EzfyCart-atc">
 // <span class="EzfyCart-atc-text">${
 //           isPopup ? "Choose Options" : "Add to Cart"
@@ -5139,7 +5139,7 @@
 // 	   ${enableSplide ? '<div class="splide__track"><ul class="splide__list">' : ""}
 //     		${products}
 // 		${enableSplide ? "</ul></div>" : ""}
-	      
+
 //     </div>
 //     </div>
 //     `;
@@ -5214,7 +5214,7 @@
 //       <div class="EzfyPopup-body">
 //       <p>Loading...</p>
 //       </div>
- 
+
 //     </div>
 //     </div>`;
 
@@ -5320,8 +5320,8 @@
 
 //           console.log("choice", choice);
 //           choicesHTML += `
-// 				<option data-price="${choice.priceModifier}" 
-// 				data-value="${choice.text}" 
+// 				<option data-price="${choice.priceModifier}"
+// 				data-value="${choice.text}"
 // 				${i === each.defaultChoice ? "selected" : ""}>${choice.text} ${
 //             choice.priceModifier !== 0
 //               ? ` (+${window.Ecwid.formatCurrency(choice.priceModifier)})`
@@ -5364,7 +5364,7 @@
 //                     : ""
 //                 }
 //         			</div></label>
-        			
+
 // 				  </div>
 // 				</div>
 // 				`;
@@ -5377,7 +5377,7 @@
 // 			class="EzfyProduct-option EzfyProduct-option--radio" data-option-name="${each.name}">
 // 				<span class="EzfyProduct-option-label">${each.name}</span>
 // 				${choicesHTML}
-		
+
 // 			</div>
 // 			`;
 //       }
@@ -5385,8 +5385,8 @@
 //       if (each.type === "SIZE") {
 //         for (var [i, choice] of each.choices.entries()) {
 //           choicesHTML += `
-// 				<div 
-				
+// 				<div
+
 // 				data-option-index="${index}"
 // 				class="EzfyProduct-size">
 // 				  <div class="EzfyProduct-size-field">
@@ -5407,7 +5407,7 @@
 // 	        			</div>
 //         			</label>
 //         			</div>
-        			
+
 // 				  </div>
 // 				</div>
 // 				`;
@@ -5431,29 +5431,26 @@
 //           const id = `${choice.text}__${index}`;
 
 //           choicesHTML += `
-// 				<div 
+// 				<div
 // 				data-option-index="${index}"
 // 				class="EzfyProduct-checkbox">
-				
+
 // 				  <svg xmlns="http://www.w3.org/2000/svg" style="display: none">
 //     <symbol id="checkmark" viewBox="0 0 24 24">
 //       <path stroke-linecap="round" stroke-miterlimit="10" fill="none" d="M22.9 3.7l-15.2 16.6-6.6-7.1">
 //       </path>
 //     </symbol>
 //   </svg>
-				
-        		
-       
+
 //  		 <input data-price="${
 //        choice.priceModifier
 //      }"  class="EzfyProduct-checkbox-input" type="checkbox" id="${id}" name="${id}" value="${
 //             choice.text
 //           }" >
 
-  					
 // 			<label for="${id}">
 // 				<svg><use xlink:href="#checkmark" /></svg>
-				
+
 // 				<div style="display:flex;">
 // 					<span class="EzfyProduct-checkbox-text">${choice.text}</span>
 // 					<div class="EzfyProduct-checkbox-cost">
@@ -5463,7 +5460,7 @@
 //                 : ""
 //             }
 // 					</div>
-// 	        	</div>	
+// 	        	</div>
 // 			</label>
 // 			</div>
 // 				`;
@@ -5507,7 +5504,7 @@
 //         each.name
 //       }">
 // 				<span class="EzfyProduct-option-label">${each.name}</span>
-// 				<textarea 
+// 				<textarea
 // 				${each.required ? "required" : ""}
 // 				class="EzfyProduct-textfield-textarea" placeholder="Enter your text"></textarea>
 // 			</div>
@@ -5525,7 +5522,7 @@
 //         each.name
 //       }">
 // 				<span class="EzfyProduct-option-label">${each.name}</span>
-// 				<input 
+// 				<input
 // 					${each.required ? "required" : ""}
 // 					readonly
 // 				class="EzfyProduct-textfield-input EzfyProduct-textfield-date-picker" type="text" placeholder="${
@@ -5554,7 +5551,7 @@
 
 //     const html = `
 // 	<div class="EzfyProduct">
-	
+
 // 		<div class="EzfyProduct-left">
 // 		<div class="splide" data-is-slider="${isSlider}" role="group">
 // 			  <div class="splide__track">
@@ -5562,21 +5559,21 @@
 // 					<li class="splide__slide EzfyProduct-figure">
 // 						<img class="EzfyProduct-image" src="${image}" alt="${name}" />
 // 					</li>
-						
+
 // 					${gallery}
 // 					</ul>
 // 			  </div>
 // 			</div>
-			
+
 // 		</div>
-		
+
 // 		<div class="EzfyProduct-right">
 // 			<h2 class="EzfyProduct-title">${name}</h2>
 // 			<div class="EzfyProduct-prices">
 // 		        <div data-original-price="${price}" class="EzfyProduct-price">${defaultDisplayedPriceFormatted}</div>
 // 		        <div class="EzfyProduct-compare-price">${
 //               compareToPriceDiscountFormatted ? compareToPriceFormatted : ""
-//             } 
+//             }
 // 	        </div>
 // 	        </div>
 // 	        <div class="EzfyProduct-options">
@@ -5588,16 +5585,15 @@
 //             }</span>
 //         	  	<button id="EzfyPopupATC">Add to Cart</button>
 //         	  	<span class="EzfyProduct-atc-errors"></span>
-// 			</div>	
+// 			</div>
 // 			<div class="EzfyProduct-description">
 // 			<div class="EzfyProduct-description-title EzfyProduct-mini-title">Product description</div>
-			
+
 // 			<div class="EzfyProduct-text">${description}</div>
 // 			</div>
-		
-		
+
 // 		</div>
-	
+
 // 	</div>
 // 	`;
 
