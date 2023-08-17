@@ -298,8 +298,8 @@ const useStore = create(
       });
     },
 
-    setSettings: async (settings) => {
-      if (!settings) {
+    setSettings: async (newSettings) => {
+      if (!newSettings) {
         throw new Error("no settings object");
       }
 
@@ -308,9 +308,13 @@ const useStore = create(
           ? await get().upsellProducts()
           : await get().upsellProducts;
 
+      const currentSettings = await get().settings;
+
+      var updatedSettings = Object.assign({}, currentSettings, newSettings);
+
       if (window.EcwidApp) {
         try {
-          const payload = { settings, upsellProducts };
+          const payload = { updatedSettings, upsellProducts };
 
           window.EcwidApp.setAppPublicConfig(
             JSON.stringify(payload),
@@ -324,7 +328,7 @@ const useStore = create(
       }
 
       set({
-        settings,
+        settings: updatedSettings,
       });
     },
 

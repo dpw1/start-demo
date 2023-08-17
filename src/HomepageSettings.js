@@ -11,6 +11,9 @@ export default function HomepageSettings() {
 
   const [isEnabled, setIsEnabled] = useState(defaultSettings.isEnabled);
   const [appTitle, setAppTitle] = useState(defaultSettings.appTitle);
+  const [enableAddToCart, setEnableAddToCart] = useState(
+    defaultSettings.enableAddToCart,
+  );
   const settings = useStore((state) => state.settings);
 
   useEffect(() => {
@@ -28,8 +31,7 @@ export default function HomepageSettings() {
               `The app is enabled on the storefront.`
             ) : (
               <span>
-                The app is <b>not</b> enabled on the storefront. It will not
-                show up on the checkout page.
+                The app is <b>not</b> enabled on the storefront.
               </span>
             )}
           </p>
@@ -74,9 +76,46 @@ export default function HomepageSettings() {
               className="field__input"
               placeholder="Carousel title"
               value={appTitle}
-              onChange={(e) => setAppTitle(e.target.value)}
+              onChange={(e) => {
+                const title = e.target.value;
+                setAppTitle(title);
+                setSettings({
+                  appTitle: title,
+                });
+              }}
             />{" "}
           </div>
+        </div>{" "}
+      </div>
+
+      <div className="HomepageSettings-item HomepageSettings-item--checkbox form-area__content form-area__content--no-margin">
+        <div className="HomepageSettings-description">
+          <p className="HomepageSettings-text">Enable quick add to cart</p>
+
+          <p className="HomepageSettings-subtitle">
+            Show "add to cart" button below product's price.
+          </p>
+        </div>
+        <div className="HomepageSettings-setting text-default">
+          <label className="checkbox micro">
+            <input
+              name=""
+              checked={enableAddToCart}
+              onChange={() => {
+                setEnableAddToCart(!enableAddToCart);
+
+                setSettings({
+                  enableAddToCart: !enableAddToCart,
+                });
+                return;
+              }}
+              type="checkbox"
+            />{" "}
+            <div className="HomepageSettings-text" data-on={``} data-off="">
+              {" "}
+              <div />{" "}
+            </div>
+          </label>
         </div>{" "}
       </div>
     </div>
