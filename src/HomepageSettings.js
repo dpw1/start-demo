@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./HomepageSettings.scss";
 
 import { useStore } from "./store/store";
-import defaultSettings from "./utils";
+import { defaultSettings } from "./utils";
 
 export default function HomepageSettings() {
   /* The settings below must be synced with utils.js 'defaultSettings */
