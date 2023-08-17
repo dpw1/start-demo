@@ -83,55 +83,66 @@ const useStore = create(
 
     /* Get Bundle products that will show up at the front-end. */
     upsellProducts: async () => {
-      const url = localProductURL;
-
-      const { data: products } = await axios.get(url);
-
-      console.log(sanitizeUpsellProducts(products));
-      debugger;
-
       if (window.EcwidApp && window.EcwidApp.getPayload()) {
         return new Promise(async (resolve, reject) => {
-          console.log("before: ", window.upsellProducts);
+          const url = localProductURL;
 
-          if (window.hasOwnProperty("upsellProducts")) {
-            resolve(window.upsellProducts);
-            return;
-          } else {
-            console.log("upsell prods not found", window.upsellProducts);
-            let data = [];
+          const { data: products } = await axios.get(url);
 
-            window.EcwidApp.getAppPublicConfig(function (value) {
-              const _data = JSON.parse(value);
-              data = data = _data.upsellProducts;
+          const upsellProducts = sanitizeUpsellProducts(products);
+          window.upsellProducts = upsellProducts;
 
-              if (!data) {
-                window.upsellProducts = [];
-                resolve([]);
-                return;
-              }
+          set({
+            upsellProducts,
+          });
 
-              console.log(
-                "xxx 33ECWID DB DATA",
-                _data,
-                data,
-                window.upsellProducts,
-              );
-
-              window.upsellProducts = data;
-              resolve(data);
-
-              set({
-                upsellProducts: data,
-              });
-
-              return;
-            });
-          }
+          resolve(upsellProducts);
+          return;
         });
       }
 
-      return [];
+      // if (window.EcwidApp && window.EcwidApp.getPayload()) {
+      //   return new Promise(async (resolve, reject) => {
+      //     console.log("before: ", window.upsellProducts);
+
+      //     if (window.hasOwnProperty("upsellProducts")) {
+      //       resolve(window.upsellProducts);
+      //       return;
+      //     } else {
+      //       console.log("upsell prods not found", window.upsellProducts);
+      //       let data = [];
+
+      //       window.EcwidApp.getAppPublicConfig(function (value) {
+      //         const _data = JSON.parse(value);
+      //         data = data = _data.upsellProducts;
+
+      //         if (!data) {
+      //           window.upsellProducts = [];
+      //           resolve([]);
+      //           return;
+      //         }
+
+      //         console.log(
+      //           "xxx 33ECWID DB DATA",
+      //           _data,
+      //           data,
+      //           window.upsellProducts,
+      //         );
+
+      //         window.upsellProducts = data;
+      //         resolve(data);
+
+      //         set({
+      //           upsellProducts: data,
+      //         });
+
+      //         return;
+      //       });
+      //     }
+      //   });
+      // }
+
+      // return [];
     },
 
     setStoreUpsellProducts: (data) => {

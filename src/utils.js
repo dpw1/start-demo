@@ -145,6 +145,7 @@ export function sanitizeUpsellProducts(products) {
     });
   }
 
+  window.upsellProducts = result;
   console.log("cleaning: ", result);
   debugger;
 
