@@ -124,6 +124,10 @@ export async function sanitizeUpsellProducts(products) {
       var parentID = each.id;
       var bundle = [];
 
+      if (!each.enabled || !each.inStock) {
+        continue;
+      }
+
       for (var _upsell of each.relatedProducts.productIds) {
         var upsell = products.items.filter((e) => e.id === _upsell)[0];
 
@@ -142,6 +146,7 @@ export async function sanitizeUpsellProducts(products) {
 
       /* Random categories here */
       if (each.relatedProducts.relatedCategory.enabled) {
+        debugger;
         const categoryProducts = await getProductsFromCategoryWithId(
           each.relatedProducts.relatedCategory.categoryId,
         );
@@ -178,9 +183,10 @@ export async function sanitizeUpsellProducts(products) {
   });
 }
 
-function getProductsFromCategoryWithId(id = null) {
+function getProductsFromCategoryWithId(id = 0) {
   return new Promise(async (resolve, reject) => {
     let categories = [];
+    debugger;
 
     if (window.ezfyCategories) {
       categories = window.ezfyCategories;
