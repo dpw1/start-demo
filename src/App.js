@@ -39,7 +39,9 @@ function App() {
     }
 
     try {
-      initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
+      initial.settings = value.hasOwnProperty("settings")
+        ? Object.assign({}, defaultSettings, value.settings)
+        : defaultSettings;
     } catch (err) {
       initial.settings = defaultSettings;
     }
