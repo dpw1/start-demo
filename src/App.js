@@ -104,7 +104,7 @@ function App() {
 
                 <TextContentBlock
                   subtitle={"Tutorial"}
-                  description={"Brief explanation on how to get started."}>
+                  description={"How to setup related products."}>
                   <Tutorial></Tutorial>
                 </TextContentBlock>
 

@@ -55,6 +55,13 @@
       }
     }
 
+    &[class*="--exclamation"] {
+      svg {
+        width: 23px;
+        height: 23px;
+      }
+    }
+
     svg {
       width: 34px;
       height: 34px;
