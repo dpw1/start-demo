@@ -22,8 +22,6 @@ function App() {
   const settings = useStore((state) => state.settings);
   const setSettings = useStore((state) => state.setSettings);
 
-  const getUpsellProducts = useStore((state) => state.upsellProducts);
-
   function initDatabaseOnFirstInstall(value) {
     value = JSON.parse(value);
     let mustInit = false;
@@ -53,6 +51,8 @@ function App() {
         console.log("Fresh database setup!", e);
       });
     }
+
+    // getUpsellProducts();
 
     setUpsellProducts(initial.upsellProducts);
     setSettings(initial.settings);

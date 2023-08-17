@@ -8,7 +8,7 @@ import {
 
 import { subscribeWithSelector } from "zustand/middleware";
 
-const localProductURL = /localhost/.test(window.location.href)
+const productsURL = /localhost/.test(window.location.href)
   ? /* local dev */
     `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
   : /* production */
@@ -44,12 +44,11 @@ const useStore = create(
     /* ===============
     Get store's products and add them to the store's 'products' variable */
     populateProducts: async () => {
-      const url = localProductURL;
+      const url = productsURL;
 
       const { data: products } = await axios.get(url);
 
       window.store__products = products;
-      // debugger;
 
       set({
         products,
@@ -83,66 +82,23 @@ const useStore = create(
 
     /* Get Bundle products that will show up at the front-end. */
     upsellProducts: async () => {
-      if (window.EcwidApp && window.EcwidApp.getPayload()) {
-        return new Promise(async (resolve, reject) => {
-          const url = localProductURL;
+      return new Promise(async (resolve, reject) => {
+        const url = productsURL;
 
-          const { data: products } = await axios.get(url);
+        const { data: products } = await axios.get(url);
 
-          const upsellProducts = sanitizeUpsellProducts(products);
-          window.upsellProducts = upsellProducts;
+        const upsellProducts = await sanitizeUpsellProducts(products);
+        window.upsellProducts = upsellProducts;
 
-          set({
-            upsellProducts,
-          });
-
-          resolve(upsellProducts);
-          return;
+        set({
+          upsellProducts,
         });
+
+        resolve(upsellProducts);
+        return;
+      });
+      if (window.EcwidApp && window.EcwidApp.getPayload()) {
       }
-
-      // if (window.EcwidApp && window.EcwidApp.getPayload()) {
-      //   return new Promise(async (resolve, reject) => {
-      //     console.log("before: ", window.upsellProducts);
-
-      //     if (window.hasOwnProperty("upsellProducts")) {
-      //       resolve(window.upsellProducts);
-      //       return;
-      //     } else {
-      //       console.log("upsell prods not found", window.upsellProducts);
-      //       let data = [];
-
-      //       window.EcwidApp.getAppPublicConfig(function (value) {
-      //         const _data = JSON.parse(value);
-      //         data = data = _data.upsellProducts;
-
-      //         if (!data) {
-      //           window.upsellProducts = [];
-      //           resolve([]);
-      //           return;
-      //         }
-
-      //         console.log(
-      //           "xxx 33ECWID DB DATA",
-      //           _data,
-      //           data,
-      //           window.upsellProducts,
-      //         );
-
-      //         window.upsellProducts = data;
-      //         resolve(data);
-
-      //         set({
-      //           upsellProducts: data,
-      //         });
-
-      //         return;
-      //       });
-      //     }
-      //   });
-      // }
-
-      // return [];
     },
 
     setStoreUpsellProducts: (data) => {
@@ -204,7 +160,7 @@ const useStore = create(
         Symbol.iterator in Object(bundleProducts) ? [...bundleProducts] : [];
 
       const _updated = [..._bundle, currentProduct];
-      const updated = sanitizeUpsellProducts(_updated);
+      const updated = await sanitizeUpsellProducts(_updated);
 
       console.log("updated -- ", updated);
 

@@ -1,6 +1,7 @@
 import React from "react";
 import "./Tutorial.scss";
 import example from "./images/example-1.png"; // Import the image
+import relatedProductsImage from "./images/related-products.jpg"; // Import the image
 
 export default function Tutorial() {
   return (
@@ -8,7 +9,7 @@ export default function Tutorial() {
       <div className="Tutorial-container">
         <div className="Tutorial-left">
           <p className="HomepageSettings-text Text--h3">
-            Offer related products at the checkout page
+            Related products at the checkout page with quick view & add to cart
           </p>
           <div className="Text--p">
             This app creates a carousel with products related to what your
@@ -18,15 +19,7 @@ export default function Tutorial() {
           <br />
 
           <div className="Text--p">
-            How to add related products to show up in the carousel (detailed
-            instructions can be{" "}
-            <a
-              target="_blank"
-              href="https://support.ecwid.com/hc/en-us/articles/208078945-Related-products"
-              rel="noreferrer">
-              found here
-            </a>
-            ):
+            Here is how you can setup the products to show up:
           </div>
           <ol>
             <li className="Text--p">
@@ -41,11 +34,29 @@ export default function Tutorial() {
             <li className="Text--p">
               Choose the product you wish to recommend related products.
             </li>
-            <li className="Text--p">Click on the "related products" tab.</li>
+            <li className="Text--p">Click on the "related products" tab. </li>
+
             <li className="Text--p">
               Click Enable (if you haven't set up related products for this item
               before) and configure the products.
+              <img
+                className="Tutorial-image"
+                src={relatedProductsImage}
+                alt=""
+              />
             </li>
+
+            <div className="Text--p">
+              <br />
+              Detailed instructions can be{" "}
+              <a
+                target="_blank"
+                href="https://support.ecwid.com/hc/en-us/articles/208078945-Related-products"
+                rel="noreferrer">
+                found here
+              </a>
+              .
+            </div>
           </ol>
         </div>
         <figure className="Tutorial-figure">

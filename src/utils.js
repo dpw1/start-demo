@@ -1,3 +1,7 @@
+import axios from "axios";
+
+window.ezfyCategories = null;
+
 export const defaultSettings = {
   isEnabled: true,
   appTitle: `Complete your purchase`,
@@ -92,64 +96,137 @@ Requires an object like this:
     }
 ]
 */
-export function sanitizeUpsellProducts(products) {
-  console.log("within sanitze: ", products);
+export async function sanitizeUpsellProducts(products) {
+  return new Promise(async (resolve, reject) => {
+    console.log("within sanitze: ", products);
 
-  const productsWithUpsells = products.items.filter(
-    (e) =>
-      e.relatedProducts.productIds.length >= 1 ||
-      e.relatedProducts.relatedCategory.enabled,
-  );
+    const productsWithUpsells = products.items.filter(
+      (e) =>
+        e.relatedProducts.productIds.length >= 1 ||
+        e.relatedProducts.relatedCategory.enabled,
+    );
 
-  let totalOptions = (upsell) => {
-    if (upsell.hasOwnProperty("options")) {
-      return upsell.options.length;
-    }
+    let totalOptions = (upsell) => {
+      if (upsell.hasOwnProperty("options")) {
+        return upsell.options.length;
+      }
 
-    if (upsell.hasOwnProperty("totalOptions")) {
-      return upsell.totalOptions;
-    }
+      if (upsell.hasOwnProperty("totalOptions")) {
+        return upsell.totalOptions;
+      }
 
-    return 0;
-  };
+      return 0;
+    };
 
-  var result = [];
+    var result = [];
 
-  for (var each of productsWithUpsells) {
-    var parentID = each.id;
-    var bundle = [];
+    for (var each of productsWithUpsells) {
+      var parentID = each.id;
+      var bundle = [];
 
-    for (var _upsell of each.relatedProducts.productIds) {
-      var upsell = products.items.filter((e) => e.id === _upsell)[0];
+      for (var _upsell of each.relatedProducts.productIds) {
+        var upsell = products.items.filter((e) => e.id === _upsell)[0];
 
-      console.log(_upsell);
-      debugger;
+        bundle.push({
+          id: upsell.id,
+          name: upsell.name,
+          thumbnailUrl: upsell.thumbnailUrl,
+          defaultDisplayedPriceFormatted: upsell.defaultDisplayedPriceFormatted,
+          compareToPriceDiscountFormatted:
+            upsell.compareToPriceDiscountFormatted,
+          compareToPriceFormatted: upsell.compareToPriceFormatted,
+          url: upsell.url,
+          totalOptions: totalOptions(upsell),
+        });
+      }
 
-      bundle.push({
-        id: upsell.id,
-        name: upsell.name,
-        thumbnailUrl: upsell.thumbnailUrl,
-        defaultDisplayedPriceFormatted: upsell.defaultDisplayedPriceFormatted,
-        compareToPriceDiscountFormatted: upsell.compareToPriceDiscountFormatted,
-        compareToPriceFormatted: upsell.compareToPriceFormatted,
-        url: upsell.url,
-        totalOptions: totalOptions(upsell),
+      /* Random categories here */
+      if (each.relatedProducts.relatedCategory.enabled) {
+        const categoryProducts = await getProductsFromCategoryWithId(
+          each.relatedProducts.relatedCategory.categoryId,
+        );
+
+        debugger;
+
+        for (var categoryProduct of categoryProducts) {
+          bundle.push({
+            id: categoryProduct.id,
+            name: categoryProduct.name,
+            thumbnailUrl: categoryProduct.thumbnailUrl,
+            defaultDisplayedPriceFormatted:
+              categoryProduct.defaultDisplayedPriceFormatted,
+            compareToPriceDiscountFormatted:
+              categoryProduct.compareToPriceDiscountFormatted,
+            compareToPriceFormatted: categoryProduct.compareToPriceFormatted,
+            url: categoryProduct.url,
+            totalOptions: totalOptions(categoryProduct),
+          });
+        }
+      }
+
+      result.push({
+        id: parentID,
+        bundle,
       });
     }
 
-    /* Random categories here */
-    if (each.relatedProducts.relatedCategory.enabled) {
+    window.upsellProducts = result;
+    console.log("cleaning: ", result);
+    debugger;
+
+    resolve(result);
+  });
+}
+
+function getProductsFromCategoryWithId(id = null) {
+  return new Promise(async (resolve, reject) => {
+    let categories = [];
+
+    if (window.ezfyCategories) {
+      categories = window.ezfyCategories;
+    } else {
+      const categoriesURL = /localhost/.test(window.location.href)
+        ? /* local dev */
+          `https://app.ecwid.com/api/v3/37374877/categories?token=${process.env.REACT_APP_TOKEN}&offset=0`
+        : /* production */
+          `https://app.ecwid.com/api/v3/${
+            window.EcwidApp.getPayload().store_id
+          }/categories?token=${
+            window.EcwidApp.getPayload().access_token
+          }&offset=0`;
+
+      const { data } = await axios.get(categoriesURL);
+
+      window.ezfyCategories = data.items;
+      categories = data.items;
     }
 
-    result.push({
-      id: parentID,
-      bundle,
-    });
-  }
+    if (id) {
+      let products;
 
-  window.upsellProducts = result;
-  console.log("cleaning: ", result);
-  debugger;
+      if (window.store__products) {
+        products = window.store__products;
+      } else {
+        const productsURL = /localhost/.test(window.location.href)
+          ? /* local dev */
+            `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
+          : /* production */
+            `https://app.ecwid.com/api/v3/${
+              window.EcwidApp.getPayload().store_id
+            }/products?token=${window.EcwidApp.getPayload().access_token}`;
 
-  return result;
+        const { data: _products } = await axios.get(productsURL);
+        window.store__products = _products;
+        products = _products.items;
+      }
+
+      let found = [];
+
+      if (products && products.length >= 1) {
+        found = products.filter((e) => e.categoryIds.includes(id));
+      }
+
+      resolve(found);
+    }
+  });
 }
