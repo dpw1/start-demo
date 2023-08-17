@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useStore } from "./store/store";
 import "./TotalProducts.scss";
+import { getProducts } from "./utils";
 
 export default function TotalProducts() {
   const [totalWithUpsell, setTotalWithUpsell] = useState(null);
 
   const [settings, setSettings] = useState(null);
+  const [products, setProducts] = useState(null);
 
   useEffect(() => {
     useStore.subscribe(
@@ -22,6 +24,10 @@ export default function TotalProducts() {
         setSettings(e);
       },
     );
+
+    (async () => {
+      setProducts(await getProducts());
+    })();
   }, []);
 
   return (
@@ -92,7 +98,7 @@ export default function TotalProducts() {
             </div>
           </div>
 
-          {totalWithUpsell !== null && settings.isEnabled && (
+          {totalWithUpsell !== null && products && settings.isEnabled && (
             <div className="TotalProducts-item">
               <div className="TotalProducts-image TotalProducts-image--exclamation">
                 <svg
@@ -107,9 +113,8 @@ export default function TotalProducts() {
                 <a
                   target="_blank"
                   href={
-                    window.store__products.filter(
-                      (e) => e.id === totalWithUpsell[0].id,
-                    )[0].url
+                    products.filter((e) => e.id === totalWithUpsell[0].id)[0]
+                      .url
                   }
                   rel="noreferrer">
                   this product{" "}

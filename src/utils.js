@@ -214,18 +214,7 @@ function getProductsFromCategoryWithId(id = 0, quantity = 5) {
     if (window.store__products) {
       products = window.store__products;
     } else {
-      const productsURL = /localhost/.test(window.location.href)
-        ? /* local dev */
-          `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
-        : /* production */
-          `https://app.ecwid.com/api/v3/${
-            window.EcwidApp.getPayload().store_id
-          }/products?token=${window.EcwidApp.getPayload().access_token}`;
-
-      const { data: _products } = await axios.get(productsURL);
-      products = removeUnavailableProducts(_products.items);
-
-      window.store__products = products;
+      products = await getProducts();
     }
 
     let found = [];
@@ -257,4 +246,27 @@ export function removeUnavailableProducts(products) {
       }
     })
     .filter((e) => e !== null);
+}
+
+export function getProducts() {
+  return new Promise(async (resolve, reject) => {
+    if (window.hasOwnProperty("store__products")) {
+      resolve(window.store__products);
+      return;
+    }
+    const productsURL = /localhost/.test(window.location.href)
+      ? /* local dev */
+        `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
+      : /* production */
+        `https://app.ecwid.com/api/v3/${
+          window.EcwidApp.getPayload().store_id
+        }/products?token=${window.EcwidApp.getPayload().access_token}`;
+
+    const { data: _products } = await axios.get(productsURL);
+    const products = removeUnavailableProducts(_products.items);
+
+    window.store__products = products;
+
+    resolve(products);
+  });
 }
