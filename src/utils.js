@@ -146,12 +146,10 @@ export async function sanitizeUpsellProducts(products) {
 
       /* Random categories here */
       if (each.relatedProducts.relatedCategory.enabled) {
-        debugger;
         const categoryProducts = await getProductsFromCategoryWithId(
           each.relatedProducts.relatedCategory.categoryId,
+          each.relatedProducts.relatedCategory.productCount,
         );
-
-        debugger;
 
         for (var categoryProduct of categoryProducts) {
           bundle.push({
@@ -171,22 +169,25 @@ export async function sanitizeUpsellProducts(products) {
 
       result.push({
         id: parentID,
-        bundle,
+        bundle: [...new Set(bundle.map((o) => o.id))].map((id) =>
+          bundle.find((obj) => obj.id === id),
+        ),
       });
     }
 
-    window.upsellProducts = result;
-    console.log("cleaning: ", result);
-    debugger;
+    const finalResult = [...new Set(result.map((o) => o.id))].map((id) =>
+      result.find((obj) => obj.id === id),
+    );
+    window.upsellProducts = finalResult;
+    console.log("Products with upsells: ", finalResult);
 
-    resolve(result);
+    resolve(finalResult);
   });
 }
 
-function getProductsFromCategoryWithId(id = 0) {
+function getProductsFromCategoryWithId(id = 0, quantity = 5) {
   return new Promise(async (resolve, reject) => {
     let categories = [];
-    debugger;
 
     if (window.ezfyCategories) {
       categories = window.ezfyCategories;
@@ -207,32 +208,53 @@ function getProductsFromCategoryWithId(id = 0) {
       categories = data.items;
     }
 
-    if (id) {
-      let products;
+    let products = [];
 
-      if (window.store__products) {
-        products = window.store__products;
-      } else {
-        const productsURL = /localhost/.test(window.location.href)
-          ? /* local dev */
-            `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
-          : /* production */
-            `https://app.ecwid.com/api/v3/${
-              window.EcwidApp.getPayload().store_id
-            }/products?token=${window.EcwidApp.getPayload().access_token}`;
+    if (window.store__products) {
+      products = window.store__products;
+    } else {
+      const productsURL = /localhost/.test(window.location.href)
+        ? /* local dev */
+          `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
+        : /* production */
+          `https://app.ecwid.com/api/v3/${
+            window.EcwidApp.getPayload().store_id
+          }/products?token=${window.EcwidApp.getPayload().access_token}`;
 
-        const { data: _products } = await axios.get(productsURL);
-        window.store__products = _products;
-        products = _products.items;
-      }
+      const { data: _products } = await axios.get(productsURL);
+      products = removeUnavailableProducts(_products.items);
+      debugger;
 
-      let found = [];
-
-      if (products && products.length >= 1) {
-        found = products.filter((e) => e.categoryIds.includes(id));
-      }
-
-      resolve(found);
+      window.store__products = products;
     }
+
+    let found = [];
+
+    /* get products from specific category */
+    if (products && products.length >= 1) {
+      if (id !== 0) {
+        if (products && products.length >= 1) {
+          found = products.filter((e) => e.categoryIds.includes(id));
+        }
+      } else {
+        /* get random products */
+        debugger;
+        found = products.sort(() => Math.random() - 0.5).slice(0, quantity);
+      }
+    }
+
+    resolve(found);
   });
+}
+
+export function removeUnavailableProducts(products) {
+  return products
+    .filter((e) => {
+      if (e.enabled && e.inStock) {
+        return e;
+      } else {
+        return null;
+      }
+    })
+    .filter((e) => e !== null);
 }
