@@ -314,7 +314,7 @@ const useStore = create(
 
       if (window.EcwidApp) {
         try {
-          const payload = { updatedSettings, upsellProducts };
+          const payload = { settings: updatedSettings, upsellProducts };
 
           window.EcwidApp.setAppPublicConfig(
             JSON.stringify(payload),

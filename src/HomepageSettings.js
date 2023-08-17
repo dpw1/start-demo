@@ -66,7 +66,7 @@ export default function HomepageSettings() {
           <p className="HomepageSettings-text">App's title</p>
 
           <p className="HomepageSettings-subtitle">
-            Text that is shown above the carousel on the checkout page.
+            Text that is displayed above the carousel on the checkout page.
           </p>
         </div>
         <div className="HomepageSettings-setting text-default">
