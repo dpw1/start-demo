@@ -1,5 +1,6 @@
 export const defaultSettings = {
   isEnabled: true,
+  appTitle: `Complete your purchase`,
 };
 
 export function getProductURLHref(productID) {

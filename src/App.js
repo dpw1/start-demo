@@ -41,7 +41,7 @@ function App() {
     try {
       initial.settings = value.hasOwnProperty("settings") ? value.settings : [];
     } catch (err) {
-      initial.settings = [];
+      initial.settings = defaultSettings;
     }
 
     console.log("!Must create new database? ", mustInit, initial);

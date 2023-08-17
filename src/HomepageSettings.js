@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import "./HomepageSettings.scss";
 
 import { useStore } from "./store/store";
+import defaultSettings from "./utils";
 
 export default function HomepageSettings() {
+  /* The settings below must be synced with utils.js 'defaultSettings */
+
   const setSettings = useStore((state) => state.setSettings);
-  const [isEnabled, setIsEnabled] = useState(false);
-  const [appTitle, setAppTitle] = useState("Complete your purchase");
+
+  const [isEnabled, setIsEnabled] = useState(defaultSettings.isEnabled);
+  const [appTitle, setAppTitle] = useState(defaultSettings.appTitle);
   const settings = useStore((state) => state.settings);
 
   useEffect(() => {
