@@ -6,6 +6,7 @@ import { useStore } from "./store/store";
 export default function HomepageSettings() {
   const setSettings = useStore((state) => state.setSettings);
   const [isEnabled, setIsEnabled] = useState(false);
+  const [appTitle, setAppTitle] = useState("Complete your purchase");
   const settings = useStore((state) => state.settings);
 
   useEffect(() => {
@@ -14,7 +15,7 @@ export default function HomepageSettings() {
 
   return (
     <div className="HomepageSettings">
-      <div className="HomepageSettings-item form-area__content form-area__content--no-margin">
+      <div className="HomepageSettings-item HomepageSettings-item--checkbox form-area__content form-area__content--no-margin">
         <div className="HomepageSettings-description">
           <p className="HomepageSettings-text">Show on checkout page</p>
 
@@ -51,6 +52,27 @@ export default function HomepageSettings() {
               <div />{" "}
             </div>
           </label>
+        </div>{" "}
+      </div>
+
+      <div className="HomepageSettings-item form-area__content form-area__content--no-margin">
+        <div className="HomepageSettings-description">
+          <p className="HomepageSettings-text">App's title</p>
+
+          <p className="HomepageSettings-subtitle">
+            Text that is shown above the carousel on the checkout page.
+          </p>
+        </div>
+        <div className="HomepageSettings-setting text-default">
+          <div className="HomepageSettings-field field">
+            <input
+              type="text"
+              className="field__input"
+              placeholder="Carousel title"
+              value={appTitle}
+              onChange={(e) => setAppTitle(e.target.value)}
+            />{" "}
+          </div>
         </div>{" "}
       </div>
     </div>

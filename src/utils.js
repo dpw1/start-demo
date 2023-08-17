@@ -90,8 +90,14 @@ Requires an object like this:
     }
 ]
 */
-export function sanitizeBundleProducts(productWithBundles) {
-  console.log("within sanitze: ", productWithBundles);
+export function sanitizeUpsellProducts(products) {
+  console.log("within sanitze: ", products);
+
+  const productsWithUpsells = products.items.filter(
+    (e) =>
+      e.relatedProducts.productIds.length >= 1 ||
+      e.relatedProducts.relatedCategory.enabled,
+  );
 
   let totalOptions = (upsell) => {
     if (upsell.hasOwnProperty("options")) {
@@ -107,12 +113,15 @@ export function sanitizeBundleProducts(productWithBundles) {
 
   var result = [];
 
-  for (var each of productWithBundles) {
+  for (var each of productsWithUpsells) {
     var parentID = each.id;
     var bundle = [];
 
-    for (var upsell of each.bundle) {
-      console.log("my upsell", upsell);
+    for (var _upsell of each.relatedProducts.productIds) {
+      var upsell = products.items.filter((e) => e.id === _upsell)[0];
+
+      console.log(_upsell);
+      debugger;
 
       bundle.push({
         id: upsell.id,
@@ -126,6 +135,10 @@ export function sanitizeBundleProducts(productWithBundles) {
       });
     }
 
+    /* Random categories here */
+    if (each.relatedProducts.relatedCategory.enabled) {
+    }
+
     result.push({
       id: parentID,
       bundle,
@@ -133,6 +146,7 @@ export function sanitizeBundleProducts(productWithBundles) {
   }
 
   console.log("cleaning: ", result);
+  debugger;
 
   return result;
 }

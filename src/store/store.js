@@ -3,22 +3,18 @@ import axios from "axios";
 import {
   defaultSettings,
   overwriteById,
-  sanitizeBundleProducts,
+  sanitizeUpsellProducts,
 } from "../utils";
 
 import { subscribeWithSelector } from "zustand/middleware";
 
-const localURL = /localhost/.test(window.location.href)
+const localProductURL = /localhost/.test(window.location.href)
   ? /* local dev */
     `https://app.ecwid.com/api/v3/37374877/products?token=${process.env.REACT_APP_TOKEN}`
   : /* production */
     `https://app.ecwid.com/api/v3/${
       window.EcwidApp.getPayload().store_id
     }/products?token=${window.EcwidApp.getPayload().access_token}`;
-
-// const localURL = `https://app.ecwid.com/api/v3/${
-//   window.EcwidApp.getPayload().store_id
-// }/products?token=${window.EcwidApp.getPayload().access_token}`;
 
 const useStore = create(
   subscribeWithSelector((set, get) => ({
@@ -48,9 +44,12 @@ const useStore = create(
     /* ===============
     Get store's products and add them to the store's 'products' variable */
     populateProducts: async () => {
-      const url = localURL;
+      const url = localProductURL;
 
       const { data: products } = await axios.get(url);
+
+      window.store__products = products;
+      // debugger;
 
       set({
         products,
@@ -83,7 +82,14 @@ const useStore = create(
     ==================================== */
 
     /* Get Bundle products that will show up at the front-end. */
-    upsellProducts: () => {
+    upsellProducts: async () => {
+      const url = localProductURL;
+
+      const { data: products } = await axios.get(url);
+
+      console.log(sanitizeUpsellProducts(products));
+      debugger;
+
       if (window.EcwidApp && window.EcwidApp.getPayload()) {
         return new Promise(async (resolve, reject) => {
           console.log("before: ", window.upsellProducts);
@@ -187,7 +193,7 @@ const useStore = create(
         Symbol.iterator in Object(bundleProducts) ? [...bundleProducts] : [];
 
       const _updated = [..._bundle, currentProduct];
-      const updated = sanitizeBundleProducts(_updated);
+      const updated = sanitizeUpsellProducts(_updated);
 
       console.log("updated -- ", updated);
 

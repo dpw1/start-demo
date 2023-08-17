@@ -181,6 +181,300 @@ $width: 1200px;
     cursor: pointer;
   }
 
+  .field__input {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #0a1c2e;
+    font-size: 14px;
+    line-height: 19px;
+    -webkit-appearance: none;
+    padding-left: 30px;
+  }
+
+  .field {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    border: 1px solid #808f9d;
+    outline: 0;
+    background-color: #f9f9fa;
+    color: #0a1c2e;
+    text-align: left;
+    vertical-align: middle;
+    transition: color 0.1s linear, background-color 0.1s linear,
+      border-color 0.1s linear, box-shadow 0.1s linear;
+    cursor: text;
+    box-shadow: 0 1px 1px transparent inset;
+    height: 40px;
+    padding: 2px 9px 3px;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 19px;
+    margin-bottom: 10px;
+  }
+
+  .field__label {
+    display: block;
+    visibility: visible;
+    overflow: hidden;
+    opacity: 0;
+    height: auto;
+    margin-top: 2px;
+    color: #607385;
+    font-size: 10px;
+    line-height: 1.4;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-transform: translate3d(0, 5px, 0);
+    transform: translate3d(0, 5px, 0);
+    -webkit-backface-visibility: hidden;
+    transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+    pointer-events: none;
+  }
+
+  .field__select:-webkit-autofill,
+  .field__input:-webkit-autofill {
+    -webkit-animation-name: autofill;
+    -webkit-animation-duration: 0.0001s;
+    -webkit-animation-fill-mode: both;
+  }
+
+  .field__select:not(:-webkit-autofill),
+  .field__input:not(:-webkit-autofill) {
+    animation-name: autofillcancel;
+  }
+
+  .field__iframe {
+    height: 22px;
+  }
+
+  .field__placeholder {
+    display: inline-block;
+    position: absolute;
+    z-index: 2;
+    top: 9px;
+    right: 9px;
+    left: 9px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    color: #607385;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 19px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-backface-visibility: hidden;
+    transition: opacity 0.1s ease-out, transform 0.1s ease-out;
+    pointer-events: none;
+  }
+
+  .field svg {
+    width: 100%;
+    height: auto;
+    fill: currentColor;
+  }
+
+  .field:hover,
+  .field--hover {
+    background-color: #fff;
+  }
+
+  .field:active,
+  .field:focus,
+  .field--focus {
+    border-color: #275ce0;
+    outline: 0;
+    background-color: #fff;
+    box-shadow: 0 0 0 1px #275ce0 inset;
+    color: #607385;
+  }
+
+  .field--autofilled {
+    background-color: #fff4b2;
+  }
+
+  .field .field-state--success,
+  .field .field-state--close {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 9px;
+    width: 16px;
+    height: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .field .field-state--success {
+    width: 22px;
+    height: 22px;
+    color: #0cac42;
+    pointer-events: none;
+  }
+
+  .field .field-state--close {
+    color: #f43c36;
+    transition: color 0.1s ease-out;
+    cursor: pointer;
+  }
+
+  .field .field-state--close:hover {
+    color: #ab2a26;
+  }
+
+  .field .field-state--close:active {
+    color: #f77772;
+  }
+
+  .field__arrow {
+    display: block;
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    box-sizing: content-box;
+    width: 17px;
+    height: 17px;
+    padding: 8px;
+    color: #808f9d;
+    -webkit-font-smoothing: antialiased;
+    transition: opacity 0.1s ease-out, color 0.1s ease-out;
+  }
+
+  .field--filled .field__label,
+  .field--focus .field__label,
+  .field--autofilled .field__label {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  .field--filled .field__placeholder,
+  .field--focus .field__placeholder,
+  .field--autofilled .field__placeholder {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -5px, 0);
+    transform: translate3d(0, -5px, 0);
+  }
+
+  .field--filled .select-target {
+    opacity: 1;
+  }
+
+  .field--filled .field__select {
+    opacity: 1;
+  }
+
+  .field--focus .select-target {
+    opacity: 1;
+  }
+
+  .field__error {
+    display: none;
+    margin: 6px 0 8px;
+    color: #f43c36;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .field--monospace .field__input,
+  .field--monospace .field__textarea {
+    font-family: monospace;
+    font-size: 13px;
+    line-height: 18px;
+  }
+
+  .field--large {
+    height: 48px;
+    padding: 3px 10px 4px;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .field--large .field__input {
+    top: -1px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .field--large .field__placeholder {
+    top: 12px;
+    left: 10px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .field--large .field-state--success,
+  .field--large .field-state--close {
+    top: 14px;
+    right: 10px;
+  }
+
+  .field--large .field__arrow {
+    top: 6px;
+    right: 4px;
+  }
+
+  .field--large.field--monospace .field__input,
+  .field--large.field--monospace .field__textarea {
+    font-size: 15px;
+    line-height: 20px;
+  }
+
+  .field--large ~ __field-prefix,
+  .field--large ~ __field-suffix,
+  .field--large ~ __field-action {
+    min-width: 40px;
+    padding: 0 12px;
+  }
+
+  .field--extra-large {
+    height: 48px;
+    padding: 3px 10px 4px;
+    border-radius: 5px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .field--extra-large .field__input {
+    top: 2px;
+  }
+
+  .field--extra-large .field__placeholder {
+    top: 12px;
+    left: 9px;
+    font-size: 16px;
+    line-height: 22px;
+  }
+
+  .field--extra-large .field-state--success,
+  .field--extra-large .field-state--close {
+    top: 14px;
+    right: 11px;
+  }
+
+  .field svg {
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    fill: #607385;
+    top: 10px;
+    left: 12px;
+    pointer-events: none;
+  }
+
+  input {
+    line-height: 1;
+  }
+
   .EasyUpsellApp-title {
     font-size: 32px;
     text-align: center;

@@ -9,6 +9,29 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    &:not([class*="--checkbox"]) {
+      @media (max-width: $xs) {
+        flex-direction: column;
+
+        .HomepageSettings-setting {
+          max-width: 100%;
+          width: 100%;
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+
+  .HomepageSettings-item + .HomepageSettings-item {
+    margin-top: 30px;
+  }
+
+  .HomepageSettings-setting {
+    max-width: 220px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
   }
 
   .HomepageSettings-text {
@@ -30,6 +53,11 @@
   .HomepageSettings-description {
     display: flex;
     flex-direction: column;
+    width: 100%;
+
+    @media (min-width: $xs) {
+      padding-right: 30px;
+    }
   }
 
   .HomepageSettings-subtitle {
@@ -116,5 +144,9 @@
 
   label.checkbox.micro input:checked + div > div {
     margin-left: 20px !important;
+  }
+
+  input[type="text"] {
+    padding-left: 0;
   }
 }

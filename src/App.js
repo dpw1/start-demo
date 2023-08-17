@@ -115,22 +115,6 @@ function App() {
                 </TextContentBlock>
 
                 <TextContentBlock
-                  subtitle={"Upsell products"}
-                  description={() => (
-                    <div>Manage your upsell products here.</div>
-                  )}>
-                  {" "}
-                  <div style={{ display: "flex" }}>
-                    {upsellProducts && <React.Fragment></React.Fragment>}
-                  </div>
-                  {upsellProducts ? (
-                    <Products upsellProducts={upsellProducts}></Products>
-                  ) : (
-                    <Placeholder></Placeholder>
-                  )}
-                </TextContentBlock>
-
-                <TextContentBlock
                   subtitle={"App settings"}
                   description={"Configure the app settings here."}>
                   <HomepageSettings></HomepageSettings>
