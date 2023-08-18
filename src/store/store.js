@@ -77,7 +77,7 @@ const useStore = create(
       return get().products.items.filter((e) => e.id === parseInt(id))[0];
     },
 
-    /* ## UPSELL PRODUCTS
+    /* ## UPSELL PRODUCTS [DEPRECATED] - using only ecwid's related products now.
     ==================================== */
 
     /* Get Bundle products that will show up at the front-end. */

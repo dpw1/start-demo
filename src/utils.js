@@ -186,6 +186,7 @@ export async function sanitizeUpsellProducts(products) {
   });
 }
 
+/* Category ID */
 function getProductsFromCategoryWithId(id = 0, quantity = 5) {
   return new Promise(async (resolve, reject) => {
     let categories = [];
