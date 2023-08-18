@@ -270,3 +270,10 @@ export function getProducts() {
     resolve(products);
   });
 }
+
+/* Todo 
+inject.js
+
+- fix 'data-total-options'
+- data-ezfy-products-quantity must be rendered in front-end. Just render "getProductsFromCategoryWithId" on inject.js
+*/
