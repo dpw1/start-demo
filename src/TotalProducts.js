@@ -119,7 +119,8 @@ export default function TotalProducts() {
                   rel="noreferrer">
                   this product{" "}
                 </a>
-                to cart and proceed to the checkout page.
+                to cart and proceed to the checkout page. Make sure your cart is
+                empty before testing.
               </div>
             </div>
           )}

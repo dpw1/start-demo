@@ -99,7 +99,7 @@ Requires an object like this:
 */
 export async function sanitizeUpsellProducts(products) {
   return new Promise(async (resolve, reject) => {
-    console.log("within sanitze: ", products);
+    console.log("within sanitze:  ", products);
 
     const productsWithUpsells = products.items.filter(
       (e) =>
