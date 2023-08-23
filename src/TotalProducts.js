@@ -93,37 +93,51 @@ export default function TotalProducts() {
                 ? "Loading..."
                 : totalWithUpsell.length >= 1
                 ? `You have ${totalWithUpsell.length} product(s) with related products setup. Yay!`
-                : totalWithUpsell.length <= 0 &&
-                  `There are no products with related products setup yet. Please follow the instructions below to get started.`}
+                : totalWithUpsell.length <= 0 && (
+                    <>
+                      <span>
+                        {" "}
+                        There are no products with related products setup yet.
+                      </span>
+                      <br />
+                      <span className="Text--p">
+                        Please follow the tutorial below to get started.
+                      </span>
+                    </>
+                  )}
             </div>
           </div>
 
-          {totalWithUpsell !== null && products && settings.isEnabled && (
-            <div className="TotalProducts-item">
-              <div className="TotalProducts-image TotalProducts-image--exclamation">
-                <svg
-                  xmlns=" http://www.w3.org/2000/svg"
-                  viewBox="0 0 32 32"
-                  version="1.1">
-                  <path d="M10.656 8.864q0-2.208 1.568-3.776t3.776-1.568 3.776 1.568 1.6 3.776q0 0.256-0.064 0.448l-1.76 6.944q-0.096 1.408-1.12 2.368t-2.432 0.96q-1.376 0-2.4-0.928t-1.152-2.304q-0.32-0.96-0.672-2.112t-0.736-2.784-0.384-2.592zM12.416 24.928q0-1.472 1.056-2.496t2.528-1.056 2.528 1.056 1.056 2.496q0 1.504-1.056 2.528t-2.528 1.056-2.528-1.056-1.056-2.528z" />
-                </svg>
-              </div>
-              <div className="TotalProducts-content Text--h3">
-                To test it, you can add{" "}
-                <a
-                  target="_blank"
-                  href={
-                    products.filter((e) => e.id === totalWithUpsell[0].id)[0]
-                      .url
-                  }
-                  rel="noreferrer">
-                  this product{" "}
-                </a>
-                to cart and proceed to the checkout page. Make sure your cart is
-                empty before testing.
-              </div>
-            </div>
-          )}
+          {totalWithUpsell !== null &&
+            products &&
+            products.length >= 1 &&
+            products.hasOwnProperty("id") &&
+            settings.isEnabled(
+              <div className="TotalProducts-item">
+                <div className="TotalProducts-image TotalProducts-image--exclamation">
+                  <svg
+                    xmlns=" http://www.w3.org/2000/svg"
+                    viewBox="0 0 32 32"
+                    version="1.1">
+                    <path d="M10.656 8.864q0-2.208 1.568-3.776t3.776-1.568 3.776 1.568 1.6 3.776q0 0.256-0.064 0.448l-1.76 6.944q-0.096 1.408-1.12 2.368t-2.432 0.96q-1.376 0-2.4-0.928t-1.152-2.304q-0.32-0.96-0.672-2.112t-0.736-2.784-0.384-2.592zM12.416 24.928q0-1.472 1.056-2.496t2.528-1.056 2.528 1.056 1.056 2.496q0 1.504-1.056 2.528t-2.528 1.056-2.528-1.056-1.056-2.528z" />
+                  </svg>
+                </div>
+                <div className="TotalProducts-content Text--h3">
+                  To test it, you can add{" "}
+                  <a
+                    target="_blank"
+                    href={
+                      products.filter((e) => e.id === totalWithUpsell[0].id)[0]
+                        .url
+                    }
+                    rel="noreferrer">
+                    this product{" "}
+                  </a>
+                  to cart and proceed to the checkout page. Make sure your cart
+                  is empty before testing.
+                </div>
+              </div>,
+            )}
         </div>
       ) : (
         <div className="TotalProducts-loading Text--h3">Loading...</div>

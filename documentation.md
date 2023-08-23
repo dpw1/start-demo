@@ -11,7 +11,9 @@ To code the Javascript code, edit the `inject_js_dev.js` file
 
 ## Developing the project
 
-Run _yarn start_ to start the project and get the app up and running.
+Run _yarn start_ to start the project and get the app up and running locally.
+
+Kindly bear in mind that some changes are visible only on the live project (the ones that use ecwid's window object, like the database)
 
 ## Pushing changes
 
@@ -23,7 +25,7 @@ Once ready to test, publish it github pages:
 
 This project uses .SCSS. The compiled SCSS generates the inject_css.css
 
-## What is the back-end
+## What is the back-end folder
 
 The back-end's contain one javascript code to minify the file "inject_js_dev.js" and transform it into "inject_js.js".
 
