@@ -32,3 +32,13 @@ The back-end's contain one javascript code to minify the file "inject_js_dev.js"
 To enable it:
 
 1. run `node index.js` in the `backend` folder.
+
+## Deploying to production
+
+After coding and testing it in dev, do the following to deploy to production:
+
+`git checkout production`
+`git add . && git commit -m "[DEPLOY PRODUCTION]"`
+`git push origin production`
+
+The JS and CSS will be deployed to https://dash.cloudflare.com/
