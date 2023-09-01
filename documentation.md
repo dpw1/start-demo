@@ -15,9 +15,9 @@ Run _yarn start_ to start the project and get the app up and running locally.
 
 Kindly bear in mind that some changes are visible only on the live project (the ones that use ecwid's window object, like the database)
 
-## Pushing changes
+## Pushing changes to dev
 
-Once ready to test, publish it github pages:
+Once ready to test, publish it to github pages:
 
 `git add . && git commit -m "PUBLISH UPDATES" && git push origin main && npm run deploy`
 
