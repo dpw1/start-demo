@@ -1,11 +1,50 @@
 {
-  "name": "ecwid-app-hello",
-  "version": "1.0.0",
-  "description": "This is a sample code for creating a native application for Ecwid.",
-  "main": "functions.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "name": "basic",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://dpw1.github.io/start-demo",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "axios": "^0.21.1",
+    "dotenv": "^16.3.1",
+    "node-sass": "4.14.1",
+    "react": "^16.8.6",
+    "react-checkmark": "^1.4.0",
+    "react-dom": "^16.8.6",
+    "react-dropdown-select": "^4.10.0",
+    "react-loading-skeleton": "^2.2.0",
+    "react-modal": "^3.16.1",
+    "react-scripts": "4.0.3",
+    "reactjs-popup": "^2.0.4",
+    "web-vitals": "^1.0.1",
+    "zustand": "^3.5.1"
   },
-  "author": "",
-  "license": "ISC"
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }

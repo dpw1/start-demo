@@ -1,0 +1,84 @@
+.TotalProducts {
+  display: flex;
+  align-items: center;
+
+  .TotalProducts-items {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+  }
+
+  .TotalProducts-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .TotalProducts-item + .TotalProducts-item {
+    margin-top: 30px;
+  }
+
+  .TotalProducts-loading {
+    height: 100%;
+    line-height: 100px;
+  }
+
+  .TotalProducts-image {
+    min-width: 36px;
+    width: 36px;
+
+    height: 36px;
+    border-radius: 50%;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.12s ease-out;
+
+    border-color: #808f9d;
+    background-color: #fff;
+    color: #808f9d;
+    fill: #808f9d;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(128, 143, 157, 0.3);
+
+    &[class*="--x"] {
+      border-color: #808f9d !important;
+      background-color: #fff !important;
+      color: #808f9d !important;
+      fill: #808f9d !important;
+
+      svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+
+    &[class*="--exclamation"] {
+      svg {
+        width: 23px;
+        height: 23px;
+      }
+    }
+
+    svg {
+      width: 34px;
+      height: 34px;
+    }
+
+    @at-root .TotalProducts:not([data-total-products="null"])
+        .TotalProducts-image {
+      border-color: #0cac42;
+      background-color: #0cac42;
+      color: #fff;
+      fill: white;
+      box-shadow: unset;
+    }
+  }
+
+  .TotalProducts-content {
+    padding-left: 30px;
+    line-height: 25px;
+  }
+}

@@ -1,0 +1,21 @@
+.PopupItem {
+  display: flex;
+  align-items: center;
+  .PopupItem-figure {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0 !important;
+  }
+  .PopupItem-image {
+    display: block;
+  }
+
+  .PopupItem-product-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+}
