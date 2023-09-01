@@ -32,3 +32,8 @@ The back-end's contain one javascript code to minify the file "inject_js_dev.js"
 To enable it:
 
 1. run `node index.js` in the `backend` folder.
+
+## Deploying to production
+
+1. Run `git checkout production`
+2.
